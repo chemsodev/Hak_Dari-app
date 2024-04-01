@@ -1,0 +1,53 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+/* Form styling */
+form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* User List styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li button {
+    margin-left: 10px;
+}
