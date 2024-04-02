@@ -3,7 +3,7 @@
 
 // DOM elements
 const userForm = document.getElementById('userForm');
-const path_to_backend = "http://localhost:8080";
+const path_to_backend = "https://project-poo.onrender.com";
 
 // Event listener for form submission
 userForm.addEventListener('submit', function(event) {
