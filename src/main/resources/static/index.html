@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
 <head>
+    <meta charset="UTF-8">
     <title>API Interaction</title>
-    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="/style/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>API Interaction</h1>
-
 <!-- User Form -->
-<div class="center">
-    <h2>Create/Update User</h2>
+<div class="center" id="sign-in">
+    <h2>Create new User</h2>
     <form id="userForm">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" required><br>
@@ -25,14 +24,9 @@
 
         <button type="submit">Save</button>
     </form>
+    <a href="users.html">View User List</a>
 </div>
+<script src="script/script1.js"></script>
 
-<!-- User List -->
-<div class="center">
-    <h2>User List</h2>
-    <ul id="userList"></ul>
-</div>
-
-<script src="script/script.js"></script>
 </body>
 </html>
