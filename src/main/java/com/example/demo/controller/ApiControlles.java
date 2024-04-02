@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://127.0.0.1:5500","http://localhost:8080","https://chemsodev.github.io"})
+@CrossOrigin(origins = {"http://127.0.0.1:5500","https://project-poo.onrender.com","http://localhost:8080","https://chemsodev.github.io"})
 public class ApiControlles {
 
     @Autowired
