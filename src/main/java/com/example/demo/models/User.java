@@ -15,7 +15,18 @@ public class User {
     private String username;
     private String password;
     private String role;
-
+    public User(){}
+    public User(String firstName,String lastName,String username,String password,String role){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+}
+    @Override
+    public String toString(){
+        return "Username : " + username + ", Role : " + role ;
+    }
     public long getId() {
         return id;
     }
