@@ -11,12 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://127.0.0.1:5500","https://project-poo.onrender.com","http://localhost:8080","https://chemsodev.github.io"})
+@CrossOrigin(origins = {"http://127.0.0.1:5500","http://localhost:8080","https://chemsodev.github.io"})
 public class ApiControlles {
 
     @Autowired
     private UserRepo userRepo;
-
     @GetMapping("/")
     public String getIndex() {
         return loadIndexHtml();
@@ -28,17 +27,22 @@ public class ApiControlles {
 
     @PostMapping(value = "/save")
     public String saveUser(@RequestBody User user) {
+        String firstName = user.getFirstName();
+      List<User>  existingUsers=  userRepo.findByFirstName(firstName);
+        if (!existingUsers.isEmpty()) {
+            return "User with the same first name already exists. Not saved.";
+        }
         userRepo.save(user);
-        return "saved...";
+        return "User saved.";
     }
-
     @PutMapping(value = "/update/{id}")
     public String updateUser(@PathVariable long id, @RequestBody User user) {
         User updatedUser = userRepo.findById(id).get();
         updatedUser.setFirstName(user.getFirstName());
-        updatedUser.setAge(user.getAge());
+        updatedUser.setRole(user.getRole());
         updatedUser.setLastName(user.getLastName());
-        updatedUser.setOccupation(user.getOccupation());
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setUsername(user.getUsername());
         userRepo.save(updatedUser);
         return "Updated...";
     }

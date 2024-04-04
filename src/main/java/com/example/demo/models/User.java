@@ -12,8 +12,9 @@ public class User {
     private long id;
     private String firstName;
     private String lastName;
-    private int age;
-    private String occupation;
+    private String username;
+    private String password;
+    private String role;
 
     public long getId() {
         return id;
@@ -39,21 +40,15 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
-    }
+    public String getUsername() {return username;}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public void setUsername(String Username) {this.username = Username;}
 
-    public String getOccupation() {
-        return occupation;
-    }
+    public String getPassword() {return password;}
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
+    public void setPassword(String Password) {this.password = Password;}
 
+    public String getRole() {return role;}
 
+    public void setRole(String Role) {this.role = Role;}
 }
