@@ -1,5 +1,5 @@
 // users.js
-const path_to_backend = "http://localhost:8080";
+const path_to_backend = "https://project-poo.onrender.com";
 
 // Get Users
 function getUser() {
