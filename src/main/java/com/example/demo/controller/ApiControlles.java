@@ -27,10 +27,10 @@ public class ApiControlles {
 
     @PostMapping(value = "/save")
     public String saveUser(@RequestBody User user) {
-        String firstName = user.getFirstName();
-      List<User>  existingUsers=  userRepo.findByFirstName(firstName);
+        String username = user.getUsername();
+      List<User>  existingUsers=  userRepo.findByUsername(username);
         if (!existingUsers.isEmpty()) {
-            return "User with the same first name already exists. Not saved.";
+            return "this username is already taken. user Not saved.";
         }
         userRepo.save(user);
         return "User saved.";
