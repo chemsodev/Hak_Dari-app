@@ -26,7 +26,7 @@ function createUser(user) {
         document.getElementById('password').value="";
         document.getElementById('password2').value="";
     }else {
-        fetch(path_to_backend + '/save', {
+        fetch(path_to_backend + '/save', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
