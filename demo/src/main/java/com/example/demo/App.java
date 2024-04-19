@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,10 +21,16 @@ public class App extends Application {
         stage.setTitle("Gestion");
         stage.setScene(scene);
         stage.show();*/
-        Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginPage1.fxml"));
         stage.setTitle("Agency");
-        stage.setScene(new Scene(root,800,600));
+        stage.setScene(new Scene(root,1200,700));
+        //stage.setFullScreen(true);
+        stage.setResizable(false);
+        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
+
+        //Database Connection
+        //Connection c = Database.connect();
     }
 
     public static void main(String[] args) {
