@@ -21,16 +21,12 @@ public class App extends Application {
         stage.setTitle("Gestion");
         stage.setScene(scene);
         stage.show();*/
-        Parent root = FXMLLoader.load(getClass().getResource("loginPage1.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         stage.setTitle("Agency");
         stage.setScene(new Scene(root,1200,700));
-        //stage.setFullScreen(true);
         stage.setResizable(false);
-        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
 
-        //Database Connection
-        //Connection c = Database.connect();
     }
 
     public static void main(String[] args) {

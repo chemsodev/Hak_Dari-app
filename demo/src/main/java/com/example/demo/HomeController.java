@@ -3,31 +3,49 @@ package com.example.demo;
 import com.example.demo.user.User;
 
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class HomeController {
-    
-    @FXML
-    private Label IdLabel;
+
 
     @FXML
-    private Label WelcomeLabel;
+    private Button logOutButton;
 
     @FXML
-    private Button btnTest;
+    private Label passwordLabelTest;
 
     @FXML
-    private Label passwordLabel;
+    private Label roleLabelTest;
 
     @FXML
-    private Label roleLabel;
+    private Button testButton;
+
+    @FXML
+    private Label userWelcomerLabel;
+
+    @FXML
+    private Label usernameLabelTest;
+
+    User user = new User();
 
     public void displayInfo(User user){
-        WelcomeLabel.setText("Welcome " + user.getUsername());
-        IdLabel.setText("ID : " + user.getId());
-        passwordLabel.setText("Password : " + user.getPassword());
-        roleLabel.setText("Role : " + user.getRole());
+        userWelcomerLabel.setText("Welcome " + user.getUsername());
+        this.user = user;
     }
+
+    @FXML
+    void testButtonClicked(ActionEvent event) {
+        usernameLabelTest.setText(user.getUsername());
+        passwordLabelTest.setText(user.getPassword());
+        if(user.getRole().getRealEstateManager()){
+            roleLabelTest.setText("you have permition");
+        }else{
+            roleLabelTest.setText("you do not have permition");
+        }
+
+    }
+
 }
 

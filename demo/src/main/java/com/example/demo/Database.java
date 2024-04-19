@@ -1,6 +1,8 @@
 
 package com.example.demo;
 
+import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,6 +22,12 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Could not connect to database");
+            //Alert if Connection failed
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Connection to MySQL failed \n Please Check Your Internet Connection");
+            alert.showAndWait();
         }
         return null;
     }

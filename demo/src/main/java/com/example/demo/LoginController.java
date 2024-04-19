@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.user.User;
+import com.example.demo.user.Role;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ public class LoginController {
 
 
     User user = new User();
+    Role role = new Role();
 
     @FXML
     private Button loginBtn;
@@ -38,6 +40,9 @@ public class LoginController {
     private Label welcomeLabel;
 
     @FXML
+    private Label LoginErrorLabel;
+
+    @FXML
     void loginBtnClicked2(ActionEvent event) throws IOException {
         if(username.getText().isEmpty() || password.getText().isEmpty()){
             //Affichage d'un message
@@ -45,16 +50,10 @@ public class LoginController {
 
         }else {
 
-            //Search on DB
-            /*  if user & pswrd
-             *       user = hadik l'entité
-             *       switch scene & userInfo
-             *   else
-             *       error label
-             */
+
 
             //Connected & Switch the scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("homePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
             root = loader.load();
 
             user.setUsername(username.getText());
@@ -76,11 +75,12 @@ public class LoginController {
     private PreparedStatement prepare;
     private ResultSet result;
 
+
     private double x = 0;
     private double y = 0;
-    public void loginBtnClicked(){
+    public void loginBtnClicked(ActionEvent event){
 
-        String sql = "SELECT * FROM admin WHERE username = ? and password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? and password = ?";
 
         connect = Database.connect();
 
@@ -91,30 +91,36 @@ public class LoginController {
             prepare.setString(2, password.getText());
 
             result = prepare.executeQuery();
-            Alert alert;
 
             if(username.getText().isEmpty() || password.getText().isEmpty()){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill all blank fields");
-                alert.showAndWait();
+                LoginErrorLabel.setText("Please fill all blank fields");
             }else{
                 if(result.next()){
                     getData.username = username.getText();
 
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Login");
-                    alert.showAndWait();
+                    //init data from db to user
+                    user.setUsername(result.getString(2));
+                    user.setPassword(result.getString(3));
+                    role.setUserManager(result.getBoolean(4));
+                    role.setClientManager(result.getBoolean(5));
+                    role.setRealEstateManager(result.getBoolean(6));
+                    user.setRole(role);
+
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("homePage.fxml"));
+                    root = loader.load();
+
+                    HomeController homeController = loader.getController();
+                    homeController.displayInfo(user);
+
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
 
                 }else{
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Wrong Username/Password");
-                    alert.showAndWait();
+                    LoginErrorLabel.setText("Invalid username or password");
                 }
             }
 
