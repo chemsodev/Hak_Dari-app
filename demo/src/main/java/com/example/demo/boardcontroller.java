@@ -5,9 +5,11 @@
  */
 package com.example.demo;
 
+import com.example.demo.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class boardcontroller {
@@ -24,6 +26,8 @@ public class boardcontroller {
     private AnchorPane charge_form;
     @FXML
     private AnchorPane userManag_form;
+    @FXML
+    private Label usernamelabel;
     @FXML
     private Button home_btn;
 
@@ -136,5 +140,10 @@ public class boardcontroller {
 
 
 
+    }
+    User user = new User();
+    public void displayInfo(User user){
+        usernamelabel.setText("Welcome " + user.getUsername());
+        this.user = user;
     }
 }

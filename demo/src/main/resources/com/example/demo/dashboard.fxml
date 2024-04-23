@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.boardcontroller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.boardcontroller">
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -46,15 +35,9 @@
                <left>
                   <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutY="-23.0" prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@dashboardDesign.css" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-23.0">
                            <children>
-
-                              <Label layoutX="69.0" layoutY="117.0" text="Welcome," textFill="WHITE">
-                                 <font>
-                                    <Font name="Tahoma" size="17.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="username" alignment="CENTER" layoutX="9.0" layoutY="138.0" prefHeight="23.0" prefWidth="194.0" text="MarcoMan" textFill="WHITE">
+                              <Label fx:id="usernamelabel" alignment="CENTER" layoutX="9.0" layoutY="118.0" prefHeight="23.0" prefWidth="194.0" text="Welcom user" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
@@ -172,7 +155,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView  layoutX="9.0" layoutY="54.0"  prefHeight="537.0" prefWidth="540.0">
+                                          <TableView layoutX="9.0" layoutY="54.0" prefHeight="537.0" prefWidth="540.0">
                                              <columns>
                                                 <TableColumn fx:id="client_col_clientID" prefWidth="48.0" text="ID" />
                                                 <TableColumn fx:id="client_col_firstname" prefWidth="108.0" text="Firstname" />
@@ -181,7 +164,7 @@
                                                 <TableColumn fx:id="client_col_phone" prefWidth="125.0" text="Phone#" />
                                              </columns>
                                           </TableView>
-                                          <TextField fx:id="client_search" layoutX="14.0" layoutY="14.0"  prefHeight="30.0" prefWidth="277.0" promptText="Seach for Client" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <TextField fx:id="client_search" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach for Client" styleClass="search" stylesheets="@dashboardDesign.css" />
                                        </children>
                                     </AnchorPane>
                                     <Label layoutX="587.0" layoutY="167.0" text="Last name :">
@@ -201,9 +184,9 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="client_email" layoutX="675.0" layoutY="214.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="clientManag_addBtn" layoutX="813.0" layoutY="399.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="clientManag_updateBtn" layoutX="690.0" layoutY="399.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="clientManag_deleteBtn" layoutX="566.0" layoutY="399.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <Button fx:id="clientManag_addBtn" layoutX="813.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="clientManag_updateBtn" layoutX="690.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="clientManag_deleteBtn" layoutX="566.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
                                     <TextField fx:id="client_phone" layoutX="675.0" layoutY="266.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <TextField fx:id="client_firstname" layoutX="675.0" layoutY="112.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <Label layoutX="585.0" layoutY="116.0" text="First name :">
@@ -229,7 +212,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView layoutX="10.0" layoutY="55.0"  prefHeight="262.0" prefWidth="949.0">
+                                          <TableView layoutX="10.0" layoutY="55.0" prefHeight="262.0" prefWidth="949.0">
                                              <columns>
                                                 <TableColumn fx:id="realEstate_col_ID" prefWidth="33.0" text="ID" />
                                                 <TableColumn fx:id="realEstate_col_title" prefWidth="146.0" text="Title" />
@@ -326,7 +309,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="transaction_form" disable="true" layoutX="5.0" layoutY="5.0" prefHeight="645.0" prefWidth="979.0" visible="false">
+                        <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="5.0" prefHeight="645.0" prefWidth="979.0" visible="false">
                            <children>
                               <AnchorPane layoutX="15.0" layoutY="18.0" prefHeight="610.0" prefWidth="276.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
@@ -364,8 +347,8 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="salary_salary1" layoutX="120.0" layoutY="182.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="salary_updateBtn1" layoutX="156.0" layoutY="251.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="salary_clearBtn1" layoutX="28.0" layoutY="251.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
+                                    <Button fx:id="salary_updateBtn1" layoutX="156.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="salary_clearBtn1" layoutX="28.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="303.0" layoutY="18.0" prefHeight="610.0" prefWidth="662.0" stylesheets="@dashboardDesign.css">
@@ -384,7 +367,7 @@
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="realEstateSearch_input" layoutX="15.0" layoutY="12.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Real Estate" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <TableView fx:id="client_tableView" layoutX="206.0" layoutY="343.0"  prefHeight="256.0" prefWidth="439.0">
+                                    <TableView fx:id="client_tableView" layoutX="206.0" layoutY="343.0" prefHeight="256.0" prefWidth="439.0">
                                        <columns>
                                           <TableColumn fx:id="salary_col_employeeID11" prefWidth="37.0" text="ID" />
                                           <TableColumn fx:id="salary_col_firstName11" prefWidth="137.0" text="Fullname" />
@@ -460,7 +443,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="client_tableView1" layoutX="9.0" layoutY="54.0"  prefHeight="537.0" prefWidth="671.0">
+                                          <TableView fx:id="client_tableView1" layoutX="9.0" layoutY="54.0" prefHeight="537.0" prefWidth="671.0">
                                              <columns>
                                                 <TableColumn fx:id="user_col_id" prefWidth="38.0" text="ID" />
                                                 <TableColumn fx:id="user_col_username" prefWidth="111.0" text="Username" />

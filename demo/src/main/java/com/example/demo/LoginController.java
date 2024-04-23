@@ -107,11 +107,11 @@ public class LoginController {
                     user.setRole(role);
 
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("homePage.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
 
-                    HomeController homeController = loader.getController();
-                    homeController.displayInfo(user);
+                    boardcontroller boardController = loader.getController();
+                    boardController.displayInfo(user);
 
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
@@ -119,15 +119,15 @@ public class LoginController {
                     stage.show();
 
 
-                }else{
-                    LoginErrorLabel.setText("Invalid username or password");
-                }
+                }else LoginErrorLabel.setText("Invalid username or password");
             }
 
         }catch(Exception e){e.printStackTrace();}
 
     }
-
+    public void close(){
+        System.exit(0);
+    }
 
 
 
