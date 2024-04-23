@@ -8,11 +8,22 @@ package com.example.demo;
 import com.example.demo.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class boardcontroller {
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+
 
     @FXML
     private AnchorPane home_form;
@@ -41,6 +52,8 @@ public class boardcontroller {
     private Button charge_btn;
     @FXML
     private Button user_btn;
+    @FXML
+    private Button logout;
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == home_btn) {
@@ -145,5 +158,14 @@ public class boardcontroller {
     public void displayInfo(User user){
         usernamelabel.setText("Welcome " + user.getUsername());
         this.user = user;
+    }
+
+    public void logout(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginpage1.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
