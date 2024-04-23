@@ -117,6 +117,7 @@ public class LoginController {
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.setResizable(false);
+                    boardController.home_totalUser();
                     stage.show();
 
 

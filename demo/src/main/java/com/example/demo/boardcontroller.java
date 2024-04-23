@@ -18,6 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class boardcontroller {
     private Parent root;
@@ -53,7 +57,16 @@ public class boardcontroller {
     @FXML
     private Button user_btn;
     @FXML
-    private Button logout;
+    private Button logout_btn;
+    @FXML
+    private Label home_totalUser_label;
+
+
+
+    private Connection connect;
+    private Statement statement;
+    private PreparedStatement prepare;
+    private ResultSet result;
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == home_btn) {
@@ -100,7 +113,7 @@ public class boardcontroller {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
 
-        }else if (event.getSource() == transaction_btn) {
+        } else if (event.getSource() == transaction_btn) {
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -116,7 +129,7 @@ public class boardcontroller {
             user_btn.setStyle("-fx-background-color:transparent");
 
 
-        }else if (event.getSource() == charge_btn ) {
+        } else if (event.getSource() == charge_btn) {
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -132,7 +145,7 @@ public class boardcontroller {
             user_btn.setStyle("-fx-background-color:transparent");
 
 
-        }else if (event.getSource() == user_btn) {
+        } else if (event.getSource() == user_btn) {
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -151,11 +164,11 @@ public class boardcontroller {
         }
 
 
-
-
     }
+
     User user = new User();
-    public void displayInfo(User user){
+
+    public void displayInfo(User user) {
         usernamelabel.setText("Welcome " + user.getUsername());
         this.user = user;
     }
@@ -167,5 +180,28 @@ public class boardcontroller {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void home_totalUser() {
+
+        String sql = "SELECT COUNT(id) FROM users";
+
+         connect = Database.connect();
+        int countData = 0;
+        try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                countData = result.getInt("COUNT(id)");
+            }
+
+            home_totalUser_label.setText(String.valueOf(countData));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
