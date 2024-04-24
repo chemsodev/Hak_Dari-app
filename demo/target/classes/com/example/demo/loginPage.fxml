@@ -10,35 +10,38 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.LoginController">
     <children>
-        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane fx:id="main_form" prefHeight="700.0" prefWidth="1200.0">
             <children>
-                <AnchorPane prefHeight="700.0" prefWidth="500.0" styleClass="left-form" stylesheets="@loginDesign.css">
+                <AnchorPane prefHeight="700.0" prefWidth="600.0" styleClass="left-form" stylesheets="@loginDesign.css">
                     <children>
-                        <Label layoutX="26.0" layoutY="177.0" text="Employee Management System" textFill="WHITE">
+                        <Label layoutX="130.0" layoutY="320.0" text="RealEstate Management System" textFill="WHITE">
                             <font>
-                                <Font name="Tahoma" size="18.0" />
+                                <Font name="Tahoma" size="24.0" />
                             </font>
                         </Label>
                     </children>
                 </AnchorPane>
-                <AnchorPane layoutX="500.0" prefHeight="700.0" prefWidth="700.0" styleClass="right-form" stylesheets="@loginDesign.css">
+                <AnchorPane layoutX="600.0" prefHeight="700.0" prefWidth="600.0" styleClass="right-form" stylesheets="@loginDesign.css">
                     <children>
-                        <Label layoutX="283.0" layoutY="189.0" text="Welcome back !" textFill="#368981">
+                        <Label layoutX="233.0" layoutY="226.0" text="Welcome back !" textFill="#368981">
                             <font>
                                 <Font name="Tahoma Bold" size="17.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="username" layoutX="225.0" layoutY="233.0" prefHeight="50.0" prefWidth="250.0" promptText="Username" styleClass="textfield" stylesheets="@loginDesign.css" />
-                        <PasswordField fx:id="password" layoutX="225.0" layoutY="300.0" prefHeight="50.0" prefWidth="250.0" promptText="Password" styleClass="textfield" stylesheets="@loginDesign.css" />
-                        <Button fx:id="loginBtn" layoutX="226.0" layoutY="368.0" mnemonicParsing="false" onAction="#loginBtnClicked" prefHeight="40.0" prefWidth="250.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
-                  <Label fx:id="LoginErrorLabel" layoutX="225.0" layoutY="419.0" textFill="#d00e00">
+                        <TextField fx:id="username" layoutX="190.0" layoutY="282.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@loginDesign.css" />
+                        <PasswordField fx:id="password" layoutX="190.0" layoutY="337.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="textfield" stylesheets="@loginDesign.css" />
+                        <Button fx:id="loginBtn" layoutX="247.0" layoutY="401.0" mnemonicParsing="false" onAction="#loginBtnClicked" prefHeight="40.0" prefWidth="121.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login">
                      <font>
-                        <Font name="Tahoma" size="15.0" />
+                        <Font name="Arial" size="18.0" />
+                     </font></Button>
+                  <Label fx:id="LoginErrorLabel" layoutX="190.0" layoutY="371.0" textFill="#cd2e1f">
+                     <font>
+                        <Font name="Arial Narrow" size="14.0" />
                      </font>
                   </Label>
                     </children>
                 </AnchorPane>
-            </children>
+             </children>
         </AnchorPane>
     </children>
 </StackPane>

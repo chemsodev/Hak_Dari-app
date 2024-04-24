@@ -59,7 +59,7 @@ public class LoginController {
             user.setUsername(username.getText());
             user.setPassword(password.getText());
 
-            HomeController homeController = loader.getController();
+            BoardController homeController = loader.getController();
             homeController.displayInfo(user);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -110,7 +110,7 @@ public class LoginController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
 
-                    boardcontroller boardController = loader.getController();
+                    BoardController boardController = loader.getController();
                     boardController.displayInfo(user);
 
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -118,6 +118,7 @@ public class LoginController {
                     stage.setScene(scene);
                     stage.setResizable(false);
                     boardController.home_totalUser();
+                    //boardController.home_totalRealEstate();
                     stage.show();
 
 
