@@ -211,11 +211,11 @@ public class BoardController {
         }
 
     }
-    public void home_infoDisplay() {
+     public void home_totalUser() {
 
-        String sql = "SELECT COUNT(id) FROM RealEstate";
+        String sql = "SELECT COUNT(id) FROM users";
 
-        connect = Database.connect();
+         connect = Database.connect();
         int countData = 0;
         try {
 
@@ -232,5 +232,31 @@ public class BoardController {
             e.printStackTrace();
         }
 
+    }
+    public void home_totalRealEstate(){
+
+        String sql = "SELECT COUNT(id) FROM RealEstate";
+
+        connect = Database.connect();
+        int countData = 0;
+        try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                countData = result.getInt("COUNT(id)");
+            }
+
+            home_totalRealEstate_label.setText(String.valueOf(countData));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+   public void initialze(){
+        home_totalRealEstate();
+        home_totalUser();
     }
 }
