@@ -193,7 +193,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="28.0" prefHeight="599.0" prefWidth="969.0" stylesheets="@dashboardDesign.css">
                                  <children>
@@ -203,17 +203,17 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView layoutX="10.0" layoutY="55.0" prefHeight="262.0" prefWidth="949.0">
+                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" prefHeight="262.0" prefWidth="949.0">
                                              <columns>
-                                                <TableColumn fx:id="realEstate_col_ID" prefWidth="33.0" text="ID" />
-                                                <TableColumn fx:id="realEstate_col_title" prefWidth="146.0" text="Title" />
-                                                <TableColumn fx:id="realEstate_col_description" prefWidth="149.0" text="Description" />
-                                                <TableColumn fx:id="realEstate_col_price" prefWidth="103.0" text="Price" />
-                                                <TableColumn fx:id="realEstate_col_area" prefWidth="64.0" text="Area" />
-                                                <TableColumn fx:id="realEstate_col_address" prefWidth="148.0" text="Address" />
-                                                <TableColumn fx:id="realEstate_col_status" prefWidth="94.0" text="Status" />
-                                                <TableColumn fx:id="realEstate_col_date" prefWidth="121.0" text="Date" />
-                                                <TableColumn fx:id="realEstate_col_ownerID" prefWidth="90.0" text="OwnerId" />
+                                                <TableColumn fx:id="col_realestateID" prefWidth="49.0" text="ID" />
+                                                <TableColumn fx:id="col_title" prefWidth="107.0" text="Title" />
+                                                <TableColumn fx:id="col_type" prefWidth="41.0" text="Type" />
+                                                <TableColumn fx:id="col_description" prefWidth="183.0" text="Description" />
+                                                <TableColumn fx:id="col_price" prefWidth="143.0" text="Price" />
+                                                <TableColumn fx:id="col_area" prefWidth="134.0" text="Area" />
+                                                <TableColumn fx:id="col_address" prefWidth="116.0" text="Address" />
+                                                <TableColumn fx:id="col_status" prefWidth="74.0" text="Status" />
+                                                <TableColumn fx:id="col_ownerID" prefWidth="101.0" text="OwnerId" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="realEstate_search" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach" styleClass="search" stylesheets="@dashboardDesign.css" />

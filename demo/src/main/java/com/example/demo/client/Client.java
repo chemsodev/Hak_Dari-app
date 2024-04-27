@@ -4,11 +4,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Client {
-    private final SimpleIntegerProperty id;
-    private final SimpleStringProperty nom;
-    private final SimpleStringProperty prenom;
-    private final SimpleStringProperty email;
-    private final SimpleStringProperty phone;
+    private  SimpleIntegerProperty id;
+    private  SimpleStringProperty nom;
+    private  SimpleStringProperty prenom;
+    private  SimpleStringProperty email;
+    private  SimpleStringProperty phone;
 
     public Client(int id, String nom, String prenom, String email, String phone) {
         this.id = new SimpleIntegerProperty(id);

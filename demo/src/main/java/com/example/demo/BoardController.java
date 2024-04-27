@@ -1,7 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.client.Client;
+import com.example.demo.realEstate.RealEstate;
 import com.example.demo.user.User;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -105,6 +108,7 @@ public class BoardController {
             user_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == realEstate_btn) {
+            show_realestates();
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(true);
@@ -301,6 +305,74 @@ public class BoardController {
                 col_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
                 client_table.setItems(clientList);
+            }
+        }
+    }
+    @FXML
+    private TableView<RealEstate> realestate_table;
+
+    @FXML
+    private TableColumn<RealEstate, Integer> col_realestateID;
+
+    @FXML
+    private TableColumn<RealEstate, String> col_title;
+
+    @FXML
+    private TableColumn<RealEstate, String> col_description;
+
+    @FXML
+    private TableColumn<RealEstate, Double> col_price;
+
+    @FXML
+    private TableColumn<RealEstate, Double> col_area;
+
+    @FXML
+    private TableColumn<RealEstate, String> col_address;
+
+    @FXML
+    private TableColumn<RealEstate, Integer> col_type;
+
+    @FXML
+    private TableColumn<RealEstate, String> col_status;
+
+    @FXML
+    private TableColumn<RealEstate, Integer> col_ownerID;
+    public void show_realestates() throws SQLException {
+        String query = "SELECT * FROM RealEstate";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<RealEstate> realEstateList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int realestate_iD = resultSet.getInt("Id");
+                    String title = resultSet.getString("Title");
+                    String description = resultSet.getString("Description");
+                    Double price = resultSet.getDouble("Price");
+                    Double area = resultSet.getDouble("Area");
+                    String address = resultSet.getString("Address");
+                    int type = resultSet.getInt("Type");
+                    String status = resultSet.getString("Status");
+                    int ownerId = resultSet.getInt("id_Owner");
+
+                    RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address, status, ownerId);
+                    realEstateList.add(realEstate);
+                }
+
+                // Set cell value factories for table columns
+                col_realestateID.setCellValueFactory(new PropertyValueFactory<>("id"));
+                col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+                col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+                col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+                col_area.setCellValueFactory(new PropertyValueFactory<>("area"));
+                col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
+                col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+                col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+                col_ownerID.setCellValueFactory(new PropertyValueFactory<>("ownerId"));
+
+                realestate_table.setItems(realEstateList);
             }
         }
     }

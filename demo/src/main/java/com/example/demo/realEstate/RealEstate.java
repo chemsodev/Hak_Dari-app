@@ -1,46 +1,137 @@
 package com.example.demo.realEstate;
 
-import com.example.demo.user.User;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class RealEstate {
-    private int id;
-    private String title;
-    private String type; //on peut utiliser des entier 1 -> Residentiel ,2 -> commercial , 3 ....
-    private String description;
-    //photo
-    // a vendre ou location
-    private double price;
-    private double area;//m2
-    private String address;
-    private String status;
-    private int ownerId;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty title;
+    private SimpleIntegerProperty type;
+    private SimpleStringProperty description;
+    private SimpleDoubleProperty price;
+    private SimpleDoubleProperty area;
+    private SimpleStringProperty address;
+    private SimpleStringProperty status;
+    private SimpleIntegerProperty ownerId;
 
-    //constructor
+    public RealEstate(int id, String title, int type, String description, double price, double area, String address, String status, int ownerId) {
+        this.id = new SimpleIntegerProperty(id);
+        this.title = new SimpleStringProperty(title);
+        this.type = new SimpleIntegerProperty(type);
+        this.description = new SimpleStringProperty(description);
+        this.price = new SimpleDoubleProperty(price);
+        this.area = new SimpleDoubleProperty(area);
+        this.address = new SimpleStringProperty(address);
+        this.status = new SimpleStringProperty(status);
+        this.ownerId = new SimpleIntegerProperty(ownerId);
+    }
 
+    public int getId() {
+        return id.get();
+    }
 
-    //setter & getter
-    public void setTitle(String title) { this.title = title; }
-    public String getTitle() { return title; }
+    public void setId(int id) {
+        this.id.set(id);
+    }
 
-    public void setType(String type) { this.type = type; }
-    public String getType() { return type; }
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
 
-    public void setDescription(String description) { this.description = description; }
-    public String getDescription() { return description; }
+    public String getTitle() {
+        return title.get();
+    }
 
-    public void setPrice(double price) { this.price = price; }
-    public double getPrice() { return price; }
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
 
-    public void setArea(double area) { this.area = area; }
-    public double getArea() { return area; }
+    public SimpleStringProperty titleProperty() {
+        return title;
+    }
 
-    public void setAddress(String address) { this.address = address; }
-    public String getAddress() { return address; }
+    public int getType() {
+        return type.get();
+    }
 
-    public void setStatus(String status) { this.status = status; }
-    public String getStatus() { return status; }
+    public void setType(int type) {
+        this.type.set(type);
+    }
 
-    public void setOwnerId(int ownerId) { this.ownerId = ownerId; }
-    public int getOwnerId() { return ownerId; }
+    public SimpleIntegerProperty typeProperty() {
+        return type;
+    }
 
+    public String getDescription() {
+        return description.get();
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public SimpleDoubleProperty priceProperty() {
+        return price;
+    }
+
+    public double getArea() {
+        return area.get();
+    }
+
+    public void setArea(double area) {
+        this.area.set(area);
+    }
+
+    public SimpleDoubleProperty areaProperty() {
+        return area;
+    }
+
+    public String getAddress() {
+        return address.get();
+    }
+
+    public void setAddress(String address) {
+        this.address.set(address);
+    }
+
+    public SimpleStringProperty addressProperty() {
+        return address;
+    }
+
+    public String getStatus() {
+        return status.get();
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
+    public SimpleStringProperty statusProperty() {
+        return status;
+    }
+
+    public int getOwnerId() {
+        return ownerId.get();
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId.set(ownerId);
+    }
+
+    public SimpleIntegerProperty ownerIdProperty() {
+        return ownerId;
+    }
 }
