@@ -106,19 +106,17 @@ public class LoginController {
                     role.setRealEstateManager(result.getBoolean(6));
                     user.setRole(role);
 
-
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
-
                     BoardController boardController = loader.getController();
                     boardController.displayInfo(user);
-
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.setResizable(false);
-                    boardController.initialze();
                     stage.show();
+                    boardController.initialze();
+
 
 
                 }else LoginErrorLabel.setText("Invalid username or password");

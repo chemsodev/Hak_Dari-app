@@ -140,47 +140,47 @@
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="26.0" prefHeight="601.0" prefWidth="965.0" stylesheets="@dashboardDesign.css">
                                  <children>
-                                    <AnchorPane prefHeight="600.0" prefWidth="558.0" stylesheets="@dashboardDesign.css">
+                                    <AnchorPane prefHeight="600.0" prefWidth="638.0" stylesheets="@dashboardDesign.css">
                                        <styleClass>
                                           <String fx:value="white-bg" />
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView layoutX="9.0" layoutY="54.0" prefHeight="537.0" prefWidth="540.0">
+                                          <TableView fx:id="client_table" editable="true" layoutX="9.0" layoutY="54.0" prefHeight="537.0" prefWidth="627.0">
                                              <columns>
-                                                <TableColumn fx:id="client_col_clientID" prefWidth="48.0" text="ID" />
-                                                <TableColumn fx:id="client_col_firstname" prefWidth="108.0" text="Firstname" />
-                                                <TableColumn fx:id="client_col_lastname" prefWidth="124.0" text="Lastname" />
-                                                <TableColumn fx:id="client_col_email" prefWidth="134.0" text="Email" />
-                                                <TableColumn fx:id="client_col_phone" prefWidth="125.0" text="Phone#" />
+                                                <TableColumn fx:id="col_clientID" prefWidth="48.0" text="ID" />
+                                                <TableColumn fx:id="col_firstname" prefWidth="108.0" text="Firstname" />
+                                                <TableColumn fx:id="col_lastname" prefWidth="114.0" text="Lastname" />
+                                                <TableColumn fx:id="col_email" prefWidth="174.0" text="Email" />
+                                                <TableColumn fx:id="col_phone" prefWidth="182.0" text="Phone#" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="client_search" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach for Client" styleClass="search" stylesheets="@dashboardDesign.css" />
                                        </children>
                                     </AnchorPane>
-                                    <Label layoutX="587.0" layoutY="167.0" text="Last name :">
+                                    <Label layoutX="651.0" layoutY="167.0" text="Last name :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="client_lastname" layoutX="675.0" layoutY="163.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="589.0" layoutY="218.0" text="Email :">
+                                    <TextField fx:id="client_lastname" layoutX="730.0" layoutY="163.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="653.0" layoutY="218.0" text="Email :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="591.0" layoutY="270.0" text="Phone #:">
+                                    <Label layoutX="653.0" layoutY="270.0" text="Phone #:">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="client_email" layoutX="675.0" layoutY="214.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="clientManag_addBtn" layoutX="813.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="clientManag_updateBtn" layoutX="690.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="clientManag_deleteBtn" layoutX="566.0" layoutY="399.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
-                                    <TextField fx:id="client_phone" layoutX="675.0" layoutY="266.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <TextField fx:id="client_firstname" layoutX="675.0" layoutY="112.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="585.0" layoutY="116.0" text="First name :">
+                                    <TextField fx:id="client_email" layoutX="730.0" layoutY="214.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Button fx:id="clientManag_addBtn" layoutX="855.0" layoutY="342.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="clientManag_updateBtn" layoutX="751.0" layoutY="342.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="clientManag_deleteBtn" layoutX="650.0" layoutY="342.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <TextField fx:id="client_phone" layoutX="736.0" layoutY="266.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <TextField fx:id="client_firstname" layoutX="730.0" layoutY="122.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="650.0" layoutY="126.0" text="First name :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
