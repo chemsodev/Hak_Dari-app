@@ -184,7 +184,7 @@ public class BoardController {
     }
 
     public void logout(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginpage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
