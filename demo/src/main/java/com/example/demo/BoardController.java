@@ -124,6 +124,7 @@ public class BoardController {
             user_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == transaction_btn) {
+            show_transactionClient();
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -266,6 +267,7 @@ public class BoardController {
         home_totalUser();
         home_totalTransaction();
     }
+
     @FXML
     private TableView<Client> client_table;
     @FXML
@@ -278,6 +280,7 @@ public class BoardController {
     private TableColumn<Client, String> col_email;
     @FXML
     private TableColumn<Client, String> col_phone;
+
     public void show_clients() throws SQLException {
         String query = "SELECT * FROM Client";
         try (Connection connection = Database.connect()) {
@@ -308,35 +311,28 @@ public class BoardController {
             }
         }
     }
+
     @FXML
     private TableView<RealEstate> realestate_table;
-
     @FXML
     private TableColumn<RealEstate, Integer> col_realestateID;
-
     @FXML
     private TableColumn<RealEstate, String> col_title;
-
     @FXML
     private TableColumn<RealEstate, String> col_description;
-
     @FXML
     private TableColumn<RealEstate, Double> col_price;
-
     @FXML
     private TableColumn<RealEstate, Double> col_area;
-
     @FXML
     private TableColumn<RealEstate, String> col_address;
-
     @FXML
     private TableColumn<RealEstate, Integer> col_type;
-
     @FXML
     private TableColumn<RealEstate, String> col_status;
-
     @FXML
     private TableColumn<RealEstate, Integer> col_ownerID;
+
     public void show_realestates() throws SQLException {
         String query = "SELECT * FROM RealEstate";
         try (Connection connection = Database.connect()) {
@@ -376,4 +372,48 @@ public class BoardController {
             }
         }
     }
+
+    @FXML
+    private TableView<Client> transaction_clientTable;
+    @FXML
+    private TableColumn<Client, Integer> transaction_col_clientID;
+    @FXML
+    private TableColumn<Client, String> transaction_col_clientFullname;
+    @FXML
+    private TableColumn<Client, String> transaction_col_clientIEmail;
+    @FXML
+    private TableColumn<Client, String> transaction_col_clientPhone;
+
+    public void show_transactionClient() throws SQLException {
+        String query = "SELECT * FROM Client";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<Client> clientList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int clientID = resultSet.getInt("Id");
+                    String firstName = resultSet.getString("Nom");
+                    String lastName = resultSet.getString("Prenom");
+                    String email = resultSet.getString("Email");
+                    String phone = resultSet.getString("Phone");
+
+                    Client client = new Client(clientID, firstName, lastName, email, phone);
+                    clientList.add(client);
+                }
+
+                // Set cell value factories for table columns
+                transaction_col_clientID.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                transaction_col_clientFullname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+                transaction_col_clientIEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+                transaction_col_clientPhone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+
+
+                transaction_clientTable.setItems(clientList);
+            }
+        }
+    }
+
 }
