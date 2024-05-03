@@ -12,10 +12,9 @@ public class RealEstate {
     private SimpleDoubleProperty price;
     private SimpleDoubleProperty area;
     private SimpleStringProperty address;
-    private SimpleStringProperty status;
     private SimpleIntegerProperty ownerId;
 
-    public RealEstate(int id, String title, int type, String description, double price, double area, String address, String status, int ownerId) {
+    public RealEstate(int id, String title, int type, String description, double price, double area, String address,  int ownerId) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleIntegerProperty(type);
@@ -23,7 +22,6 @@ public class RealEstate {
         this.price = new SimpleDoubleProperty(price);
         this.area = new SimpleDoubleProperty(area);
         this.address = new SimpleStringProperty(address);
-        this.status = new SimpleStringProperty(status);
         this.ownerId = new SimpleIntegerProperty(ownerId);
     }
 
@@ -109,18 +107,6 @@ public class RealEstate {
 
     public SimpleStringProperty addressProperty() {
         return address;
-    }
-
-    public String getStatus() {
-        return status.get();
-    }
-
-    public void setStatus(String status) {
-        this.status.set(status);
-    }
-
-    public SimpleStringProperty statusProperty() {
-        return status;
     }
 
     public int getOwnerId() {

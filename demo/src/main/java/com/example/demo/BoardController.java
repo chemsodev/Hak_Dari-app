@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.client.Client;
 import com.example.demo.realEstate.RealEstate;
+import com.example.demo.transaction.Transaction;
 import com.example.demo.user.User;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -109,6 +110,7 @@ public class BoardController {
 
         } else if (event.getSource() == realEstate_btn) {
             show_realestates();
+            show_realEstate_clients();
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(true);
@@ -125,6 +127,7 @@ public class BoardController {
 
         } else if (event.getSource() == transaction_btn) {
             show_transactionClient();
+            show_transaction();
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -312,6 +315,8 @@ public class BoardController {
         }
     }
 
+    //  Real Estate Form Table IDs
+    // Real estate Table
     @FXML
     private TableView<RealEstate> realestate_table;
     @FXML
@@ -329,9 +334,45 @@ public class BoardController {
     @FXML
     private TableColumn<RealEstate, Integer> col_type;
     @FXML
-    private TableColumn<RealEstate, String> col_status;
-    @FXML
     private TableColumn<RealEstate, Integer> col_ownerID;
+
+    // Client Table -> real estate form
+    @FXML
+    private TableView<Client> realEstate_clientTableView;
+    @FXML
+    private TableColumn<Client, String> realEstate_col_ClientFullname;
+    @FXML
+    private TableColumn<Client, String> realEstate_col_clientEmail;
+
+    public void show_realEstate_clients() throws SQLException {
+        String query = "SELECT * FROM Client";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<Client> clientList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("Id");
+                    String Nom = resultSet.getString("Nom");
+                    String Prenom = resultSet.getString("Prenom");
+                    String Email = resultSet.getString("Email");
+                    String Phone = resultSet.getString("Phone");
+
+
+                    Client client = new Client(id, Nom, Prenom, Email, Phone);
+                    clientList.add(client);
+                }
+
+                // Set cell value factories for table columns
+                realEstate_col_ClientFullname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+                realEstate_col_clientEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+
+                realEstate_clientTableView.setItems(clientList);
+            }
+        }
+    }
 
     public void show_realestates() throws SQLException {
         String query = "SELECT * FROM RealEstate";
@@ -350,10 +391,9 @@ public class BoardController {
                     Double area = resultSet.getDouble("Area");
                     String address = resultSet.getString("Address");
                     int type = resultSet.getInt("Type");
-                    String status = resultSet.getString("Status");
                     int ownerId = resultSet.getInt("id_Owner");
 
-                    RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address, status, ownerId);
+                    RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address,  ownerId);
                     realEstateList.add(realEstate);
                 }
 
@@ -365,7 +405,6 @@ public class BoardController {
                 col_area.setCellValueFactory(new PropertyValueFactory<>("area"));
                 col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
                 col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
-                col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
                 col_ownerID.setCellValueFactory(new PropertyValueFactory<>("ownerId"));
 
                 realestate_table.setItems(realEstateList);
@@ -373,16 +412,72 @@ public class BoardController {
         }
     }
 
+
+
+
+    //  Transaction Tables ---------------------------------------------
+    @FXML
+    private TableView<Transaction> transaction_tableView;
+    @FXML
+    private TableColumn<Transaction, Integer> transaction_col_id;
+    @FXML
+    private TableColumn<Transaction, String> transaction_col_type;
+    @FXML
+    private TableColumn<Transaction, Long> transaction_col_prix;
+    @FXML
+    private TableColumn<Transaction, Long> transaction_col_frais;
+    @FXML
+    private TableColumn<Transaction, String> transaction_col_paiement;
+    @FXML
+    private TableColumn<Transaction, String> transaction_col_statut;
+    @FXML
+    private TableColumn<Transaction, String> transaction_col_note;
+
+    public void show_transaction() throws SQLException {
+        String query = "SELECT * FROM Transaction";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<Transaction> transactionList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("Id");
+                    String type = resultSet.getString("Type");
+                    long prix = resultSet.getLong("Prix");
+                    long frais = resultSet.getLong("Frais");
+                    String methodePaiement = resultSet.getString("MethodePaiement");
+                    String statut = resultSet.getString("Statut");
+                    String note = resultSet.getString("Note");
+                    int id_Client = resultSet.getInt("Id_Client");
+                    int id_Propriete = resultSet.getInt("Id_Propriete");
+
+                    Transaction transaction = new Transaction(id,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
+                    transactionList.add(transaction);
+                }
+
+                // Set cell value factories for table columns
+                transaction_col_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                transaction_col_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+                transaction_col_prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
+                transaction_col_frais.setCellValueFactory(new PropertyValueFactory<>("Frais"));
+                transaction_col_paiement.setCellValueFactory(new PropertyValueFactory<>("MethodePaiement"));
+                transaction_col_statut.setCellValueFactory(new PropertyValueFactory<>("Statut"));
+                transaction_col_note.setCellValueFactory(new PropertyValueFactory<>("Note"));
+
+                transaction_tableView.setItems(transactionList);
+            }
+        }
+    }
+
+    //Client table -> transaction form
     @FXML
     private TableView<Client> transaction_clientTable;
-    @FXML
-    private TableColumn<Client, Integer> transaction_col_clientID;
     @FXML
     private TableColumn<Client, String> transaction_col_clientFullname;
     @FXML
     private TableColumn<Client, String> transaction_col_clientIEmail;
-    @FXML
-    private TableColumn<Client, String> transaction_col_clientPhone;
 
     public void show_transactionClient() throws SQLException {
         String query = "SELECT * FROM Client";
@@ -405,11 +500,8 @@ public class BoardController {
                 }
 
                 // Set cell value factories for table columns
-                transaction_col_clientID.setCellValueFactory(new PropertyValueFactory<>("Id"));
                 transaction_col_clientFullname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
                 transaction_col_clientIEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
-                transaction_col_clientPhone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
-
 
                 transaction_clientTable.setItems(clientList);
             }

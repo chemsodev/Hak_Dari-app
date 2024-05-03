@@ -207,13 +207,12 @@
                                              <columns>
                                                 <TableColumn fx:id="col_realestateID" prefWidth="49.0" text="ID" />
                                                 <TableColumn fx:id="col_title" prefWidth="107.0" text="Title" />
-                                                <TableColumn fx:id="col_type" prefWidth="41.0" text="Type" />
-                                                <TableColumn fx:id="col_description" prefWidth="183.0" text="Description" />
-                                                <TableColumn fx:id="col_price" prefWidth="143.0" text="Price" />
-                                                <TableColumn fx:id="col_area" prefWidth="134.0" text="Area" />
-                                                <TableColumn fx:id="col_address" prefWidth="116.0" text="Address" />
-                                                <TableColumn fx:id="col_status" prefWidth="74.0" text="Status" />
-                                                <TableColumn fx:id="col_ownerID" prefWidth="101.0" text="OwnerId" />
+                                                <TableColumn fx:id="col_type" prefWidth="75.19998168945312" text="Type" />
+                                                <TableColumn fx:id="col_description" prefWidth="175.19993591308594" text="Description" />
+                                                <TableColumn fx:id="col_price" prefWidth="152.7999267578125" text="Price" />
+                                                <TableColumn fx:id="col_area" prefWidth="130.39996337890625" text="Area" />
+                                                <TableColumn fx:id="col_address" prefWidth="172.0" text="Address" />
+                                                <TableColumn fx:id="col_ownerID" prefWidth="89.5999755859375" text="OwnerId" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="realEstate_search" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach" styleClass="search" stylesheets="@dashboardDesign.css" />
@@ -302,77 +301,85 @@
                         </AnchorPane>
                         <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="23.0" prefHeight="645.0" prefWidth="979.0" visible="false">
                            <children>
-                              <AnchorPane layoutX="15.0" layoutY="18.0" prefHeight="610.0" prefWidth="276.0" stylesheets="@dashboardDesign.css">
+                              <AnchorPane layoutX="14.0" layoutY="18.0" prefHeight="610.0" prefWidth="258.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="27.0" layoutY="37.0" text="Employee ID:">
+                                    <Label layoutX="14.0" layoutY="39.0" text="Employee ID:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="salary_employeeID1" layoutX="120.0" layoutY="35.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="38.0" layoutY="73.0" text="First Name:">
+                                    <TextField fx:id="salary_employeeID1" layoutX="107.0" layoutY="37.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="25.0" layoutY="75.0" text="First Name:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="salary_firstName1" layoutX="120.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="39.0" layoutY="109.0" text="Last Name:">
+                                    <Label fx:id="salary_firstName1" layoutX="107.0" layoutY="72.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="26.0" layoutY="111.0" text="Last Name:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="salary_lastName1" layoutX="120.0" layoutY="106.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="55.0" layoutY="148.0" text="Position:">
+                                    <Label fx:id="salary_lastName1" layoutX="107.0" layoutY="108.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="42.0" layoutY="150.0" text="Position:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="salary_position1" layoutX="120.0" layoutY="145.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Label" />
-                                    <Label layoutX="44.0" layoutY="185.0" text="Salary ($):">
+                                    <Label fx:id="salary_position1" layoutX="107.0" layoutY="147.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Label" />
+                                    <Label layoutX="31.0" layoutY="187.0" text="Salary ($):">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="salary_salary1" layoutX="120.0" layoutY="182.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="salary_updateBtn1" layoutX="156.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="salary_clearBtn1" layoutX="28.0" layoutY="251.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
+                                    <TextField fx:id="salary_salary1" layoutX="107.0" layoutY="184.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Button fx:id="salary_updateBtn1" layoutX="143.0" layoutY="253.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="salary_clearBtn1" layoutX="15.0" layoutY="253.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="303.0" layoutY="18.0" prefHeight="610.0" prefWidth="662.0" stylesheets="@dashboardDesign.css">
+                              <AnchorPane layoutX="280.0" layoutY="18.0" prefHeight="610.0" prefWidth="693.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="realEstate_tableView" layoutX="15.0" layoutY="44.0" prefHeight="256.0" prefWidth="633.0">
+                                    <TableView fx:id="transaction_tableView" layoutX="15.0" layoutY="46.0" prefHeight="256.0" prefWidth="668.0">
                                        <columns>
-                                          <TableColumn fx:id="salary_col_employeeID1" prefWidth="42.0" text="ID" />
-                                          <TableColumn fx:id="salary_col_firstName1" prefWidth="150.0" text="Title" />
-                                          <TableColumn fx:id="salary_col_lastName1" prefWidth="88.0" text="Last Name" />
-                                          <TableColumn fx:id="salary_col_position1" prefWidth="134.0" text="Position" />
-                                          <TableColumn fx:id="salary_col_salary1" prefWidth="117.0" text="Salary ($)" />
+                                          <TableColumn fx:id="transaction_col_id" prefWidth="42.0" text="ID" />
+                                          <TableColumn fx:id="transaction_col_type" prefWidth="150.0" text="Type" />
+                                          <TableColumn fx:id="transaction_col_prix" prefWidth="100.0" text="Prix" />
+                                          <TableColumn fx:id="transaction_col_frais" prefWidth="122.0" text="Frais" />
+                                          <TableColumn fx:id="transaction_col_paiement" prefWidth="63.0" text="Paiement" />
+                                          <TableColumn fx:id="transaction_col_statut" minWidth="0.0" prefWidth="55.0" text="Statut" />
+                                          <TableColumn fx:id="transaction_col_note" prefWidth="135.0" text="Note" />
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="realEstateSearch_input" layoutX="15.0" layoutY="12.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Real Estate" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <TableView fx:id="transaction_clientTable" layoutX="206.0" layoutY="343.0" prefHeight="256.0" prefWidth="439.0">
+                                    <TableView fx:id="transaction_clientTable" layoutX="395.0" layoutY="340.0" prefHeight="256.0" prefWidth="288.0">
                                        <columns>
-                                          <TableColumn fx:id="transaction_col_clientID" prefWidth="37.0" text="ID" />
-                                          <TableColumn fx:id="transaction_col_clientFullname" prefWidth="137.0" text="Fullname" />
-                                          <TableColumn fx:id="transaction_col_clientIEmail" prefWidth="140.0" text="Email" />
-                                          <TableColumn fx:id="transaction_col_clientPhone" prefWidth="124.0" text="Phone#" />
+                                          <TableColumn fx:id="transaction_col_clientFullname" prefWidth="146.0" text="Fullname" />
+                                          <TableColumn fx:id="transaction_col_clientIEmail" prefWidth="142.0" text="Email" />
                                        </columns>
                                     </TableView>
-                                    <TextField fx:id="ClientSearch_input" layoutX="206.0" layoutY="311.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Client" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <TextField fx:id="ClientSearch_input" layoutX="395.0" layoutY="309.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Client" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <MenuButton layoutX="315.0" layoutY="12.0" mnemonicParsing="false" text="Type">
                                        <items>
                                           <MenuItem mnemonicParsing="false" text="Location" />
                                           <MenuItem mnemonicParsing="false" text="Vente" />
                                        </items>
                                     </MenuButton>
+                                    <TableView fx:id="transaction_realEstateTable" layoutX="14.0" layoutY="340.0" prefHeight="256.0" prefWidth="369.0">
+                                       <columns>
+                                          <TableColumn fx:id="transaction_col_realEstateTitle" prefWidth="98.0" text="Title" />
+                                          <TableColumn fx:id="transaction_col_realEstateDescription" prefWidth="174.0" text="Description" />
+                                          <TableColumn fx:id="transaction_col_realEstatePrice" prefWidth="96.0" text="Price" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="ClientSearch_input1" layoutX="15.0" layoutY="309.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Client" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                  </children>
                               </AnchorPane>
                            </children>

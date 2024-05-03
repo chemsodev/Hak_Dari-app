@@ -4,6 +4,7 @@ public class Role {
     private boolean userManager;
     private boolean realEstateManager;
     private boolean clientManager;
+    private boolean TransactionManager;
 
     public Role (String roleName){
         switch (roleName) {
@@ -40,4 +41,6 @@ public class Role {
     public boolean getClientManager() { return clientManager; }
     public void setClientManager(boolean clientManager) { this.clientManager = clientManager; }
 
+    public boolean getTransactionManager() { return TransactionManager; }
+    public void setTransactionManager(boolean TransactionManager) { this.TransactionManager = TransactionManager; }
 }
