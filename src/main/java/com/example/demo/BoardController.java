@@ -417,7 +417,6 @@ public class BoardController {
         }
     }
 
-    public void getRealEstate_ClientItem(){}
 
     @FXML
     private Label realEstate_Id;
@@ -448,6 +447,13 @@ public class BoardController {
             realEstate_price.setText(col_price.getCellData(index).toString());
             realEstate_address.setText(col_address.getCellData(index).toString());
             realEstate_type.setText(col_type.getCellData(index).toString());
+        }
+    }
+    @FXML
+    public void getRealEstate_ClientItem(){
+        int index = realEstate_clientTableView.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            realEstate_ownerFullname.setText(realEstate_col_ClientFullname.getCellData(index).toString());
         }
     }
 

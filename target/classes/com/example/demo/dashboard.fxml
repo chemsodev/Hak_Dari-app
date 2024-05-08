@@ -262,7 +262,7 @@
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TableView fx:id="realEstate_clientTableView" layoutX="663.0" layoutY="407.0" prefHeight="250.0" prefWidth="292.0">
+                                    <TableView fx:id="realEstate_clientTableView" layoutX="663.0" layoutY="407.0" onMouseClicked="#getRealEstate_ClientItem" prefHeight="250.0" prefWidth="292.0">
                                        <columns>
                                           <TableColumn fx:id="realEstate_col_ClientFullname" prefWidth="131.0" text="Fullname" />
                                           <TableColumn fx:id="realEstate_col_clientEmail" prefWidth="160.0" text="Email" />
