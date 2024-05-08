@@ -452,6 +452,7 @@ public class BoardController {
     }
 
 
+
     public void realEstate_addBtn_Clicked() throws SQLException {
         if (realEstate_title.getText().isEmpty() || realEstate_description.getText().isEmpty() || realEstate_price.getText().isEmpty() ||
                 realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().equals("") ||
@@ -664,6 +665,29 @@ public class BoardController {
             show_clients();
         }
     }
+    public void client_deleteBtn_Clicked() throws SQLException{
+            int index=client_table.getSelectionModel().getSelectedIndex();
+            System.out.println(index);
+            if(index != -1) {
+                int id = col_clientID.getCellData(index);
+                ClientManagement.deleteClient(id, user);
+                show_clients();
+            }
+    }
 
+    int id;
+
+    @FXML
+    public int getclient_Item(){
+        int index = client_table.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        if(index != -1){
+            client_firstname.setText(col_clientID.getCellData(index).toString());
+            client_lastname.setText(col_lastname.getCellData(index).toString());
+            client_email.setText(col_email.getCellData(index).toString());
+            client_phone.setText(col_phone.getCellData(index).toString());
+        }
+        return index;
+    }
 
 }
