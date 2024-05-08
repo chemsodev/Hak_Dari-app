@@ -419,25 +419,8 @@ public class BoardController {
 
     public void getRealEstate_ClientItem(){}
 
-
-
     @FXML
-    public void getRealEstate_Item(){
-        int index = realEstate_clientTableView.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
-        if(index != -1){
-            return;
-        }
-        realEstate_title.setText(col_title.getCellData(index));
-        realEstate_description.setText(col_description.getCellData(index));
-        //realEstate_price.setText(col_price.getCellData(index).toString());
-        //realEstate_area.setText(col_area.getCellData(index).toString());
-        realEstate_address.setText(col_address.getCellData(index));
-
-        realEstate_type.setText(col_type.getCellData(index));
-    }
-
-
+    private Label realEstate_Id;
     @FXML
     private TextField realEstate_title;
     @FXML
@@ -452,6 +435,21 @@ public class BoardController {
     private Label realEstate_ownerFullname;
     @FXML
     private MenuButton realEstate_type;
+
+
+    @FXML
+    public void getRealEstate_Item(){
+        int index = realestate_table.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        if(index != -1){
+            realEstate_Id.setText(col_realestateID.getCellData(index).toString());
+            realEstate_title.setText(col_title.getCellData(index).toString());
+            realEstate_description.setText(col_description.getCellData(index).toString());
+            realEstate_price.setText(col_price.getCellData(index).toString());
+            realEstate_address.setText(col_address.getCellData(index).toString());
+            realEstate_type.setText(col_type.getCellData(index).toString());
+        }
+    }
 
 
     public void realEstate_addBtn_Clicked() throws SQLException {
