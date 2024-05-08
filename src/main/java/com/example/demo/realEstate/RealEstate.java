@@ -24,6 +24,15 @@ public class RealEstate {
         this.address = new SimpleStringProperty(address);
         this.ownerId = new SimpleIntegerProperty(ownerId);
     }
+    public RealEstate(String title, String type, String description, double price, double area, String address,  int ownerId) {
+        this.title = new SimpleStringProperty(title);
+        this.type = new SimpleStringProperty(type);
+        this.description = new SimpleStringProperty(description);
+        this.price = new SimpleDoubleProperty(price);
+        this.area = new SimpleDoubleProperty(area);
+        this.address = new SimpleStringProperty(address);
+        this.ownerId = new SimpleIntegerProperty(ownerId);
+    }
 
     public int getId() {
         return id.get();

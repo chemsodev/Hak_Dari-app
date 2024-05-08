@@ -203,7 +203,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" prefHeight="294.0" prefWidth="949.0">
+                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="949.0">
                                              <columns>
                                                 <TableColumn fx:id="col_realestateID" prefWidth="49.0" text="ID" />
                                                 <TableColumn fx:id="col_title" prefWidth="107.0" text="Title" />

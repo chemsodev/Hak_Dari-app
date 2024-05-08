@@ -203,7 +203,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" prefHeight="294.0" prefWidth="949.0">
+                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="949.0">
                                              <columns>
                                                 <TableColumn fx:id="col_realestateID" prefWidth="49.0" text="ID" />
                                                 <TableColumn fx:id="col_title" prefWidth="107.0" text="Title" />
@@ -230,12 +230,12 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="realEstate_description" layoutX="119.0" layoutY="445.0" prefHeight="61.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="379.0" layoutY="447.0" text="Address :">
+                                    <Label layoutX="379.0" layoutY="452.0" text="Address :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_address" layoutX="442.0" layoutY="443.0" prefHeight="25.0" prefWidth="170.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <TextField fx:id="realEstate_address" layoutX="442.0" layoutY="448.0" prefHeight="25.0" prefWidth="184.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <Label layoutX="33.0" layoutY="523.0" text="Type :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
@@ -247,18 +247,18 @@
                                           <MenuItem mnemonicParsing="false" text="Vente" />
                                        </items>
                                     </MenuButton>
-                                    <Label layoutX="393.0" layoutY="411.0" text="Price :">
+                                    <Label layoutX="380.0" layoutY="411.0" text="Price :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_price" layoutX="455.0" layoutY="407.0" prefHeight="25.0" prefWidth="140.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="398.0" layoutY="476.0" text="Area :">
+                                    <TextField fx:id="realEstate_price" layoutX="442.0" layoutY="407.0" prefHeight="25.0" prefWidth="153.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="380.0" layoutY="489.0" text="Area :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_area" layoutX="457.0" layoutY="482.0" prefHeight="25.0" prefWidth="140.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <TextField fx:id="realEstate_area" layoutX="443.0" layoutY="487.0" prefHeight="25.0" prefWidth="154.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <Button fx:id="realEstate_addBtn" layoutX="537.0" layoutY="576.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
                                     <Button fx:id="realEstate_updateBtn" layoutX="424.0" layoutY="576.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
                                     <Button fx:id="realEstate_deleteBtn" layoutX="269.0" layoutY="576.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
@@ -268,7 +268,7 @@
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="607.0" layoutY="484.0" text="m²">
+                                    <Label layoutX="607.0" layoutY="489.0" text="m²">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
@@ -280,6 +280,16 @@
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="realEstate_clientSearch" layoutX="663.0" layoutY="367.0" prefHeight="30.0" prefWidth="290.0" promptText="Client Name" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="380.0" layoutY="524.0" text="Owner :">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="realEstate_ownerFullname" layoutX="446.0" layoutY="524.0" text=".">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                                  <styleClass>
                                     <String fx:value="white-bg" />

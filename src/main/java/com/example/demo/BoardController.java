@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.sql.*;
@@ -271,6 +272,9 @@ public class BoardController {
         home_totalTransaction();
     }
 
+//--------------------------------------------------------------------------------------
+//                        Client Form
+
     @FXML
     private TableView<Client> client_table;
     @FXML
@@ -315,7 +319,8 @@ public class BoardController {
         }
     }
 
-    //  Real Estate Form Table IDs
+
+    // -------------------------- Real Estate Form  -------------------------------------
     // Real estate Table
     @FXML
     private TableView<RealEstate> realestate_table;
@@ -412,6 +417,70 @@ public class BoardController {
         }
     }
 
+    public void getRealEstate_ClientItem(){}
+
+
+
+    @FXML
+    public void getRealEstate_Item(){
+        int index = realEstate_clientTableView.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        if(index != -1){
+            return;
+        }
+        realEstate_title.setText(col_title.getCellData(index));
+        realEstate_description.setText(col_description.getCellData(index));
+        //realEstate_price.setText(col_price.getCellData(index).toString());
+        //realEstate_area.setText(col_area.getCellData(index).toString());
+        realEstate_address.setText(col_address.getCellData(index));
+
+        realEstate_type.setText(col_type.getCellData(index));
+    }
+
+
+    @FXML
+    private TextField realEstate_title;
+    @FXML
+    private TextField realEstate_description;
+    @FXML
+    private TextField realEstate_price;
+    @FXML
+    private TextField realEstate_address;
+    @FXML
+    private TextField realEstate_area;
+    @FXML
+    private Label realEstate_ownerFullname;
+    @FXML
+    private MenuButton realEstate_type;
+
+
+    public void realEstate_addBtn_Clicked() throws SQLException {
+        if (realEstate_title.getText().isEmpty() || realEstate_description.getText().isEmpty() || realEstate_price.getText().isEmpty() ||
+                realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().equals("") ||
+                realEstate_type.isShowing() ){
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.showAndWait();
+
+        }else{
+            String OwnerIdQuery = "SELECT Id FROM Client WHERE Email = ? ";
+
+            String title = realEstate_title.getText();
+            String description = realEstate_description.getText();
+            double price = Double.parseDouble(realEstate_price.getText());
+            double area = Double.parseDouble(realEstate_area.getText());
+            String address = realEstate_address.getText();
+            String type = realEstate_type.getText();
+
+
+            int ownerId = 15;
+
+            RealEstate realEstate = new RealEstate( title, type, description,price, area,address,ownerId);
+        }
+    }
 
 
 
@@ -557,7 +626,11 @@ public class BoardController {
         show_transaction();
         show_transactionRealEstate();
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*  -------------------------------------------------------------------------------
+        hado ta3 client Form
+    */
+
     @FXML
     public Button client_addBtn;
     @FXML
@@ -593,5 +666,6 @@ public class BoardController {
             show_clients();
         }
     }
+
 
 }
