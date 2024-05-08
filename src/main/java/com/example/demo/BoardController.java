@@ -367,6 +367,20 @@ public class BoardController {
         }
     }
 
+    public void client_updateBtn_Clicked() throws SQLException{
+        int index=client_table.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        if(index != -1) {
+            int id = col_clientID.getCellData(index);
+            String nom=client_firstname.getText();
+            String prenom=client_lastname.getText() ;
+            String email=client_email.getText();
+            String phone=client_phone.getText();
+            ClientManagement.updateClient(user,id,nom,prenom,email,phone);
+            show_clients();
+        }
+    }
+
     public void client_deleteBtn_Clicked() throws SQLException{
         int index=client_table.getSelectionModel().getSelectedIndex();
         System.out.println(index);
@@ -404,9 +418,11 @@ public class BoardController {
     @FXML
     private TableView<Client> realEstate_clientTableView;
     @FXML
-    private TableColumn<Client, String> realEstate_col_ClientFullname;
+    private TableColumn<Client, Integer> realEstate_col_ClientId;
     @FXML
-    private TableColumn<Client, String> realEstate_col_clientEmail;
+    private TableColumn<Client, String> realEstate_col_ClientLastname;
+    @FXML
+    private TableColumn<Client, String> realEstate_col_clientPhone;
 
     public void show_realEstate_clients() throws SQLException {
         String query = "SELECT * FROM Client";
@@ -430,8 +446,9 @@ public class BoardController {
                 }
 
                 // Set cell value factories for table columns
-                realEstate_col_ClientFullname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
-                realEstate_col_clientEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+                realEstate_col_ClientId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                realEstate_col_ClientLastname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+                realEstate_col_clientPhone.setCellValueFactory(new PropertyValueFactory<>("Email"));
 
                 realEstate_clientTableView.setItems(clientList);
             }
@@ -492,13 +509,14 @@ public class BoardController {
     @FXML
     private Label realEstate_ownerFullname;
     @FXML
+    private Label realEstate_ownerId;
+    @FXML
     private MenuButton realEstate_type;
 
-
     @FXML
-    public void getRealEstate_Item(){
+    public void getRealEstate_Item() {
         int index = realestate_table.getSelectionModel().getSelectedIndex();
-        if(index != -1){
+        if (index != -1) {
             realEstate_Id.setText(col_realestateID.getCellData(index).toString());
             realEstate_title.setText(col_title.getCellData(index).toString());
             realEstate_area.setText(col_area.getCellData(index).toString());
@@ -506,13 +524,30 @@ public class BoardController {
             realEstate_price.setText(col_price.getCellData(index).toString());
             realEstate_address.setText(col_address.getCellData(index).toString());
             realEstate_type.setText(col_type.getCellData(index).toString());
+            String query = "SELECT * FROM Client WHERE Id = (SELECT id_Owner FROM RealEstate WHERE Id = ?)";
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, col_realestateID.getCellData(index).toString());
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            String firstName = resultSet.getString("Prenom");
+                            String lastName = resultSet.getString("Nom");
+                            realEstate_ownerFullname.setText(firstName + " " + lastName);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     @FXML
     public void getRealEstate_ClientItem(){
         int index = realEstate_clientTableView.getSelectionModel().getSelectedIndex();
         if(index != -1){
-            realEstate_ownerFullname.setText(realEstate_col_ClientFullname.getCellData(index).toString());
+            realEstate_ownerFullname.setText(realEstate_col_ClientLastname.getCellData(index).toString());
+            realEstate_ownerId.setText(realEstate_col_ClientId.getCellData(index).toString());
         }
     }
 
@@ -618,9 +653,11 @@ public class BoardController {
     @FXML
     private TableView<Client> transaction_clientTable;
     @FXML
-    private TableColumn<Client, String> transaction_col_clientFullname;
+    private TableColumn<Client, Integer> transaction_col_clientId;
     @FXML
-    private TableColumn<Client, String> transaction_col_clientIEmail;
+    private TableColumn<Client, String> transaction_col_clientLastname;
+    @FXML
+    private TableColumn<Client, String> transaction_col_clientPhone;
 
     public void show_transactionClient() throws SQLException {
         String query = "SELECT * FROM Client";
@@ -643,8 +680,10 @@ public class BoardController {
                 }
 
                 // Set cell value factories for table columns
-                transaction_col_clientFullname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
-                transaction_col_clientIEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+
+                transaction_col_clientId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                transaction_col_clientLastname.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+                transaction_col_clientPhone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
 
                 transaction_clientTable.setItems(clientList);
             }
@@ -653,6 +692,8 @@ public class BoardController {
 
     @FXML
     private TableView<RealEstate> transaction_realEstateTable;
+    @FXML
+    private TableColumn<RealEstate, Integer> transaction_col_realEstateId;
     @FXML
     private TableColumn<RealEstate,String> transaction_col_realEstateTitle;
     @FXML
@@ -686,6 +727,7 @@ public class BoardController {
                 }
 
                 // Set cell value factories for table columns
+                transaction_col_realEstateId.setCellValueFactory(new PropertyValueFactory<>("Id"));
                 transaction_col_realEstateTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
                 transaction_col_realEstateDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
                 transaction_col_realEstatePrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
@@ -701,23 +743,52 @@ public class BoardController {
         show_transactionRealEstate();
     }
 
-    
+    @FXML
+    private MenuButton transaction_TypeBtn;
+    @FXML
+    private Label transaction_priceLabel;
+    @FXML
+    private TextField transaction_fraisInput;
+    @FXML
+    private MenuButton transaction_PaiementBtn;
+    @FXML
+    private MenuButton transaction_StatutBtn;
+    @FXML
+    private TextField transaction_NoteInput;
+    @FXML
+    private Label transaction_ClientIdLabel;
+    @FXML
+    private Label transaction_ClientLastnameLabel;
+    @FXML
+    private Label transaction_ClientPhoneLabel;
+    @FXML
+    private Label transaction_realEstateIdLabel;
+
+
     @FXML
     public void getTransaction_Item(){
         int index = transaction_tableView.getSelectionModel().getSelectedIndex();
-        if(index == -1){
+        if(index != -1){
             //realEstate_col_ClientFullname.getCellData(index).toString()
         }
     }
     @FXML
     public void getTransaction_RealEstateItem(){
-
+        int index = transaction_realEstateTable.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            //transaction_realEstateIdLabel.setText(transaction_col_realEstateId.getCellData(index).toString());
+        }
     }
     @FXML
     public void getTransaction_ClientItem(){
+        int index = transaction_clientTable.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            //transaction_ClientIdLabel.setText(transaction_col_clientId.getCellData(index).toString());
+            transaction_ClientLastnameLabel.setText(transaction_col_clientLastname.getCellData(index).toString());
+            transaction_ClientPhoneLabel.setText(transaction_col_clientPhone.getCellData(index).toString());
+        }
 
     }
-
 
 
 }

@@ -52,6 +52,47 @@ public class ClientManagement {
             alert.showAndWait();
         }
     }
+
+    public static void updateClient(User user,int id,String NOM,String PRENOM,String EMAIL,String PHONE) {
+        if(user.getRole().getClientManager()) {
+            String query = "UPDATE Client SET Nom=? , Prenom=? , Email=? , Phone=?  where id = ?";
+
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1,NOM);
+                    statement.setString(2,PRENOM);
+                    statement.setString(3,EMAIL);
+                    statement.setString(4,PHONE);
+                    statement.setString(5, String.valueOf(id));
+                    int numRowsAffected = statement.executeUpdate();
+
+                    if (numRowsAffected > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Result Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Client updated successfully.");
+                        alert.showAndWait();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Failed to update client.");
+                        alert.showAndWait();
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Permision Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You don't have permission to update a client.");
+            alert.showAndWait();
+        }
+    }
+
     public static void deleteClient(int id,User user){
         if(user.getRole().getClientManager()) {
             String query = "delete from Client where id = ?";

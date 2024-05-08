@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 public class RealEstateManagement {
 
-    public void createRealEstate(RealEstate realEstate,User user,int id_Owner) {
+    public static void createRealEstate(RealEstate realEstate,User user,int id_Owner) {
         if(user.getRole().getRealEstateManager()) {
             LocalDate currentDate = LocalDate.now();
             String query = "insert into RealEstate (Title,Description,Price,Area,Address,Type,Date_Creation,id_Owner) values(?,?,?,?,?,?,?,?,?)";
@@ -51,11 +51,11 @@ public class RealEstateManagement {
         }
     }
 
-    public int updateRealEstate(RealEstate realEstate,User user) {
-        return 0;
+    public static void updateRealEstate(RealEstate realEstate,User user) {
+
     }
 
-    public int deleteRealEstate(RealEstate realEstate,User user) {
-        return 0;
+    public static void deleteRealEstate(RealEstate realEstate,User user) {
+
     }
 }
