@@ -272,8 +272,9 @@ public class BoardController {
         home_totalTransaction();
     }
 
-//--------------------------------------------------------------------------------------
-//                        Client Form
+//---------------------------------------------------------------------------------------------------------------
+//                                                Client Form
+//---------------------------------------------------------------------------------------------------------------
 
     @FXML
     private TableView<Client> client_table;
@@ -319,9 +320,67 @@ public class BoardController {
         }
     }
 
+    @FXML
+    public Button client_addBtn;
+    @FXML
+    public Button client_updateBtn;
+    @FXML
+    public Button client_deleteBtn;
+    //Text Field
+    @FXML
+    public TextField client_phone;
+    @FXML
+    public TextField client_firstname;
+    @FXML
+    public TextField client_email;
+    @FXML
+    public TextField client_lastname;
 
-    // -------------------------- Real Estate Form  -------------------------------------
-    // Real estate Table
+    @FXML
+    public void getclient_Item(){
+        int index = client_table.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            client_firstname.setText(col_firstname.getCellData(index).toString());
+            client_lastname.setText(col_lastname.getCellData(index).toString());
+            client_email.setText(col_email.getCellData(index).toString());
+            client_phone.setText(col_phone.getCellData(index).toString());
+        }
+    }
+
+    public void client_addBtn_Clicked() throws SQLException {
+        String nom = client_firstname.getText();
+        String prenom = client_lastname.getText();
+        String email = client_email.getText();
+        String phone = client_phone.getText();
+
+
+        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.showAndWait();
+        } else {
+            Client client = new Client(nom,prenom,email,phone);
+            ClientManagement.createClient(client,user);
+            show_clients();
+        }
+    }
+
+    public void client_deleteBtn_Clicked() throws SQLException{
+        int index=client_table.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+        if(index != -1) {
+            int id = col_clientID.getCellData(index);
+            ClientManagement.deleteClient(id, user);
+            show_clients();
+        }
+    }
+
+
+ //-------------------------------------------------------------------------------------------------------------
+ //                                               RealEstate Form
+ //-------------------------------------------------------------------------------------------------------------
     @FXML
     private TableView<RealEstate> realestate_table;
     @FXML
@@ -439,10 +498,10 @@ public class BoardController {
     @FXML
     public void getRealEstate_Item(){
         int index = realestate_table.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
         if(index != -1){
             realEstate_Id.setText(col_realestateID.getCellData(index).toString());
             realEstate_title.setText(col_title.getCellData(index).toString());
+            realEstate_area.setText(col_area.getCellData(index).toString());
             realEstate_description.setText(col_description.getCellData(index).toString());
             realEstate_price.setText(col_price.getCellData(index).toString());
             realEstate_address.setText(col_address.getCellData(index).toString());
@@ -487,9 +546,19 @@ public class BoardController {
         }
     }
 
+    public void realEstate_deleteBtn_Clicked() throws SQLException {
+
+    }
+
+    public void realEstate_updateBtn_Clicked() throws SQLException {
+
+    }
 
 
-    //  Transaction Tables ---------------------------------------------
+
+//  -------------------------------------------------------------------------------------------------------
+//                                           Transaction Tables
+//  -------------------------------------------------------------------------------------------------------
     @FXML
     private TableView<Transaction> transaction_tableView;
     @FXML
@@ -632,68 +701,23 @@ public class BoardController {
         show_transactionRealEstate();
     }
 
-    /*  -------------------------------------------------------------------------------
-        hado ta3 client Form
-    */
-
+    
     @FXML
-    public Button client_addBtn;
-    @FXML
-    public Button client_updateBtn;
-    @FXML
-    public Button client_deleteBtn;
-    //Text Field
-    @FXML
-    public TextField client_phone;
-    @FXML
-    public TextField client_firstname;
-    @FXML
-    public TextField client_email;
-    @FXML
-    public TextField client_lastname;
-
-    public void client_addBtn_Clicked() throws SQLException {
-        String nom = client_firstname.getText();
-        String prenom = client_lastname.getText();
-        String email = client_email.getText();
-        String phone = client_phone.getText();
-
-
-        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-            alert.showAndWait();
-        } else {
-            Client client = new Client(nom,prenom,email,phone);
-            ClientManagement.createClient(client,user);
-            show_clients();
+    public void getTransaction_Item(){
+        int index = transaction_tableView.getSelectionModel().getSelectedIndex();
+        if(index == -1){
+            //realEstate_col_ClientFullname.getCellData(index).toString()
         }
     }
-    public void client_deleteBtn_Clicked() throws SQLException{
-            int index=client_table.getSelectionModel().getSelectedIndex();
-            System.out.println(index);
-            if(index != -1) {
-                int id = col_clientID.getCellData(index);
-                ClientManagement.deleteClient(id, user);
-                show_clients();
-            }
-    }
-
-    int id;
-
     @FXML
-    public int getclient_Item(){
-        int index = client_table.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
-        if(index != -1){
-            client_firstname.setText(col_clientID.getCellData(index).toString());
-            client_lastname.setText(col_lastname.getCellData(index).toString());
-            client_email.setText(col_email.getCellData(index).toString());
-            client_phone.setText(col_phone.getCellData(index).toString());
-        }
-        return index;
+    public void getTransaction_RealEstateItem(){
+
     }
+    @FXML
+    public void getTransaction_ClientItem(){
+
+    }
+
+
 
 }
