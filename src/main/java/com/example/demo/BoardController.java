@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.client.Client;
 import com.example.demo.client.ClientManagement;
 import com.example.demo.realEstate.RealEstate;
+import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
 import com.example.demo.user.User;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,11 +23,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
-
+import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 
-public class BoardController {
+public class BoardController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -376,7 +380,8 @@ public class BoardController {
             String prenom=client_lastname.getText() ;
             String email=client_email.getText();
             String phone=client_phone.getText();
-            ClientManagement.updateClient(user,id,nom,prenom,email,phone);
+            Client client = new Client(nom,prenom,email,phone);
+            ClientManagement.updateClient(user,client);
             show_clients();
         }
     }
@@ -497,21 +502,19 @@ public class BoardController {
     @FXML
     private Label realEstate_Id;
     @FXML
-    private TextField realEstate_title;
+    private  TextField realEstate_title;
     @FXML
-    private TextField realEstate_description;
+    private  TextField realEstate_description;
     @FXML
-    private TextField realEstate_price;
+    private  TextField realEstate_price;
     @FXML
-    private TextField realEstate_address;
+    private  TextField realEstate_address;
     @FXML
     private TextField realEstate_area;
     @FXML
     private Label realEstate_ownerFullname;
     @FXML
     private Label realEstate_ownerId;
-    @FXML
-    private MenuButton realEstate_type;
 
     @FXML
     public void getRealEstate_Item() {
@@ -523,7 +526,7 @@ public class BoardController {
             realEstate_description.setText(col_description.getCellData(index).toString());
             realEstate_price.setText(col_price.getCellData(index).toString());
             realEstate_address.setText(col_address.getCellData(index).toString());
-            realEstate_type.setText(col_type.getCellData(index).toString());
+            realEstate_type.setValue(col_type.getCellData(index).toString());
             String query = "SELECT * FROM Client WHERE Id = (SELECT id_Owner FROM RealEstate WHERE Id = ?)";
             try (Connection connection = Database.connect()) {
                 assert connection != null;
@@ -537,6 +540,7 @@ public class BoardController {
                         }
                     }
                 }
+                realEstate_ownerId.setText(col_ownerID.getCellData(index).toString());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -555,8 +559,8 @@ public class BoardController {
 
     public void realEstate_addBtn_Clicked() throws SQLException {
         if (realEstate_title.getText().isEmpty() || realEstate_description.getText().isEmpty() || realEstate_price.getText().isEmpty() ||
-                realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().equals("") ||
-                realEstate_type.isShowing() ){
+                realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().isEmpty()
+                || realEstate_ownerId.getText().isEmpty() || realEstate_type.getValue().isEmpty()){
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
@@ -565,19 +569,16 @@ public class BoardController {
             alert.showAndWait();
 
         }else{
-            String OwnerIdQuery = "SELECT Id FROM Client WHERE Email = ? ";
-
             String title = realEstate_title.getText();
             String description = realEstate_description.getText();
             double price = Double.parseDouble(realEstate_price.getText());
             double area = Double.parseDouble(realEstate_area.getText());
             String address = realEstate_address.getText();
-            String type = realEstate_type.getText();
-
-
-            int ownerId = 15;
-
-            RealEstate realEstate = new RealEstate( title, type, description,price, area,address,ownerId);
+            String type = realEstate_type.getValue();
+            int OwnerId = Integer.parseInt(realEstate_ownerId.getText());
+            RealEstate realEstate = new RealEstate( title, type, description,price, area,address,OwnerId);
+            RealEstateManagement.createRealEstate(realEstate,user);
+            show_realestates();
         }
     }
 
@@ -588,7 +589,17 @@ public class BoardController {
     public void realEstate_updateBtn_Clicked() throws SQLException {
 
     }
-
+    public void realEstate_clearBtn_Clicked(){
+        realEstate_Id.setText("");
+        realEstate_title.setText("");
+        realEstate_description.setText("");
+        realEstate_price.setText("");
+        realEstate_address.setText("");
+        realEstate_area.setText("");
+        realEstate_ownerFullname.setText("");
+        realEstate_ownerId.setText("");
+        realEstate_type.setValue("");
+    }
 
 
 //  -------------------------------------------------------------------------------------------------------
@@ -790,5 +801,11 @@ public class BoardController {
 
     }
 
-
+    @FXML
+    private  ChoiceBox<String> realEstate_type;
+    private String[] real_estate_types = {"Vente","Location"};
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        realEstate_type.getItems().addAll(real_estate_types);
+    }
 }
