@@ -587,7 +587,29 @@ public class BoardController implements Initializable {
     }
 
     public void realEstate_updateBtn_Clicked() throws SQLException {
+        if (realEstate_Id.getText().isEmpty() || realEstate_title.getText().isEmpty() || realEstate_description.getText().isEmpty() || realEstate_price.getText().isEmpty() ||
+                realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().isEmpty()
+                || realEstate_ownerId.getText().isEmpty() || realEstate_type.getValue().isEmpty()){
 
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.showAndWait();
+
+        }else{
+            int id = Integer.parseInt(realEstate_Id.getText());
+            String title = realEstate_title.getText();
+            String description = realEstate_description.getText();
+            double price = Double.parseDouble(realEstate_price.getText());
+            double area = Double.parseDouble(realEstate_area.getText());
+            String address = realEstate_address.getText();
+            String type = realEstate_type.getValue();
+            int OwnerId = Integer.parseInt(realEstate_ownerId.getText());
+            RealEstate realEstate = new RealEstate( id,title, type, description,price, area,address,OwnerId);
+            RealEstateManagement.updateRealEstate(realEstate,user);
+            show_realestates();
+        }
     }
     public void realEstate_clearBtn_Clicked(){
         realEstate_Id.setText("");

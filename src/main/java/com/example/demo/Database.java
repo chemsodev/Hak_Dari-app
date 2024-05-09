@@ -18,7 +18,6 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Could not connect to database");
-            //Alert if Connection failed
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);

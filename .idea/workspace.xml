@@ -7,14 +7,7 @@
     <list default="true" id="93afddf0-08b0-4a37-81ae-04181dc0eab4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/client/ClientManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/client/ClientManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstateManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstateManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/BoardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/client/ClientManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/client/ClientManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstateManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstateManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +51,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="abdo" />
+        <entry key="$PROJECT_DIR$" value="javafx_app_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,7 +84,7 @@
     "Spring Boot.DemoApplication.executor": "Run",
     "database.data.extractors.current.export.id": "SQL Inserts",
     "database.data.extractors.current.id": "SQL Inserts",
-    "git-widget-placeholder": "abdo",
+    "git-widget-placeholder": "javafx__app__branch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/media/chemso/DCB4C82AB4C8094A/Users/Hassiba Informatique/mysql-connector-j-8.3.0/mysql-connector-j-8.3.0.jar",
     "node.js.detected.package.eslint": "true",
@@ -135,6 +128,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
@@ -177,7 +172,7 @@
       <workItem from="1715167279738" duration="5280000" />
       <workItem from="1715176580075" duration="975000" />
       <workItem from="1715177587448" duration="14147000" />
-      <workItem from="1715260460129" duration="7118000" />
+      <workItem from="1715260460129" duration="9972000" />
     </task>
     <servers />
   </component>
