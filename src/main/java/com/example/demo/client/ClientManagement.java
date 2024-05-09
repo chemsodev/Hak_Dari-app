@@ -53,18 +53,18 @@ public class ClientManagement {
         }
     }
 
-    public static void updateClient(User user,int id,String NOM,String PRENOM,String EMAIL,String PHONE) {
+    public static void updateClient(User user,Client client) {
         if(user.getRole().getClientManager()) {
             String query = "UPDATE Client SET Nom=? , Prenom=? , Email=? , Phone=?  where id = ?";
 
             try (Connection connection = Database.connect()) {
                 assert connection != null;
                 try (PreparedStatement statement = connection.prepareStatement(query)) {
-                    statement.setString(1,NOM);
-                    statement.setString(2,PRENOM);
-                    statement.setString(3,EMAIL);
-                    statement.setString(4,PHONE);
-                    statement.setString(5, String.valueOf(id));
+                    statement.setString(1,client.getNom());
+                    statement.setString(2,client.getPrenom());
+                    statement.setString(3,client.getEmail());
+                    statement.setString(4,client.getPhone());
+                    statement.setString(5, String.valueOf(client.getId()));
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
