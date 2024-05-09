@@ -583,7 +583,17 @@ public class BoardController implements Initializable {
     }
 
     public void realEstate_deleteBtn_Clicked() throws SQLException {
-
+        if (realEstate_Id.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the real estate that u want to delete first.");
+            alert.showAndWait();
+        }else{
+            int id = Integer.parseInt(realEstate_Id.getText());
+            RealEstateManagement.deleteRealEstate(id,user);
+            show_realestates();
+        }
     }
 
     public void realEstate_updateBtn_Clicked() throws SQLException {

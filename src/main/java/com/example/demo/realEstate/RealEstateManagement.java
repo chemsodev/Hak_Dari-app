@@ -4,10 +4,7 @@ import com.example.demo.Database;
 import com.example.demo.user.User;
 import javafx.scene.control.Alert;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class RealEstateManagement {
@@ -114,8 +111,48 @@ public class RealEstateManagement {
         }
     }
 
-    public static void deleteRealEstate(RealEstate realEstate,User user) {
+    public static void deleteRealEstate(int id,User user) {
+        if(user.getRole().getClientManager()) {
+            String query = "delete from RealEstate where id = ?";
 
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+                    statement.setString(1, String.valueOf(id));
+                    int numRowsAffected = statement.executeUpdate();
+
+                    if (numRowsAffected > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Result Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("real estate deleted successfully.");
+                        alert.showAndWait();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Failed to delete real estate.");
+                        alert.showAndWait();
+                    }
+                }
+            }catch (SQLIntegrityConstraintViolationException e){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("cannot delete this real estate because it's in an existing transaction  .");
+                alert.showAndWait();
+            }
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Permision Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You don't have permission to delete a real estate.");
+            alert.showAndWait();
+        }
     }
-
 }

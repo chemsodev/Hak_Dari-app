@@ -366,11 +366,11 @@
                                     </Label>
                                     <TextField fx:id="transaction_NoteInput" layoutX="100.0" layoutY="314.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <MenuButton fx:id="transaction_StatutBtn" layoutX="100.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Chose Option">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="En Cours" />
-                                        <MenuItem mnemonicParsing="false" text="Termine" />
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="En Cours" />
+                                          <MenuItem mnemonicParsing="false" text="Termine" />
                                           <MenuItem mnemonicParsing="false" text="Annuler" />
-                                      </items>
+                                       </items>
                                     </MenuButton>
                                     <MenuButton fx:id="transaction_TypeBtn" layoutX="100.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Chose Option">
                                        <items>
