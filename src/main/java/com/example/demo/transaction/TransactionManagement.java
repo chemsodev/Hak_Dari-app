@@ -10,36 +10,53 @@ import java.time.LocalDate;
 public class TransactionManagement {
 
 
-    public void addTransaction(User user, Transaction transaction, int IdPropriete, int IdClient) {
+    public static void addTransaction(User user, Transaction transaction) {
         if(user.getRole().getTransactionManager()) {
             LocalDate currentDate = LocalDate.now();
             String query = "insert into Transaction (Type,DateTransaction,Prix,Frais,MethodePaiement,Statut,Note,Id_Client,Id_Propriete) values(?,?,?,?,?,?,?,?,?)";
 
-            try (Connection connection = Database.connect();
-                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-                preparedStatement.setString(1, transaction.getType());
-                preparedStatement.setDate(2, Date.valueOf(currentDate));
-                preparedStatement.setDouble(3, transaction.getPrix());
-                preparedStatement.setDouble(4, transaction.getFrais());
-                preparedStatement.setString(5, transaction.getMethodePaiement());
-                preparedStatement.setString(6, transaction.getStatut());
-                preparedStatement.setString(7, transaction.getNote());
-                preparedStatement.setInt(8, IdClient);
-                preparedStatement.setInt(9, IdPropriete);
+                    preparedStatement.setString(1, transaction.getType());
+                    preparedStatement.setDate(2, Date.valueOf(currentDate));
+                    preparedStatement.setDouble(3, transaction.getPrix());
+                    preparedStatement.setDouble(4, transaction.getFrais());
+                    preparedStatement.setString(5, transaction.getMethodePaiement());
+                    preparedStatement.setString(6, transaction.getStatut());
+                    preparedStatement.setString(7, transaction.getNote());
+                    preparedStatement.setInt(8, transaction.getId_Client());
+                    preparedStatement.setInt(9, transaction.getId_Propriete());
 
 
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Data inserted successfully!");
+                    int rowsAffected = preparedStatement.executeUpdate();
+                    if (rowsAffected > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Result Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("transaction added successfully.");
+                    alert.showAndWait();
                 } else {
-                    System.out.println("Failed to insert data.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to add transaction.");
+                    alert.showAndWait();
                 }
+        }
+            } catch (SQLIntegrityConstraintViolationException e){
 
-            } catch (SQLException e) {
-                System.err.println("Error during data insertion: " + e.getMessage());
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText("cannot delete this real estate because it's in an existing transaction  .");
+        alert.showAndWait();
+        } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        }else{
+        }
+        else{
             System.out.println("You do not have permission to add transaction.");
             //Alert
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -49,5 +66,4 @@ public class TransactionManagement {
             alert.showAndWait();
         }
     }
-
-}
+    }

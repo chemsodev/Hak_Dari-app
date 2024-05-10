@@ -5,7 +5,9 @@ import com.example.demo.client.ClientManagement;
 import com.example.demo.realEstate.RealEstate;
 import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
+import com.example.demo.transaction.TransactionManagement;
 import com.example.demo.user.User;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -380,7 +382,7 @@ public class BoardController implements Initializable {
             String prenom=client_lastname.getText() ;
             String email=client_email.getText();
             String phone=client_phone.getText();
-            Client client = new Client(nom,prenom,email,phone);
+            Client client = new Client(id,nom,prenom,email,phone);
             ClientManagement.updateClient(user,client);
             show_clients();
         }
@@ -786,18 +788,13 @@ public class BoardController implements Initializable {
         show_transactionRealEstate();
     }
 
+
     @FXML
-    private MenuButton transaction_TypeBtn;
+    private TextField transaction_NoteInput;
     @FXML
     private Label transaction_priceLabel;
     @FXML
     private TextField transaction_fraisInput;
-    @FXML
-    private MenuButton transaction_PaiementBtn;
-    @FXML
-    private MenuButton transaction_StatutBtn;
-    @FXML
-    private TextField transaction_NoteInput;
     @FXML
     private Label transaction_ClientIdLabel;
     @FXML
@@ -812,32 +809,89 @@ public class BoardController implements Initializable {
     public void getTransaction_Item(){
         int index = transaction_tableView.getSelectionModel().getSelectedIndex();
         if(index != -1){
-            //realEstate_col_ClientFullname.getCellData(index).toString()
+            transaction_TypeBtn.setValue(transaction_col_type.getCellData(index));
+            transaction_priceLabel.setText(String.valueOf(transaction_col_prix.getCellData(index)));
+            transaction_fraisInput.setText(String.valueOf(transaction_col_frais.getCellData(index)));
+            transaction_NoteInput.setText(String.valueOf(transaction_col_note.getCellData(index)));
+            transaction_PaiementBtn.setValue(String.valueOf(transaction_col_paiement.getCellData(index)));
+            transaction_StatutBtn.setValue(String.valueOf(transaction_col_statut.getCellData(index)));
         }
     }
     @FXML
     public void getTransaction_RealEstateItem(){
         int index = transaction_realEstateTable.getSelectionModel().getSelectedIndex();
         if(index != -1){
-            //transaction_realEstateIdLabel.setText(transaction_col_realEstateId.getCellData(index).toString());
+            transaction_realEstateIdLabel.setText(String.valueOf(transaction_col_realEstateId.getCellData(index)));
         }
     }
     @FXML
     public void getTransaction_ClientItem(){
         int index = transaction_clientTable.getSelectionModel().getSelectedIndex();
         if(index != -1){
-            //transaction_ClientIdLabel.setText(transaction_col_clientId.getCellData(index).toString());
-            transaction_ClientLastnameLabel.setText(transaction_col_clientLastname.getCellData(index).toString());
-            transaction_ClientPhoneLabel.setText(transaction_col_clientPhone.getCellData(index).toString());
+            transaction_ClientIdLabel.setText(String.valueOf(transaction_col_clientId.getCellData(index)));
+            transaction_ClientLastnameLabel.setText(transaction_col_clientLastname.getCellData(index));
+            transaction_ClientPhoneLabel.setText(transaction_col_clientPhone.getCellData(index));
         }
 
     }
+    @FXML
+    public void Transaction_addBtn_Clicked() throws SQLException {
+        if ( transaction_PaiementBtn.getValue().isEmpty() || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
+                || transaction_NoteInput.getText().isEmpty()|| transaction_PaiementBtn.getValue().isEmpty()|| transaction_StatutBtn.getValue().isEmpty()|| transaction_realEstateIdLabel.getText().isEmpty()
+                || transaction_ClientIdLabel.getText().isEmpty()|| transaction_ClientLastnameLabel.getText().isEmpty() || transaction_ClientPhoneLabel.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.showAndWait();
 
+        }else{
+            int index = transaction_clientTable.getSelectionModel().getSelectedIndex();
+             int id=transaction_col_id.getCellData(index);
+             String type=transaction_TypeBtn.getValue();
+             double prix= Double.parseDouble(transaction_priceLabel.getText());
+             double frais= Double.parseDouble(transaction_fraisInput.getText());
+             String methodePaiement=transaction_PaiementBtn.getValue();
+             String statut=transaction_StatutBtn.getValue();
+             String note=transaction_NoteInput.getText();
+             int id_Client= Integer.parseInt(transaction_ClientIdLabel.getText());
+             int id_Propriete= Integer.parseInt(transaction_realEstateIdLabel.getText());
+            Transaction transaction = new Transaction(id,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
+            TransactionManagement.addTransaction(user,transaction);
+            show_transaction();
+        }
+    }
+    public void transaction_clearBtn_Clicked(){
+        transaction_PaiementBtn.setValue("");
+        transaction_TypeBtn.setValue("");
+        transaction_priceLabel.setText("");
+        transaction_fraisInput.setText("");
+        transaction_NoteInput.setText("");
+        transaction_PaiementBtn.setValue("");
+        transaction_StatutBtn.setValue("");
+        transaction_realEstateIdLabel.setText("");
+        transaction_ClientIdLabel.setText("");
+        transaction_ClientLastnameLabel.setText("");
+        transaction_ClientPhoneLabel.setText("");
+    }
+    @FXML
+    private  ChoiceBox<String> transaction_PaiementBtn;
+    @FXML
+    private ChoiceBox<String> transaction_StatutBtn;
+    @FXML
+    private ChoiceBox<String> transaction_TypeBtn;
     @FXML
     private  ChoiceBox<String> realEstate_type;
     private String[] real_estate_types = {"Vente","Location"};
+    private String[] transaction_Paiement_types= {"En Cours","Termine","Annuler"};
+    private String[] transaction_Statut_types = {"En Cours","Termine","Annuler"};
+    private String[] transaction_Type_types = {"Vente","Location"};
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         realEstate_type.getItems().addAll(real_estate_types);
+        transaction_PaiementBtn.getItems().addAll(transaction_Paiement_types);
+        transaction_StatutBtn.getItems().addAll(transaction_Statut_types);
+        transaction_TypeBtn.getItems().addAll(transaction_Type_types);
     }
 }
