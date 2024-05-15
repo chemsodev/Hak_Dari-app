@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -23,9 +24,6 @@ public class LoginController {
     private Stage stage;
     private Scene scene;
 
-
-    User user = new User();
-    Role role = new Role();
 
     @FXML
     private Button loginBtn;
@@ -42,33 +40,6 @@ public class LoginController {
     @FXML
     private Label LoginErrorLabel;
 
-    @FXML
-    void loginBtnClicked2(ActionEvent event) throws IOException {
-        if(username.getText().isEmpty() || password.getText().isEmpty()){
-            //Affichage d'un message
-            welcomeLabel.setText("Veiller remplire le nom d'utilisateur ..");
-
-        }else {
-
-
-
-            //Connected & Switch the scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-            root = loader.load();
-
-            user.setUsername(username.getText());
-            user.setPassword(password.getText());
-
-            BoardController homeController = loader.getController();
-            homeController.displayInfo(user);
-
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        }
-    }
 
     //    DATABASE TOOLS
     private Connection connect;
@@ -99,14 +70,19 @@ public class LoginController {
                     getData.username = username.getText();
 
                     //init data from db to user
-                    user.setUsername(result.getString(2));
-                    user.setPassword(result.getString(3));
-                    role.setUserManager(result.getBoolean(4));
-                    role.setClientManager(result.getBoolean(5));
-                    role.setRealEstateManager(result.getBoolean(6));
-                    role.setTransactionManager(result.getBoolean(7));
-                    role.setChargeManager(result.getBoolean(8));
-                    user.setRole(role);
+                    int id = result.getInt("Id");
+                    String username = result.getString("username");
+                    String password = result.getString("password");
+                    boolean userManag = result.getBoolean("userManag");
+                    boolean clientManag = result.getBoolean("clientManag");
+                    boolean realEstateManag = true;
+                    boolean transactionManag = true;
+                    boolean chargeManag = true;
+
+
+                    Role role = new Role(userManag,realEstateManag,clientManag,transactionManag, chargeManag);
+                    User user = new User(id,username,password,role);
+
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
                     root = loader.load();
@@ -120,11 +96,15 @@ public class LoginController {
                     boardController.initialze();
 
 
-
                 }else LoginErrorLabel.setText("Invalid username or password");
             }
 
-        }catch(Exception e){e.printStackTrace();}
+        }catch (SQLException e){
+            System.err.println("SQL Exeption");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
     public void close(){

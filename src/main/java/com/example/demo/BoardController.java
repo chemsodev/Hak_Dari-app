@@ -8,6 +8,7 @@ import com.example.demo.realEstate.RealEstate;
 import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
 import com.example.demo.transaction.TransactionManagement;
+import com.example.demo.user.Role;
 import com.example.demo.user.User;
 import javafx.collections.FXCollections;
 
@@ -166,23 +167,32 @@ public class BoardController implements Initializable {
 
 
         } else if (event.getSource() == user_btn) {
-            home_form.setVisible(false);
-            clientManag_form.setVisible(false);
-            realEstate_form.setVisible(false);
-            transaction_form.setVisible(false);
-            charge_form.setVisible(false);
-            userManag_form.setVisible(true);
+            if(user.getRole().getUserManager()) {
 
-            home_btn.setStyle("-fx-background-color:transparent");
-            client_btn.setStyle("-fx-background-color:transparent");
-            realEstate_btn.setStyle("-fx-background-color:transparent");
-            transaction_btn.setStyle("-fx-background-color:transparent");
-            charge_btn.setStyle("-fx-background-color:transparent");
-            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+                home_form.setVisible(false);
+                clientManag_form.setVisible(false);
+                realEstate_form.setVisible(false);
+                transaction_form.setVisible(false);
+                charge_form.setVisible(false);
+                userManag_form.setVisible(true);
 
+                show_user();
 
+                home_btn.setStyle("-fx-background-color:transparent");
+                client_btn.setStyle("-fx-background-color:transparent");
+                realEstate_btn.setStyle("-fx-background-color:transparent");
+                transaction_btn.setStyle("-fx-background-color:transparent");
+                charge_btn.setStyle("-fx-background-color:transparent");
+                user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Permision Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You don't have permission to Manage Users.");
+                alert.showAndWait();
+            }
         }
-
 
     }
 
@@ -568,8 +578,6 @@ public class BoardController implements Initializable {
         }
     }
 
-
-
     public void realEstate_addBtn_Clicked() throws SQLException {
         if (realEstate_title.getText().isEmpty() || realEstate_description.getText().isEmpty() || realEstate_price.getText().isEmpty() ||
                 realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().isEmpty()
@@ -634,6 +642,7 @@ public class BoardController implements Initializable {
             show_realestates();
         }
     }
+
     public void realEstate_clearBtn_Clicked(){
         realEstate_Id.setText("");
         realEstate_title.setText("");
@@ -648,7 +657,7 @@ public class BoardController implements Initializable {
 
 
 //  -------------------------------------------------------------------------------------------------------
-//                                           Transaction Tables
+//                                           Transaction Form
 //  -------------------------------------------------------------------------------------------------------
     @FXML
     private TableView<Transaction> transaction_tableView;
@@ -845,6 +854,7 @@ public class BoardController implements Initializable {
         }
 
     }
+
     @FXML
     public void Transaction_addBtn_Clicked() throws SQLException {
         if ( transaction_PaiementBtn.getValue()==null || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
@@ -872,6 +882,7 @@ public class BoardController implements Initializable {
             show_transaction();
         }
     }
+    @FXML
     public void transaction_clearBtn_Clicked(){
         transaction_PaiementBtn.setValue("");
         transaction_TypeBtn.setValue("");
@@ -885,6 +896,7 @@ public class BoardController implements Initializable {
         transaction_ClientLastnameLabel.setText("");
         transaction_ClientPhoneLabel.setText("");
     }
+
     @FXML
     private  ChoiceBox<String> transaction_PaiementBtn;
     @FXML
@@ -905,8 +917,9 @@ public class BoardController implements Initializable {
         transaction_StatutBtn.getItems().addAll(transaction_Statut_types);
         transaction_TypeBtn.getItems().addAll(transaction_Type_types);
     }
+
     @FXML
-    private TableView charge_table;
+    private TableView<Charge> charge_table;
     @FXML
     private TableColumn<Charge,String> charge_col_title;
     @FXML
@@ -915,6 +928,7 @@ public class BoardController implements Initializable {
     private TableColumn<Charge, String> charge_col_total;
     @FXML
     private TableColumn<Charge, String> charge_col_id;
+
     public void show_charges() throws SQLException {
         String query = "SELECT * FROM charge";
         try (Connection connection = Database.connect()) {
@@ -959,7 +973,8 @@ public class BoardController implements Initializable {
             charge_title.setText(charge_col_title.getCellData(index));
         }
     }
-   public void charge_addBtn_clicked() throws SQLException {
+
+    public void charge_addBtn_clicked() throws SQLException {
        String Title = charge_title.getText();
        String description = charge_description.getText();
        double total = Double.parseDouble(charge_total.getText());
@@ -989,4 +1004,139 @@ public class BoardController implements Initializable {
             show_charges();
         }
     }
+
+//  -------------------------------------------------------------------------------------------------------
+//                                           User Tables
+//  -------------------------------------------------------------------------------------------------------
+
+    @FXML
+    private Label user_userIdLabel;
+    @FXML
+    private TextField user_username;
+    @FXML
+    private TextField user_password;
+    @FXML
+    private RadioButton user_clientManag;
+    @FXML
+    private RadioButton user_realEstateManag;
+    @FXML
+    private RadioButton user_transactionManag;
+    @FXML
+    private RadioButton user_chargeManag;
+    @FXML
+    private RadioButton user_userManag;
+
+    @FXML
+    private Button user_addBtn;
+    @FXML
+    private Button user_updateBtn;
+    @FXML
+    private Button user_deleteBtn;
+
+    @FXML
+    private TableView<User> user_tableView;
+    @FXML
+    private TableColumn<User,Integer> user_col_id;
+    @FXML
+    private TableColumn<User,String> user_col_username;
+    @FXML
+    private TableColumn<User,String> user_col_password;
+    @FXML
+    private TableColumn<User,Boolean> user_col_clientManag;
+    @FXML
+    private TableColumn<User,Boolean> user_col_realEstateManag;
+    @FXML
+    private TableColumn<User,Boolean> user_col_transactionManag;
+    @FXML
+    private TableColumn<User,Boolean> user_col_chargeManag;
+    @FXML
+    private TableColumn<User,Boolean> user_col_userManag;
+
+    public void show_user() throws SQLException {
+        String query = "SELECT * FROM users";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<User>  userList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int id= Integer.parseInt(resultSet.getString("Id"));
+                    String username = resultSet.getString("username");
+                    String password = resultSet.getString("password");
+                    boolean userManag = resultSet.getBoolean("userManag");
+                    boolean clientManag = resultSet.getBoolean("clientManag");
+                    boolean realEstateManag = resultSet.getBoolean("realEstateManag");
+                    boolean transactionManag = resultSet.getBoolean("transactionManag");
+                    boolean chargeManag = resultSet.getBoolean("chargeManag");
+
+                    Role role = new Role(userManag,realEstateManag,clientManag,transactionManag,chargeManag);
+                    User user= new User(id,username,password,role);
+                    userList.add(user);
+                }
+
+                // Set cell value factories for table columns
+                user_col_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                user_col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+                user_col_password.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+                user_col_clientManag.setCellValueFactory(new PropertyValueFactory<>("clientManager"));
+                user_col_realEstateManag.setCellValueFactory(new PropertyValueFactory<>("realEstateManager"));
+                user_col_transactionManag.setCellValueFactory(new PropertyValueFactory<>("transactionManager"));
+                user_col_chargeManag.setCellValueFactory(new PropertyValueFactory<>("chargeManager"));
+                user_col_userManag.setCellValueFactory(new PropertyValueFactory<>("userManager"));
+
+                user_tableView.setItems(userList);
+
+            }catch (SQLException e){
+                System.err.println("SQL exeption In User Form");
+            }catch (Exception e){
+                System.err.println("Exeption In User Form");
+            }
+        }
+    }
+
+    public void getUser_item(){
+        int index = user_tableView.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+
+            user_userIdLabel.setText(user_col_id.getCellData(index).toString());
+            user_username.setText(user_col_username.getCellData(index).toString());
+            user_password.setText(user_col_password.getCellData(index).toString());
+
+
+            if(user_col_clientManag.getCellData(index).toString().equals("true")) user_clientManag.setSelected(true);
+            else user_clientManag.setSelected(false);
+
+            if(user_col_realEstateManag.getCellData(index).toString().equals("true")) user_realEstateManag.setSelected(true);
+            else user_realEstateManag.setSelected(false);
+
+            if(user_col_transactionManag.getCellData(index).toString().equals("true")) user_transactionManag.setSelected(true);
+            else user_transactionManag.setSelected(false);
+
+            if(user_col_chargeManag.getCellData(index).toString().equals("true")) user_chargeManag.setSelected(true);
+            else user_chargeManag.setSelected(false);
+
+            if(user_col_userManag.getCellData(index).toString().equals("true")) user_userManag.setSelected(true);
+            else user_userManag.setSelected(false);
+
+
+        }
+    }
+
+
+    public void user_addBtn_clicked() throws SQLException {
+
+    }
+
+    public void user_updateBtn_clicked() throws SQLException {
+
+    }
+
+    public void user_deleteBtn_clicked() throws SQLException {
+
+    }
+
+
 }

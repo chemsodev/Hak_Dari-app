@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ChargeManagement {
+
     public static void createCharge(Charge charge, User user) {
         if(user.getRole().getChargeManager()) {
             String query = "INSERT INTO charge (Title, Description, Total) VALUES (?,?,?)";
