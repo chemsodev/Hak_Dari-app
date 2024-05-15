@@ -105,6 +105,7 @@ public class LoginController {
                     role.setClientManager(result.getBoolean(5));
                     role.setRealEstateManager(result.getBoolean(6));
                     role.setTransactionManager(result.getBoolean(7));
+                    role.setChargeManager(result.getBoolean(8));
                     user.setRole(role);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));

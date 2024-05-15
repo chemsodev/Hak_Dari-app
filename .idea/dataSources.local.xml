@@ -5,7 +5,6 @@
       <database-info product="MySQL" version="8.0.30" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.3.0 (Revision: 805f872a57875f311cb82487efcfb070411a3fa0)" dbms="MYSQL" exact-version="8.0.30" exact-driver-version="8.3">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>

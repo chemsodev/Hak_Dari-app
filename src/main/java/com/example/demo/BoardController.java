@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.charge.Charge;
+import com.example.demo.charge.ChargeManagement;
 import com.example.demo.client.Client;
 import com.example.demo.client.ClientManagement;
 import com.example.demo.realEstate.RealEstate;
@@ -7,9 +9,6 @@ import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
 import com.example.demo.transaction.TransactionManagement;
 import com.example.demo.user.User;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -24,7 +23,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
 import java.net.URL;
@@ -151,6 +149,7 @@ public class BoardController implements Initializable {
 
 
         } else if (event.getSource() == charge_btn) {
+            show_charges();
             home_form.setVisible(false);
             clientManag_form.setVisible(false);
             realEstate_form.setVisible(false);
@@ -341,11 +340,14 @@ public class BoardController implements Initializable {
     public TextField client_email;
     @FXML
     public TextField client_lastname;
+    @FXML
+    public Label client_id;;
 
     @FXML
     public void getclient_Item(){
         int index = client_table.getSelectionModel().getSelectedIndex();
         if(index != -1){
+            client_id.setText(col_clientID.getCellData(index).toString());
             client_firstname.setText(col_firstname.getCellData(index).toString());
             client_lastname.setText(col_lastname.getCellData(index).toString());
             client_email.setText(col_email.getCellData(index).toString());
@@ -374,10 +376,14 @@ public class BoardController implements Initializable {
     }
 
     public void client_updateBtn_Clicked() throws SQLException{
-        int index=client_table.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
-        if(index != -1) {
-            int id = col_clientID.getCellData(index);
+        if (client_id.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.showAndWait();
+        } else{
+            int id = Integer.parseInt(client_id.getText());
             String nom=client_firstname.getText();
             String prenom=client_lastname.getText() ;
             String email=client_email.getText();
@@ -386,13 +392,18 @@ public class BoardController implements Initializable {
             ClientManagement.updateClient(user,client);
             show_clients();
         }
+
     }
 
     public void client_deleteBtn_Clicked() throws SQLException{
-        int index=client_table.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
-        if(index != -1) {
-            int id = col_clientID.getCellData(index);
+        if (client_id.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.showAndWait();
+        } else{
+            int id = Integer.parseInt(client_id.getText());
             ClientManagement.deleteClient(id, user);
             show_clients();
         }
@@ -836,8 +847,8 @@ public class BoardController implements Initializable {
     }
     @FXML
     public void Transaction_addBtn_Clicked() throws SQLException {
-        if ( transaction_PaiementBtn.getValue().isEmpty() || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
-                || transaction_NoteInput.getText().isEmpty()|| transaction_PaiementBtn.getValue().isEmpty()|| transaction_StatutBtn.getValue().isEmpty()|| transaction_realEstateIdLabel.getText().isEmpty()
+        if ( transaction_PaiementBtn.getValue()==null || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
+                || transaction_NoteInput.getText().isEmpty()|| transaction_StatutBtn.getValue().isEmpty()|| transaction_realEstateIdLabel.getText().isEmpty()
                 || transaction_ClientIdLabel.getText().isEmpty()|| transaction_ClientLastnameLabel.getText().isEmpty() || transaction_ClientPhoneLabel.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
@@ -883,7 +894,7 @@ public class BoardController implements Initializable {
     @FXML
     private  ChoiceBox<String> realEstate_type;
     private String[] real_estate_types = {"Vente","Location"};
-    private String[] transaction_Paiement_types= {"En Cours","Termine","Annuler"};
+    private String[] transaction_Paiement_types= {"cash","bank change"};
     private String[] transaction_Statut_types = {"En Cours","Termine","Annuler"};
     private String[] transaction_Type_types = {"Vente","Location"};
 
@@ -893,5 +904,89 @@ public class BoardController implements Initializable {
         transaction_PaiementBtn.getItems().addAll(transaction_Paiement_types);
         transaction_StatutBtn.getItems().addAll(transaction_Statut_types);
         transaction_TypeBtn.getItems().addAll(transaction_Type_types);
+    }
+    @FXML
+    private TableView charge_table;
+    @FXML
+    private TableColumn<Charge,String> charge_col_title;
+    @FXML
+    private TableColumn<Charge, String> charge_col_description;
+    @FXML
+    private TableColumn<Charge, String> charge_col_total;
+    @FXML
+    private TableColumn<Charge, String> charge_col_id;
+    public void show_charges() throws SQLException {
+        String query = "SELECT * FROM charge";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<Charge>  chargeList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int charge_id= Integer.parseInt(resultSet.getString("charge_id"));
+                    String title = resultSet.getString("Title");
+                    String description = resultSet.getString("Description");
+                    Double total = resultSet.getDouble("Total");
+                    Charge charge= new Charge(charge_id,description,title,total);
+                    chargeList.add(charge);
+                }
+
+                // Set cell value factories for table columns
+                charge_col_id.setCellValueFactory(new PropertyValueFactory<>("charge_id"));
+                charge_col_title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+                charge_col_description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+                charge_col_total.setCellValueFactory(new PropertyValueFactory<>("Total"));
+                charge_table.setItems(chargeList);
+            }
+        }
+    }
+    @FXML
+    private Label charge_id;
+    @FXML
+    private TextField charge_total;
+    @FXML
+    private TextArea charge_description;
+    @FXML
+    private TextField charge_title;
+    public void getcharge_Item(){
+        int index = charge_table.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            charge_id.setText(String.valueOf(charge_col_id.getCellData(index)));
+            charge_total.setText(String.valueOf(charge_col_total.getCellData(index)));
+            charge_description.setText(charge_col_description.getCellData(index));
+            charge_title.setText(charge_col_title.getCellData(index));
+        }
+    }
+   public void charge_addBtn_clicked() throws SQLException {
+       String Title = charge_title.getText();
+       String description = charge_description.getText();
+       double total = Double.parseDouble(charge_total.getText());
+
+       if (Title.isEmpty() || description.isEmpty() || total==0) {
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+           alert.setTitle("Error Message");
+           alert.setHeaderText(null);
+           alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+           alert.showAndWait();
+       } else {
+           Charge charge=new Charge(Title,description,total);
+           ChargeManagement.createCharge(charge,user);
+           show_charges();
+       }
+   }
+    public void charge_deleteBtn_clicked() throws SQLException{
+        if (charge_id.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the charge that u want to delete first.");
+            alert.showAndWait();
+        }else{
+            String id = charge_id.getText();
+            ChargeManagement.deleteClient(id, user);
+            show_charges();
+        }
     }
 }

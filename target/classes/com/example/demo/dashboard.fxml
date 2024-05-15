@@ -10,6 +10,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -136,7 +137,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="clientManag_form" prefHeight="555.0" prefWidth="889.0" visible="false">
+                        <AnchorPane fx:id="clientManag_form" prefHeight="555.0" prefWidth="889.0">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="26.0" prefHeight="601.0" prefWidth="965.0" stylesheets="@dashboardDesign.css">
                                  <children>
@@ -181,6 +182,16 @@
                                     <TextField fx:id="client_phone" layoutX="736.0" layoutY="266.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <TextField fx:id="client_firstname" layoutX="730.0" layoutY="122.0" prefHeight="25.0" prefWidth="172.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <Label layoutX="650.0" layoutY="126.0" text="First name :">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="651.0" layoutY="85.0" text="Id:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="client_id" layoutX="730.0" layoutY="85.0" prefHeight="20.0" prefWidth="12.0">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
@@ -314,7 +325,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="23.0" prefHeight="645.0" prefWidth="979.0">
+                        <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="23.0" prefHeight="645.0" prefWidth="979.0" visible="false">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="18.0" prefHeight="610.0" prefWidth="258.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
@@ -438,39 +449,50 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="23.0" layoutY="157.0" text="Title">
+                                    <Label layoutX="23.0" layoutY="129.0" text="Title:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="charge_title" layoutX="111.0" layoutY="155.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="23.0" layoutY="193.0" text="Description :">
+                                    <TextField fx:id="charge_title" layoutX="111.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="19.0" layoutY="217.0" text="Description :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="charge_description" layoutX="111.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="25.0" layoutY="229.0" text="Total (DA)">
+                                    <Label layoutX="19.0" layoutY="298.0" text="Total (DA)">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="charge_total" layoutX="111.0" layoutY="226.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="charge_addBtn" layoutX="156.0" layoutY="305.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="charge_deleteBtn" layoutX="28.0" layoutY="305.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <TextField fx:id="charge_total" layoutX="111.0" layoutY="296.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                    <Button fx:id="charge_addBtn" layoutX="156.0" layoutY="330.0" mnemonicParsing="false" onAction="#charge_addBtn_clicked" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="charge_deleteBtn" layoutX="23.0" layoutY="330.0" mnemonicParsing="false" onAction="#charge_deleteBtn_clicked" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <TextArea fx:id="charge_description" layoutX="107.0" layoutY="166.0" prefHeight="103.0" prefWidth="158.0" />
+                                    <Label layoutX="23.0" layoutY="76.0" text="Id:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="charge_id" layoutX="112.0" layoutY="75.0" prefHeight="20.0" prefWidth="12.0">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="371.0" layoutY="66.0" prefHeight="523.0" prefWidth="554.0" stylesheets="@dashboardDesign.css">
+                              <AnchorPane layoutX="371.0" layoutY="66.0" prefHeight="523.0" prefWidth="605.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="salary_tableView" layoutX="11.0" layoutY="11.0" prefHeight="501.0" prefWidth="532.0">
+                                    <TableView fx:id="charge_table" layoutX="6.0" layoutY="11.0" onMouseClicked="#getcharge_Item" prefHeight="501.0" prefWidth="593.0">
                                        <columns>
-                                          <TableColumn fx:id="charge_col_title" prefWidth="135.0" text="Title" />
-                                          <TableColumn fx:id="charge_col_description" prefWidth="276.0" text="Description" />
-                                          <TableColumn fx:id="charge_col_total" prefWidth="120.0" text="Total" />
+                                          <TableColumn fx:id="charge_col_title" prefWidth="167.0" text="Title" />
+                                          <TableColumn fx:id="charge_col_description" prefWidth="240.0" text="Description" />
+                                          <TableColumn fx:id="charge_col_total" prefWidth="122.0" text="Total" />
+                                          <TableColumn fx:id="charge_col_id" maxWidth="212.0" prefWidth="62.0" text="Id" />
                                        </columns>
                                     </TableView>
                                  </children>
