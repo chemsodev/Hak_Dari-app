@@ -1,6 +1,5 @@
 package com.example.demo.user;
 
-import com.example.demo.realEstate.RealEstate;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,8 +18,15 @@ public class User {
         this.password = new SimpleStringProperty(password);
         this.role = role;
     }
-    public User() {}
 
+    public User() {
+    }
+
+    public User(String username, String password, Role role) {
+        this.username = new SimpleStringProperty(username);
+        this.password = new SimpleStringProperty(password);
+        this.role = role;
+    }
     //Seter & Getter
 
     public void setId(int id) { this.id.set(id); }

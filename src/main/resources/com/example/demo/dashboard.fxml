@@ -501,7 +501,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="userManag_form" prefHeight="555.0" prefWidth="889.0">
                            <children>
-                              <AnchorPane layoutX="7.0" layoutY="26.0" prefHeight="601.0" prefWidth="965.0" stylesheets="@dashboardDesign.css">
+                              <AnchorPane layoutX="7.0" layoutY="26.0"  prefHeight="601.0" prefWidth="965.0" stylesheets="@dashboardDesign.css">
                                  <children>
                                     <AnchorPane prefHeight="600.0" prefWidth="691.0" stylesheets="@dashboardDesign.css">
                                        <styleClass>
@@ -526,9 +526,9 @@
                                     </AnchorPane>
                                     <TextField fx:id="user_password" layoutX="736.0" layoutY="163.0" prefHeight="25.0" prefWidth="172.0" promptText="Password" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                     <TextField fx:id="user_username" layoutX="736.0" layoutY="112.0" prefHeight="25.0" prefWidth="172.0" promptText="Username" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="user_addBtn" layoutX="767.0" layoutY="375.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="user_updateBtn" layoutX="767.0" layoutY="432.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="user_deleteBtn" layoutX="767.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <Button fx:id="user_addBtn" layoutX="767.0" layoutY="375.0" mnemonicParsing="false" onAction="#user_addBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="user_updateBtn" layoutX="767.0" layoutY="432.0" mnemonicParsing="false" onAction="#user_updateBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="user_deleteBtn" layoutX="767.0" layoutY="488.0" mnemonicParsing="false" onAction="#user_deleteBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
                                     <RadioButton fx:id="user_clientManag" layoutX="751.0" layoutY="217.0" mnemonicParsing="false" text="Client Manager">
                                        <font>
                                           <Font size="15.0" />

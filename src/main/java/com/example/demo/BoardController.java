@@ -10,6 +10,7 @@ import com.example.demo.transaction.Transaction;
 import com.example.demo.transaction.TransactionManagement;
 import com.example.demo.user.Role;
 import com.example.demo.user.User;
+import com.example.demo.user.UserManagement;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -203,7 +204,7 @@ public class BoardController implements Initializable {
         this.user = user;
     }
 
-    public void logout(ActionEvent event) throws IOException {
+    public  void logout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -1052,7 +1053,7 @@ public class BoardController implements Initializable {
     @FXML
     private TableColumn<User,Boolean> user_col_userManag;
 
-    public void show_user() throws SQLException {
+    public  void show_user() throws SQLException {
         String query = "SELECT * FROM users";
         try (Connection connection = Database.connect()) {
             assert connection != null;
@@ -1102,8 +1103,8 @@ public class BoardController implements Initializable {
         if(index != -1){
 
             user_userIdLabel.setText(user_col_id.getCellData(index).toString());
-            user_username.setText(user_col_username.getCellData(index).toString());
-            user_password.setText(user_col_password.getCellData(index).toString());
+            user_username.setText(user_col_username.getCellData(index));
+            user_password.setText(user_col_password.getCellData(index));
 
 
             if(user_col_clientManag.getCellData(index).toString().equals("true")) user_clientManag.setSelected(true);
@@ -1127,15 +1128,74 @@ public class BoardController implements Initializable {
 
 
     public void user_addBtn_clicked() throws SQLException {
-
+     if (user_username.getText().isEmpty() || user_password.getText().isEmpty() || (!user_clientManag.isSelected() && !user_realEstateManag.isSelected() && !user_transactionManag.isSelected() && !user_chargeManag.isSelected() && !user_userManag.isSelected()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.showAndWait();
+        }else{
+         String u_username = user_username.getText();
+         String u_password = user_password.getText();
+         boolean user_clientManagement =false;
+         boolean user_realEstateManagement =false;
+         boolean user_transactionManagement =false;
+         boolean user_chargeManagement =false;
+         boolean user_userManagement =false;
+         if (user_clientManag.isSelected()) user_clientManagement = true;
+         if (user_realEstateManag.isSelected()) user_realEstateManagement = true;
+         if (user_transactionManag.isSelected()) user_transactionManagement = true;
+         if (user_chargeManag.isSelected()) user_chargeManagement = true;
+         if (user_userManag.isSelected()) user_userManagement = true;
+         Role role=new Role(user_userManagement,user_realEstateManagement,user_clientManagement,user_transactionManagement,user_chargeManagement);
+          User user1=new User(u_username,u_password,role);
+         UserManagement.createUser(user1);
+         show_user();
+     }
     }
 
     public void user_updateBtn_clicked() throws SQLException {
-
+        if(user_userIdLabel.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.showAndWait();
+        } else{
+            int id = Integer.parseInt(user_userIdLabel.getText());
+            String u_username = user_username.getText();
+            String u_password = user_password.getText();
+            boolean user_clientManagement =false;
+            boolean user_realEstateManagement =false;
+            boolean user_transactionManagement =false;
+            boolean user_chargeManagement =false;
+            boolean user_userManagement =false;
+            if (user_clientManag.isSelected()) user_clientManagement = true;
+            if (user_realEstateManag.isSelected()) user_realEstateManagement = true;
+            if (user_transactionManag.isSelected()) user_transactionManagement = true;
+            if (user_chargeManag.isSelected()) user_chargeManagement = true;
+            if (user_userManag.isSelected()) user_userManagement = true;
+            Role role=new Role(user_userManagement,user_realEstateManagement,user_clientManagement,user_transactionManagement,user_chargeManagement);
+            User user1=new User(id,u_username,u_password,role);
+            UserManagement.updateUser(user1);
+            show_user();
+        }
     }
 
     public void user_deleteBtn_clicked() throws SQLException {
-
+        if(user_userIdLabel.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.showAndWait();
+        } else{
+            int id = Integer.parseInt(user_userIdLabel.getText());
+            UserManagement.deleteUser(user,id);
+            if(user.getId()==id){logout_btn.fire();}
+            else{show_user();}
+        }
     }
 
 

@@ -5,17 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93afddf0-08b0-4a37-81ae-04181dc0eab4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/0ac77b6e-8a03-4d77-81fc-73f8eb8cb2e3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0ac77b6e-8a03-4d77-81fc-73f8eb8cb2e3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0ac77b6e-8a03-4d77-81fc-73f8eb8cb2e3/storage_v2/_src_/schema/dbusers.SqDQVw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0ac77b6e-8a03-4d77-81fc-73f8eb8cb2e3/storage_v2/_src_/schema/dbusers.SqDQVw.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/charge/Charge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/charge/Charge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/charge/ChargeManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/charge/ChargeManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/client/ClientManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/client/ClientManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/getData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/getData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstateManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/realEstate/RealEstateManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/transaction/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/transaction/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/transaction/TransactionManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/transaction/TransactionManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/user/UserManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/user/UserManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboardDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/dashboardDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/loginDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/loginDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo/loginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo/loginPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/BoardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/Database.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/charge/Charge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/charge/Charge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/charge/ChargeManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/charge/ChargeManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/client/ClientManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/client/ClientManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/dashboardDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/dashboardDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/getData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/getData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/loginDesign.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/loginDesign.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/loginPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/loginPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstateManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/realEstate/RealEstateManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/transaction/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/transaction/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/transaction/TransactionManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/transaction/TransactionManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/user/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/user/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/user/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/demo/user/UserManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/demo/user/UserManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,6 +245,8 @@
       <workItem from="1715698375935" duration="3637000" />
       <workItem from="1715714398935" duration="13838000" />
       <workItem from="1715729590926" duration="1275000" />
+      <workItem from="1715860297042" duration="2479000" />
+      <workItem from="1715903790471" duration="6362000" />
     </task>
     <servers />
   </component>
