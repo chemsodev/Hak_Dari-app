@@ -594,7 +594,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="appointment_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="636.0">
+                                          <TableView fx:id="appointment_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getAppointment_item" prefHeight="294.0" prefWidth="636.0">
                                              <columns>
                                                 <TableColumn fx:id="col_appointmentId" prefWidth="35.0" text="ID" />
                                                 <TableColumn fx:id="col_appointmentDate" prefWidth="96.0" text="Date" />
@@ -651,13 +651,31 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="appointment_realEstateTable" layoutX="8.0" layoutY="53.0" onMouseClicked="#getRealEstate_ClientItem" prefHeight="295.0" prefWidth="304.0">
+                                          <TableView fx:id="appointment_realEstateTable" layoutX="8.0" layoutY="53.0" onMouseClicked="#getAppointmentRealEstate_item" prefHeight="295.0" prefWidth="304.0">
                                              <columns>
                                                 <TableColumn fx:id="appointment_col_realEstateId" prefWidth="28.0" text="Id" />
                                                 <TableColumn fx:id="appointment_col_realEstateTitle" prefWidth="133.0" text="Title" />
                                                 <TableColumn fx:id="appointment_col_realEstateDescription" prefWidth="142.0" text="Description" />
                                              </columns>
                                           </TableView>
+                                          <Label layoutX="37.0" layoutY="374.0" text="Id :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="appointment_realEstateTitleLabel" layoutX="125.0" layoutY="412.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                          <Label layoutX="37.0" layoutY="416.0" text="Title :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="appointment_realEstateId" layoutX="125.0" layoutY="371.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                          <Label fx:id="appointment_realEstateDescriptionLabel" layoutX="125.0" layoutY="453.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" />
+                                          <Label layoutX="37.0" layoutY="457.0" text="Description :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                     <DatePicker fx:id="appointment_date" layoutX="119.0" layoutY="478.0" onAction="#getDate" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />

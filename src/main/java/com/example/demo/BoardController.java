@@ -223,6 +223,7 @@ public class BoardController implements Initializable {
             appointment_form.setVisible(true);
 
             show_appointment();
+            show_appointmentRealEstate();
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -1325,6 +1326,14 @@ public class BoardController implements Initializable {
     @FXML
     private TextField appointment_clientPhone;
 
+    @FXML
+    private Label appointment_realEstateId;
+    @FXML
+    private Label appointment_realEstateTitleLabel;
+    @FXML
+    private Label appointment_realEstateDescriptionLabel;
+
+
     public void show_appointment() throws SQLException{
         String query = "SELECT * FROM Appointment";
         try (Connection connection = Database.connect()) {
@@ -1363,19 +1372,76 @@ public class BoardController implements Initializable {
         }
     }
 
-    LocalDate date=LocalDate.now();
+    public void show_appointmentRealEstate() throws SQLException{
+        String query = "SELECT * FROM RealEstate";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
 
+                ObservableList<RealEstate> realEstateList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int realestate_iD = resultSet.getInt("Id");
+                    String title = resultSet.getString("Title");
+                    String description = resultSet.getString("Description");
+                    Double price = resultSet.getDouble("Price");
+                    Double area = resultSet.getDouble("Area");
+                    String address = resultSet.getString("Address");
+                    String type = resultSet.getString("Type");
+                    //date
+                    int id_Owner = resultSet.getInt("Id_Owner");
+
+                    RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address, id_Owner);
+
+                    realEstateList.add(realEstate);
+                }
+
+                // Set cell value factories for table columns
+                appointment_col_realEstateId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                appointment_col_realEstateTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
+                appointment_col_realEstateDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
+
+                appointment_realEstateTable.setItems(realEstateList);
+            }
+        }
+    }
+
+    public void getAppointment_item(){
+        int index = appointment_table.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            appointment_id.setText(String.valueOf(col_appointmentId.getCellData(index)));
+            appointment_description.setText(col_appointmentDescription.getCellData(index));
+            appointment_date.setValue(col_appointmentDate.getCellData(index));
+            appointment_clientFullname.setText(col_appointmentClientFullname.getCellData(index));
+            appointment_clientPhone.setText(String.valueOf(col_appointmentClientPhone.getCellData(index)));
+        }
+    }
+
+    public void getAppointmentRealEstate_item(){
+        int index = appointment_realEstateTable.getSelectionModel().getSelectedIndex();
+        if(index != -1){
+            appointment_realEstateId.setText(String.valueOf(appointment_col_realEstateId.getCellData(index)));
+            appointment_realEstateTitleLabel.setText(appointment_col_realEstateTitle.getCellData(index));
+            appointment_realEstateDescriptionLabel.setText(appointment_col_realEstateDescription.getCellData(index));
+        }
+    }
+
+    LocalDate date = LocalDate.now();
+
+    @FXML
     public void getDate(ActionEvent event){
         this.date = appointment_date.getValue();
     }
 
     public void appointment_addBtn_clicked() throws SQLException {
-        if(appointment_id.getText().isEmpty() || appointment_description.getText().isEmpty() ||
-           appointment_clientFullname.getText().isEmpty() || appointment_clientPhone.getText().isEmpty())
+        if(appointment_id.getText().isEmpty() || appointment_clientFullname.getText().isEmpty() ||
+                appointment_clientPhone.getText().isEmpty() || appointment_realEstateId.getText().isEmpty() ||
+                appointment_date.getValue() != null)
         {
-
+            System.out.println(date.toString());
         }else{
-
+            System.out.println(date.toString());
         }
 
     }
@@ -1393,6 +1459,9 @@ public class BoardController implements Initializable {
         if(this.date != null){
             System.out.println(this.date.toString());
         }
+        appointment_realEstateId.setText("");
+        appointment_realEstateTitleLabel.setText("");
+        appointment_realEstateDescriptionLabel.setText("");
     }
 
 
