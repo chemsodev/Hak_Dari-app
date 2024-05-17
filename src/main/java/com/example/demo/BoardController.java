@@ -49,6 +49,8 @@ public class BoardController implements Initializable {
     private AnchorPane charge_form;
     @FXML
     private AnchorPane userManag_form;
+    @FXML
+    private AnchorPane appointment_form;
 
     //Side Bar
     @FXML
@@ -65,6 +67,8 @@ public class BoardController implements Initializable {
     private Button charge_btn;
     @FXML
     private Button user_btn;
+    @FXML
+    private Button appointment_btn;
     @FXML
     private Button logout_btn;
 
@@ -90,6 +94,7 @@ public class BoardController implements Initializable {
             transaction_form.setVisible(false);
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -97,6 +102,8 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
+
         } else if (event.getSource() == client_btn) {
             show_clients();
             home_form.setVisible(false);
@@ -105,6 +112,7 @@ public class BoardController implements Initializable {
             transaction_form.setVisible(false);
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
@@ -112,6 +120,7 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == realEstate_btn) {
             show_realestates();
@@ -122,6 +131,7 @@ public class BoardController implements Initializable {
             transaction_form.setVisible(false);
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -129,6 +139,7 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == transaction_btn) {
             //Affichage des table
@@ -141,6 +152,7 @@ public class BoardController implements Initializable {
             transaction_form.setVisible(true);
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -148,6 +160,7 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
 
 
         } else if (event.getSource() == charge_btn) {
@@ -158,6 +171,7 @@ public class BoardController implements Initializable {
             transaction_form.setVisible(false);
             charge_form.setVisible(true);
             userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -165,6 +179,7 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
             user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
 
 
         } else if (event.getSource() == user_btn) {
@@ -176,6 +191,7 @@ public class BoardController implements Initializable {
                 transaction_form.setVisible(false);
                 charge_form.setVisible(false);
                 userManag_form.setVisible(true);
+                appointment_form.setVisible(false);
 
                 show_user();
 
@@ -185,6 +201,7 @@ public class BoardController implements Initializable {
                 transaction_btn.setStyle("-fx-background-color:transparent");
                 charge_btn.setStyle("-fx-background-color:transparent");
                 user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+                appointment_btn.setStyle("-fx-background-color:transparent");
 
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -193,6 +210,23 @@ public class BoardController implements Initializable {
                 alert.setContentText("You don't have permission to Manage Users.");
                 alert.showAndWait();
             }
+        }else if(event.getSource() == appointment_btn){
+            home_form.setVisible(false);
+            clientManag_form.setVisible(false);
+            realEstate_form.setVisible(false);
+            transaction_form.setVisible(false);
+            charge_form.setVisible(false);
+            userManag_form.setVisible(false);
+            appointment_form.setVisible(true);
+
+            home_btn.setStyle("-fx-background-color:transparent");
+            client_btn.setStyle("-fx-background-color:transparent");
+            realEstate_btn.setStyle("-fx-background-color:transparent");
+            transaction_btn.setStyle("-fx-background-color:transparent");
+            charge_btn.setStyle("-fx-background-color:transparent");
+            user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+
         }
 
     }
@@ -383,6 +417,8 @@ public class BoardController implements Initializable {
             Client client = new Client(nom,prenom,email,phone);
             ClientManagement.createClient(client,user);
             show_clients();
+            //Clear Item
+            client_clearBtn_Clicked();
         }
     }
 
@@ -402,6 +438,8 @@ public class BoardController implements Initializable {
             Client client = new Client(id,nom,prenom,email,phone);
             ClientManagement.updateClient(user,client);
             show_clients();
+            //Clear Item
+            client_clearBtn_Clicked();
         }
 
     }
@@ -417,9 +455,18 @@ public class BoardController implements Initializable {
             int id = Integer.parseInt(client_id.getText());
             ClientManagement.deleteClient(id, user);
             show_clients();
+            //Clear item
+            client_clearBtn_Clicked();
         }
     }
 
+    public void client_clearBtn_Clicked() {
+        client_id.setText("");
+        client_firstname.setText("");
+        client_lastname.setText("");
+        client_email.setText("");
+        client_phone.setText("");
+    }
 
  //-------------------------------------------------------------------------------------------------------------
  //                                               RealEstate Form
@@ -601,6 +648,7 @@ public class BoardController implements Initializable {
             RealEstate realEstate = new RealEstate( title, type, description,price, area,address,OwnerId);
             RealEstateManagement.createRealEstate(realEstate,user);
             show_realestates();
+            realEstate_clearBtn_Clicked();
         }
     }
 
@@ -615,6 +663,7 @@ public class BoardController implements Initializable {
             int id = Integer.parseInt(realEstate_Id.getText());
             RealEstateManagement.deleteRealEstate(id,user);
             show_realestates();
+            realEstate_clearBtn_Clicked();
         }
     }
 
@@ -641,6 +690,8 @@ public class BoardController implements Initializable {
             RealEstate realEstate = new RealEstate( id,title, type, description,price, area,address,OwnerId);
             RealEstateManagement.updateRealEstate(realEstate,user);
             show_realestates();
+            //Clear Item
+            realEstate_clearBtn_Clicked();
         }
     }
 
@@ -809,7 +860,8 @@ public class BoardController implements Initializable {
         show_transactionRealEstate();
     }
 
-
+    @FXML
+    private Label transaction_idLabel;
     @FXML
     private TextField transaction_NoteInput;
     @FXML
@@ -830,6 +882,7 @@ public class BoardController implements Initializable {
     public void getTransaction_Item(){
         int index = transaction_tableView.getSelectionModel().getSelectedIndex();
         if(index != -1){
+            transaction_idLabel.setText(String.valueOf(transaction_col_id.getCellData(index)));
             transaction_TypeBtn.setValue(transaction_col_type.getCellData(index));
             transaction_priceLabel.setText(String.valueOf(transaction_col_prix.getCellData(index)));
             transaction_fraisInput.setText(String.valueOf(transaction_col_frais.getCellData(index)));
@@ -856,8 +909,8 @@ public class BoardController implements Initializable {
 
     }
 
-    @FXML
-    public void Transaction_addBtn_Clicked() throws SQLException {
+
+    public void transaction_addBtn_Clicked() throws SQLException {
         int index=-1;
          index = transaction_clientTable.getSelectionModel().getSelectedIndex();
         if ( transaction_PaiementBtn.getValue()==null || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
@@ -882,10 +935,28 @@ public class BoardController implements Initializable {
             Transaction transaction = new Transaction(id,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
             TransactionManagement.addTransaction(user,transaction);
             show_transaction();
+            //Clear Item
+            transaction_clearBtn_Clicked();
         }
     }
-    @FXML
+
+    public void transaction_deleteBtn_Clicked() throws SQLException {
+        if (transaction_idLabel.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Some text fields are empty. Please make sure to select the Transaction that u want to delete first.");
+            alert.showAndWait();
+        }else{
+            int id = Integer.parseInt(transaction_idLabel.getText());
+            TransactionManagement.deleteTransaction(user,id);
+            show_charges();
+            transaction_clearBtn_Clicked();
+        }
+    }
+
     public void transaction_clearBtn_Clicked(){
+        transaction_idLabel.setText("");
         transaction_PaiementBtn.setValue("");
         transaction_TypeBtn.setValue("");
         transaction_priceLabel.setText("");
@@ -919,6 +990,10 @@ public class BoardController implements Initializable {
         transaction_StatutBtn.getItems().addAll(transaction_Statut_types);
         transaction_TypeBtn.getItems().addAll(transaction_Type_types);
     }
+
+//  -------------------------------------------------------------------------------------------------------
+//                                           Charge Form
+//  -------------------------------------------------------------------------------------------------------
 
     @FXML
     private TableView<Charge> charge_table;
@@ -966,6 +1041,7 @@ public class BoardController implements Initializable {
     private TextArea charge_description;
     @FXML
     private TextField charge_title;
+
     public void getcharge_Item(){
         int index = charge_table.getSelectionModel().getSelectedIndex();
         if(index != -1){
@@ -977,7 +1053,6 @@ public class BoardController implements Initializable {
     }
 
     public void charge_addBtn_clicked() throws SQLException {
-
 
        if (charge_title.getText().isEmpty() || charge_description.getText().isEmpty() || charge_total.getText().isEmpty()) {
            Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -992,8 +1067,19 @@ public class BoardController implements Initializable {
            Charge charge=new Charge(Title,description,total);
            ChargeManagement.createCharge(charge,user);
            show_charges();
+           //clear item
+           charge_clearBtn_Clicked();
        }
-   }
+    }
+
+    public void charge_clearBtn_Clicked() {
+        charge_id.setText("");
+        charge_total.setText("");
+        charge_description.setText("");
+        charge_title.setText("");
+    }
+
+
     public void charge_deleteBtn_clicked() throws SQLException{
         if (charge_id.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -1005,11 +1091,13 @@ public class BoardController implements Initializable {
             String id = charge_id.getText();
             ChargeManagement.deleteClient(id, user);
             show_charges();
+            //clear item
+            charge_clearBtn_Clicked();
         }
     }
 
 //  -------------------------------------------------------------------------------------------------------
-//                                           User Tables
+//                                           User Form
 //  -------------------------------------------------------------------------------------------------------
 
     @FXML

@@ -57,7 +57,6 @@ public class TransactionManagement {
             }
         }
         else{
-            System.out.println("You do not have permission to add transaction.");
             //Alert
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Permission");
@@ -66,4 +65,44 @@ public class TransactionManagement {
             alert.showAndWait();
         }
     }
+
+    public static void deleteTransaction(User user, int id) {
+        if(user.getRole().getTransactionManager()) {
+            String query = "delete from Transaction where id = ?";
+
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+                    statement.setString(1, String.valueOf(id));
+                    int numRowsAffected = statement.executeUpdate();
+
+                    if (numRowsAffected > 0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Result Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Transaction delete successfully.");
+                        alert.showAndWait();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Failed to delete Transaction.");
+                        alert.showAndWait();
+                    }
+                }
+            }
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            //Alert
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Permission");
+            alert.setHeaderText("Permission denied");
+            alert.setContentText("You do not have permission to delete transaction.");
+            alert.showAndWait();
+        }
     }
+
+}
