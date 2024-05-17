@@ -75,9 +75,9 @@ public class LoginController {
                     String password = result.getString("password");
                     boolean userManag = result.getBoolean("userManag");
                     boolean clientManag = result.getBoolean("clientManag");
-                    boolean realEstateManag = true;
-                    boolean transactionManag = true;
-                    boolean chargeManag = true;
+                    boolean realEstateManag = result.getBoolean("realEstateManag");
+                    boolean transactionManag = result.getBoolean("transactionManag");
+                    boolean chargeManag = result.getBoolean("chargeManag");
 
 
                     Role role = new Role(userManag,realEstateManag,clientManag,transactionManag, chargeManag);

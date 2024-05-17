@@ -112,7 +112,7 @@ public class RealEstateManagement {
     }
 
     public static void deleteRealEstate(int id,User user) {
-        if(user.getRole().getClientManager()) {
+        if(user.getRole().getRealEstateManager()) {
             String query = "delete from RealEstate where id = ?";
 
             try (Connection connection = Database.connect()) {

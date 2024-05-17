@@ -391,7 +391,7 @@ public class BoardController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.setContentText("Some text fields are empty.Please make sure to select the client that u want to delete and to fill all the text fields..");
             alert.showAndWait();
         } else{
             int id = Integer.parseInt(client_id.getText());
@@ -411,7 +411,7 @@ public class BoardController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
+            alert.setContentText("Please make sure to select the client that u want to delete first.");
             alert.showAndWait();
         } else{
             int id = Integer.parseInt(client_id.getText());
@@ -609,7 +609,7 @@ public class BoardController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the real estate that u want to delete first.");
+            alert.setContentText("Please make sure to select the real estate that u want to delete first.");
             alert.showAndWait();
         }else{
             int id = Integer.parseInt(realEstate_Id.getText());
@@ -626,7 +626,7 @@ public class BoardController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
+            alert.setContentText("Some text fields are empty.Please make sure to select the real estate that u want to update and to fill all the text fields.");
             alert.showAndWait();
 
         }else{
@@ -858,9 +858,11 @@ public class BoardController implements Initializable {
 
     @FXML
     public void Transaction_addBtn_Clicked() throws SQLException {
+        int index=-1;
+         index = transaction_clientTable.getSelectionModel().getSelectedIndex();
         if ( transaction_PaiementBtn.getValue()==null || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
                 || transaction_NoteInput.getText().isEmpty()|| transaction_StatutBtn.getValue().isEmpty()|| transaction_realEstateIdLabel.getText().isEmpty()
-                || transaction_ClientIdLabel.getText().isEmpty()|| transaction_ClientLastnameLabel.getText().isEmpty() || transaction_ClientPhoneLabel.getText().isEmpty()){
+                || transaction_ClientIdLabel.getText().isEmpty()|| transaction_ClientLastnameLabel.getText().isEmpty() || transaction_ClientPhoneLabel.getText().isEmpty()|| index == -1){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -868,7 +870,6 @@ public class BoardController implements Initializable {
             alert.showAndWait();
 
         }else{
-            int index = transaction_clientTable.getSelectionModel().getSelectedIndex();
              int id=transaction_col_id.getCellData(index);
              String type=transaction_TypeBtn.getValue();
              double prix= Double.parseDouble(transaction_priceLabel.getText());
@@ -976,17 +977,18 @@ public class BoardController implements Initializable {
     }
 
     public void charge_addBtn_clicked() throws SQLException {
-       String Title = charge_title.getText();
-       String description = charge_description.getText();
-       double total = Double.parseDouble(charge_total.getText());
 
-       if (Title.isEmpty() || description.isEmpty() || total==0) {
+
+       if (charge_title.getText().isEmpty() || charge_description.getText().isEmpty() || charge_total.getText().isEmpty()) {
            Alert alert = new Alert(Alert.AlertType.ERROR);
            alert.setTitle("Error Message");
            alert.setHeaderText(null);
            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
            alert.showAndWait();
        } else {
+           String Title = charge_title.getText();
+           String description = charge_description.getText();
+           double total = Double.parseDouble(charge_total.getText());
            Charge charge=new Charge(Title,description,total);
            ChargeManagement.createCharge(charge,user);
            show_charges();
