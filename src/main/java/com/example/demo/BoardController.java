@@ -30,6 +30,7 @@ import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -220,6 +221,8 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(true);
+
+            show_appointment();
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -1290,7 +1293,7 @@ public class BoardController implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> col_appointmentId;
     @FXML
-    private TableColumn<Appointment, String> col_appointmentDate;
+    private TableColumn<Appointment, LocalDate> col_appointmentDate;
     @FXML
     private TableColumn<Appointment, String> col_appointmentDescription;
     @FXML
@@ -1322,14 +1325,76 @@ public class BoardController implements Initializable {
     @FXML
     private TextField appointment_clientPhone;
 
+    public void show_appointment() throws SQLException{
+        String query = "SELECT * FROM Appointment";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
 
-    public void appointment_addBtn_clicked() throws SQLException {}
+                ObservableList<Appointment>  appointmentList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("Id");
+                    String description = resultSet.getString("description");
+                    LocalDate date = resultSet.getDate("appointment_date").toLocalDate();
+                    String clientFullname = resultSet.getString("client_fullname");
+                    String clientPhone = resultSet.getString("client_phone");
+                    int realEstateId = resultSet.getInt("realEstate_id");
+                    int userId = resultSet.getInt("user_id");
+
+
+                    Appointment appointment = new Appointment(id,date,description,clientFullname,clientPhone,realEstateId,userId);
+                    appointmentList.add(appointment);
+                }
+
+                // Set cell value factories for table columns
+                col_appointmentId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+                col_appointmentDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+                col_appointmentDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+                col_appointmentClientFullname.setCellValueFactory(new PropertyValueFactory<>("clientFullname"));
+                col_appointmentClientPhone.setCellValueFactory(new PropertyValueFactory<>("clientPhone"));
+                col_appointmentRealEstateId.setCellValueFactory(new PropertyValueFactory<>("IdRealEstate"));
+                col_appointmentUserId.setCellValueFactory(new PropertyValueFactory<>("IdUser"));
+
+                appointment_table.setItems(appointmentList);
+
+            }
+        }
+    }
+
+    LocalDate date=LocalDate.now();
+
+    public void getDate(ActionEvent event){
+        this.date = appointment_date.getValue();
+    }
+
+    public void appointment_addBtn_clicked() throws SQLException {
+        if(appointment_id.getText().isEmpty() || appointment_description.getText().isEmpty() ||
+           appointment_clientFullname.getText().isEmpty() || appointment_clientPhone.getText().isEmpty())
+        {
+
+        }else{
+
+        }
+
+    }
 
     public void appointment_updateBtn_clicked() throws SQLException {}
 
     public void appointment_deleteBtn_clicked() throws SQLException {}
 
-    public void appointment_clearBtn_clicked(){}
+    public void appointment_clearBtn_clicked(){
+        appointment_id.setText("");
+        appointment_description.setText("");
+        appointment_clientFullname.setText("");
+        appointment_clientPhone.setText("");
+        appointment_date.setValue(null);
+        if(this.date != null){
+            System.out.println(this.date.toString());
+        }
+    }
+
 
 
 }

@@ -640,7 +640,7 @@
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="appointment_id" layoutX="118.0" layoutY="373.0" prefHeight="18.0" prefWidth="68.0" text="gg">
+                                    <Label fx:id="appointment_id" layoutX="118.0" layoutY="373.0" prefHeight="18.0" prefWidth="68.0">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
@@ -660,7 +660,7 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <DatePicker fx:id="appointment_date" layoutX="119.0" layoutY="478.0" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <DatePicker fx:id="appointment_date" layoutX="119.0" layoutY="478.0" onAction="#getDate" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                  </children>
                                  <styleClass>
                                     <String fx:value="white-bg" />

@@ -10,5 +10,6 @@ module com.example.demo {
     opens com.example.demo.user to javafx.base;
     opens com.example.demo.transaction to javafx.base;
     opens com.example.demo.charge to javafx.base;
+    opens com.example.demo.appointment to javafx.base;
     exports com.example.demo;
 }
