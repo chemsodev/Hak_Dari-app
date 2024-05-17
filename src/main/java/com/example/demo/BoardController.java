@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.appointment.Appointment;
 import com.example.demo.charge.Charge;
 import com.example.demo.charge.ChargeManagement;
 import com.example.demo.client.Client;
@@ -29,6 +30,7 @@ import javafx.scene.control.ChoiceBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class BoardController implements Initializable {
@@ -818,6 +820,23 @@ public class BoardController implements Initializable {
     @FXML
     private TableColumn<RealEstate,Double> transaction_col_realEstatePrice;
 
+    @FXML
+    private Label transaction_idLabel;
+    @FXML
+    private TextField transaction_NoteInput;
+    @FXML
+    private Label transaction_priceLabel;
+    @FXML
+    private TextField transaction_fraisInput;
+    @FXML
+    private Label transaction_ClientIdLabel;
+    @FXML
+    private Label transaction_ClientLastnameLabel;
+    @FXML
+    private Label transaction_ClientPhoneLabel;
+    @FXML
+    private Label transaction_realEstateIdLabel;
+
     public void show_transactionRealEstate() throws SQLException {
         String query = "SELECT * FROM RealEstate";
         try (Connection connection = Database.connect()) {
@@ -860,25 +879,6 @@ public class BoardController implements Initializable {
         show_transactionRealEstate();
     }
 
-    @FXML
-    private Label transaction_idLabel;
-    @FXML
-    private TextField transaction_NoteInput;
-    @FXML
-    private Label transaction_priceLabel;
-    @FXML
-    private TextField transaction_fraisInput;
-    @FXML
-    private Label transaction_ClientIdLabel;
-    @FXML
-    private Label transaction_ClientLastnameLabel;
-    @FXML
-    private Label transaction_ClientPhoneLabel;
-    @FXML
-    private Label transaction_realEstateIdLabel;
-
-
-    @FXML
     public void getTransaction_Item(){
         int index = transaction_tableView.getSelectionModel().getSelectedIndex();
         if(index != -1){
@@ -891,14 +891,14 @@ public class BoardController implements Initializable {
             transaction_StatutBtn.setValue(String.valueOf(transaction_col_statut.getCellData(index)));
         }
     }
-    @FXML
+
     public void getTransaction_RealEstateItem(){
         int index = transaction_realEstateTable.getSelectionModel().getSelectedIndex();
         if(index != -1){
             transaction_realEstateIdLabel.setText(String.valueOf(transaction_col_realEstateId.getCellData(index)));
         }
     }
-    @FXML
+
     public void getTransaction_ClientItem(){
         int index = transaction_clientTable.getSelectionModel().getSelectedIndex();
         if(index != -1){
@@ -908,7 +908,6 @@ public class BoardController implements Initializable {
         }
 
     }
-
 
     public void transaction_addBtn_Clicked() throws SQLException {
         int index=-1;
@@ -1006,6 +1005,15 @@ public class BoardController implements Initializable {
     @FXML
     private TableColumn<Charge, String> charge_col_id;
 
+    @FXML
+    private Label charge_id;
+    @FXML
+    private TextField charge_total;
+    @FXML
+    private TextArea charge_description;
+    @FXML
+    private TextField charge_title;
+
     public void show_charges() throws SQLException {
         String query = "SELECT * FROM charge";
         try (Connection connection = Database.connect()) {
@@ -1033,14 +1041,6 @@ public class BoardController implements Initializable {
             }
         }
     }
-    @FXML
-    private Label charge_id;
-    @FXML
-    private TextField charge_total;
-    @FXML
-    private TextArea charge_description;
-    @FXML
-    private TextField charge_title;
 
     public void getcharge_Item(){
         int index = charge_table.getSelectionModel().getSelectedIndex();
@@ -1079,7 +1079,6 @@ public class BoardController implements Initializable {
         charge_title.setText("");
     }
 
-
     public void charge_deleteBtn_clicked() throws SQLException{
         if (charge_id.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -1117,12 +1116,6 @@ public class BoardController implements Initializable {
     @FXML
     private RadioButton user_userManag;
 
-    @FXML
-    private Button user_addBtn;
-    @FXML
-    private Button user_updateBtn;
-    @FXML
-    private Button user_deleteBtn;
 
     @FXML
     private TableView<User> user_tableView;
@@ -1287,6 +1280,56 @@ public class BoardController implements Initializable {
             else{show_user();}
         }
     }
+
+//  -------------------------------------------------------------------------------------------------------
+//                                           Appointment Form
+//  -------------------------------------------------------------------------------------------------------
+
+    @FXML
+    private TableView<Appointment> appointment_table;
+    @FXML
+    private TableColumn<Appointment, Integer> col_appointmentId;
+    @FXML
+    private TableColumn<Appointment, String> col_appointmentDate;
+    @FXML
+    private TableColumn<Appointment, String> col_appointmentDescription;
+    @FXML
+    private TableColumn<Appointment, String> col_appointmentClientFullname;
+    @FXML
+    private TableColumn<Appointment, String> col_appointmentClientPhone;
+    @FXML
+    private TableColumn<Appointment, Integer> col_appointmentRealEstateId;
+    @FXML
+    private TableColumn<Appointment, Integer> col_appointmentUserId;
+
+    @FXML
+    private TableView<RealEstate> appointment_realEstateTable;
+    @FXML
+    private TableColumn<RealEstate, Integer> appointment_col_realEstateId;
+    @FXML
+    private TableColumn<RealEstate, String> appointment_col_realEstateTitle;
+    @FXML
+    private TableColumn<RealEstate, String> appointment_col_realEstateDescription;
+
+    @FXML
+    private Label appointment_id;
+    @FXML
+    private TextField appointment_description;
+    @FXML
+    private DatePicker appointment_date;
+    @FXML
+    private TextField appointment_clientFullname;
+    @FXML
+    private TextField appointment_clientPhone;
+
+
+    public void appointment_addBtn_clicked() throws SQLException {}
+
+    public void appointment_updateBtn_clicked() throws SQLException {}
+
+    public void appointment_deleteBtn_clicked() throws SQLException {}
+
+    public void appointment_clearBtn_clicked(){}
 
 
 }

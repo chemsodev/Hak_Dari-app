@@ -6,6 +6,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -585,117 +586,81 @@
                         </AnchorPane>
                         <AnchorPane fx:id="appointment_form" layoutX="-3.0" layoutY="3.0" prefHeight="555.0" prefWidth="889.0">
                            <children>
-                              <AnchorPane layoutX="10.0" layoutY="16.0" prefHeight="669.0" prefWidth="969.0" stylesheets="@dashboardDesign.css">
+                              <AnchorPane layoutX="7.0" layoutY="15.0" prefHeight="663.0" prefWidth="981.0" stylesheets="@dashboardDesign.css">
                                  <children>
-                                    <AnchorPane prefHeight="357.0" prefWidth="968.0" stylesheets="@dashboardDesign.css">
+                                    <AnchorPane prefHeight="357.0" prefWidth="654.0" stylesheets="@dashboardDesign.css">
                                        <styleClass>
                                           <String fx:value="white-bg" />
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="realestate_table1" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="949.0">
+                                          <TableView fx:id="appointment_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="636.0">
                                              <columns>
-                                                <TableColumn fx:id="col_realestateID1" prefWidth="49.0" text="ID" />
-                                                <TableColumn fx:id="col_title1" prefWidth="107.0" text="Title" />
-                                                <TableColumn fx:id="col_type1" prefWidth="75.19998168945312" text="Type" />
-                                                <TableColumn fx:id="col_description1" prefWidth="175.19993591308594" text="Description" />
-                                                <TableColumn fx:id="col_price1" prefWidth="152.7999267578125" text="Price" />
-                                                <TableColumn fx:id="col_area1" prefWidth="130.39996337890625" text="Area" />
-                                                <TableColumn fx:id="col_address1" prefWidth="172.0" text="Address" />
-                                                <TableColumn fx:id="col_ownerID1" prefWidth="89.5999755859375" text="OwnerId" />
+                                                <TableColumn fx:id="col_appointmentId" prefWidth="35.0" text="ID" />
+                                                <TableColumn fx:id="col_appointmentDate" prefWidth="96.0" text="Date" />
+                                                <TableColumn fx:id="col_appointmentDescription" prefWidth="152.0" text="Description" />
+                                                <TableColumn fx:id="col_appointmentClientFullname" prefWidth="141.0" text="Client Fullname" />
+                                                <TableColumn fx:id="col_appointmentClientPhone" prefWidth="110.0" text="Client Phone" />
+                                                <TableColumn fx:id="col_appointmentRealEstateId" prefWidth="47.0" text="R.E.id" />
+                                                <TableColumn fx:id="col_appointmentUserId" prefWidth="54.0" text="User Id" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="realEstate_search1" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach" styleClass="search" stylesheets="@dashboardDesign.css" />
                                        </children>
                                     </AnchorPane>
-                                    <Label layoutX="30.0" layoutY="410.0" text="Title :">
+                                    <Label layoutX="30.0" layoutY="407.0" text="Description :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_title1" layoutX="118.0" layoutY="407.0" prefHeight="25.0" prefWidth="192.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="30.0" layoutY="449.0" text="Description :">
+                                    <TextField fx:id="appointment_description" layoutX="119.0" layoutY="403.0" prefHeight="61.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="341.0" layoutY="444.0" text="Client Phone :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_description1" layoutX="119.0" layoutY="445.0" prefHeight="61.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="379.0" layoutY="452.0" text="Address :">
+                                    <TextField fx:id="appointment_clientPhone" layoutX="459.0" layoutY="441.0" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="30.0" layoutY="481.0" text="Date :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="realEstate_address1" layoutX="442.0" layoutY="448.0" prefHeight="25.0" prefWidth="184.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="33.0" layoutY="523.0" text="Type :">
+                                    <Label layoutX="342.0" layoutY="403.0" text="Client Fullname :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="380.0" layoutY="411.0" text="Price :">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="realEstate_price1" layoutX="442.0" layoutY="407.0" prefHeight="25.0" prefWidth="153.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="380.0" layoutY="489.0" text="Area :">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="realEstate_area1" layoutX="443.0" layoutY="487.0" prefHeight="25.0" prefWidth="154.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="realEstate_addBtn1" layoutX="537.0" layoutY="576.0" mnemonicParsing="false" onAction="#realEstate_addBtn_Clicked" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="realEstate_updateBtn1" layoutX="424.0" layoutY="576.0" mnemonicParsing="false" onAction="#realEstate_updateBtn_Clicked" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
-                                    <Button fx:id="realEstate_deleteBtn1" layoutX="269.0" layoutY="576.0" mnemonicParsing="false" onAction="#realEstate_deleteBtn_Clicked" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
-                                    <Button fx:id="realEstate_clearBtn1" layoutX="156.0" layoutY="576.0" mnemonicParsing="false" onAction="#realEstate_clearBtn_Clicked" prefHeight="41.0" prefWidth="94.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
-                                    <Label layoutX="599.0" layoutY="411.0" text="DZD">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="607.0" layoutY="489.0" text="m²">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <TableView fx:id="realEstate_clientTableView1" layoutX="663.0" layoutY="407.0" onMouseClicked="#getRealEstate_ClientItem" prefHeight="250.0" prefWidth="292.0">
-                                       <columns>
-                                          <TableColumn fx:id="realEstate_col_ClientId1" prefWidth="28.0" text="Id" />
-                                          <TableColumn fx:id="realEstate_col_ClientLastname1" prefWidth="132.0" text="LastName" />
-                                          <TableColumn fx:id="realEstate_col_clientPhone1" prefWidth="131.0" text="Phone" />
-                                       </columns>
-                                    </TableView>
-                                    <TextField fx:id="realEstate_clientSearch1" layoutX="663.0" layoutY="367.0" prefHeight="30.0" prefWidth="290.0" promptText="Client Name" styleClass="search" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="380.0" layoutY="521.0" text="Owner :">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="realEstate_ownerFullname1" layoutX="446.0" layoutY="521.0" text=".">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
+                                    <TextField fx:id="appointment_clientFullname" layoutX="459.0" layoutY="401.0" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Button fx:id="realEstate_addBtn1" layoutX="508.0" layoutY="509.0" mnemonicParsing="false" onAction="#appointment_addBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="add-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="realEstate_updateBtn1" layoutX="395.0" layoutY="509.0" mnemonicParsing="false" onAction="#appointment_updateBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Update" />
+                                    <Button fx:id="realEstate_deleteBtn1" layoutX="508.0" layoutY="569.0" mnemonicParsing="false" onAction="#appointment_deleteBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <Button fx:id="realEstate_clearBtn1" layoutX="395.0" layoutY="569.0" mnemonicParsing="false" onAction="#appointment_clearBtn_clicked" prefHeight="41.0" prefWidth="94.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
                                     <Label layoutX="30.0" layoutY="373.0" text="Id :">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="realEstate_Id1" layoutX="118.0" layoutY="373.0">
+                                    <Label fx:id="appointment_id" layoutX="118.0" layoutY="373.0" prefHeight="18.0" prefWidth="68.0" text="gg">
                                        <font>
                                           <Font name="Tahoma" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="380.0" layoutY="547.0" text="Owner Id :">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="realEstate_ownerId1" layoutX="453.0" layoutY="547.0" text=".">
-                                       <font>
-                                          <Font name="Tahoma" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <ChoiceBox fx:id="realEstate_type1" layoutX="119.0" layoutY="518.0" prefHeight="27.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <AnchorPane layoutX="661.0" prefHeight="663.0" prefWidth="320.0" stylesheets="@dashboardDesign.css">
+                                       <styleClass>
+                                          <String fx:value="white-bg" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                       <children>
+                                          <TableView fx:id="appointment_realEstateTable" layoutX="8.0" layoutY="53.0" onMouseClicked="#getRealEstate_ClientItem" prefHeight="295.0" prefWidth="304.0">
+                                             <columns>
+                                                <TableColumn fx:id="appointment_col_realEstateId" prefWidth="28.0" text="Id" />
+                                                <TableColumn fx:id="appointment_col_realEstateTitle" prefWidth="133.0" text="Title" />
+                                                <TableColumn fx:id="appointment_col_realEstateDescription" prefWidth="142.0" text="Description" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                    <DatePicker fx:id="appointment_date" layoutX="119.0" layoutY="478.0" prefHeight="25.0" prefWidth="190.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
                                  </children>
                                  <styleClass>
                                     <String fx:value="white-bg" />
