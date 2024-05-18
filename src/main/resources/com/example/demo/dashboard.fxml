@@ -69,7 +69,7 @@
                <center>
                   <AnchorPane prefHeight="702.0" prefWidth="989.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="home_form" layoutY="-5.0" prefHeight="700.0" prefWidth="989.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+                        <AnchorPane fx:id="home_form" layoutY="-5.0" prefHeight="700.0" prefWidth="989.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
                            <children>
                               <AnchorPane layoutX="69.0" layoutY="105.0" prefHeight="521.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
@@ -423,13 +423,14 @@
                                  <children>
                                     <TableView fx:id="transaction_tableView" layoutX="15.0" layoutY="46.0" onMouseClicked="#getTransaction_Item" prefHeight="256.0" prefWidth="668.0">
                                        <columns>
-                                          <TableColumn fx:id="transaction_col_id" prefWidth="42.0" text="ID" />
-                                          <TableColumn fx:id="transaction_col_type" prefWidth="150.0" text="Type" />
-                                          <TableColumn fx:id="transaction_col_prix" prefWidth="100.0" text="Prix" />
-                                          <TableColumn fx:id="transaction_col_frais" prefWidth="122.0" text="Frais" />
-                                          <TableColumn fx:id="transaction_col_paiement" prefWidth="63.0" text="Paiement" />
-                                          <TableColumn fx:id="transaction_col_statut" minWidth="0.0" prefWidth="55.0" text="Statut" />
-                                          <TableColumn fx:id="transaction_col_note" prefWidth="135.0" text="Note" />
+                                          <TableColumn fx:id="transaction_col_id" prefWidth="33.0" text="ID" />
+                                          <TableColumn fx:id="transaction_col_type" prefWidth="71.0" text="Type" />
+                                          <TableColumn fx:id="transaction_col_date" prefWidth="96.0" text="Date" />
+                                          <TableColumn fx:id="transaction_col_prix" prefWidth="99.0" text="Prix" />
+                                          <TableColumn fx:id="transaction_col_frais" prefWidth="88.0" text="Frais" />
+                                          <TableColumn fx:id="transaction_col_paiement" text="Paiement" />
+                                          <TableColumn fx:id="transaction_col_statut" minWidth="0.0" prefWidth="74.0" text="Statut" />
+                                          <TableColumn fx:id="transaction_col_note" prefWidth="126.0" text="Note" />
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="realEstateSearch_input" layoutX="15.0" layoutY="12.0" prefHeight="25.0" prefWidth="289.0" promptText="Search For Real Estate" styleClass="textfield" stylesheets="@dashboardDesign.css" />
@@ -500,7 +501,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="charge_table" layoutX="6.0" layoutY="11.0" onMouseClicked="#getcharge_Item" prefHeight="501.0" prefWidth="593.0">
+                                    <TableView fx:id="charge_table" layoutX="6.0" layoutY="11.0" onMouseClicked="#getCharge_Item" prefHeight="501.0" prefWidth="593.0">
                                        <columns>
                                           <TableColumn fx:id="charge_col_title" prefWidth="167.0" text="Title" />
                                           <TableColumn fx:id="charge_col_description" prefWidth="240.0" text="Description" />
@@ -584,7 +585,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="appointment_form" layoutX="-3.0" layoutY="3.0" prefHeight="555.0" prefWidth="889.0">
+                        <AnchorPane fx:id="appointment_form" layoutX="-3.0" layoutY="3.0" prefHeight="555.0" prefWidth="889.0" visible="false">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="15.0" prefHeight="663.0" prefWidth="981.0" stylesheets="@dashboardDesign.css">
                                  <children>

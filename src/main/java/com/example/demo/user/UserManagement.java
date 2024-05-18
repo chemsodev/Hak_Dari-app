@@ -2,6 +2,7 @@ package com.example.demo.user;
 
 import com.example.demo.BoardController;
 import com.example.demo.Database;
+import com.example.demo.alerts.Alerts;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -14,50 +15,59 @@ import java.util.Optional;
 import static com.example.demo.BoardController.*;
 
 public class UserManagement {
-
     //Create user
-    public static void createUser(User user){
-        String query = "INSERT INTO users (username, password, userManag, clientManag, realEstateManag, transactionManag, chargeManag) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public static void createUser(User superUser,User user){
+        Alerts alerts = new Alerts();
+        if(superUser.getRole().getUserManager()) {
+            String query = "INSERT INTO users (username, password, userManag, clientManag, realEstateManag, transactionManag, chargeManag) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = Database.connect()) {
-            assert connection != null;
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (Connection connection = Database.connect()) {
+                assert connection != null;
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
 
-                statement.setString(1, user.getUsername());
-                statement.setString(2, user.getPassword());
-                if (user.getRole().getUserManager()){statement.setString(3, String.valueOf(1));}
-                else{statement.setString(3, String.valueOf(0));}
-                if (user.getRole().getClientManager()){statement.setString(4, String.valueOf(1));}
-                else{statement.setString(4, String.valueOf(0));}
-                if (user.getRole().getRealEstateManager()){statement.setString(5, String.valueOf(1));}
-                else{statement.setString(5, String.valueOf(0));}
-                if (user.getRole().getTransactionManager()){statement.setString(6, String.valueOf(1));}
-                else{statement.setString(6, String.valueOf(0));}
-                if (user.getRole().getChargeManager()){statement.setString(7, String.valueOf(1));}
-                else{statement.setString(7, String.valueOf(0));}
-                int numRowsAffected = statement.executeUpdate();
-                if (numRowsAffected > 0) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Result Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("User added successfully.");
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Failed to add User.");
-                    alert.showAndWait();
+                    statement.setString(1, user.getUsername());
+                    statement.setString(2, user.getPassword());
+                    if (user.getRole().getUserManager()) {
+                        statement.setString(3, String.valueOf(1));
+                    } else {
+                        statement.setString(3, String.valueOf(0));
+                    }
+                    if (user.getRole().getClientManager()) {
+                        statement.setString(4, String.valueOf(1));
+                    } else {
+                        statement.setString(4, String.valueOf(0));
+                    }
+                    if (user.getRole().getRealEstateManager()) {
+                        statement.setString(5, String.valueOf(1));
+                    } else {
+                        statement.setString(5, String.valueOf(0));
+                    }
+                    if (user.getRole().getTransactionManager()) {
+                        statement.setString(6, String.valueOf(1));
+                    } else {
+                        statement.setString(6, String.valueOf(0));
+                    }
+                    if (user.getRole().getChargeManager()) {
+                        statement.setString(7, String.valueOf(1));
+                    } else {
+                        statement.setString(7, String.valueOf(0));
+                    }
+                    int numRowsAffected = statement.executeUpdate();
+                    if (numRowsAffected > 0) {
+                        alerts.showAlertSuccessfuly("Added","User");
+                    } else {
+                        alerts.showAlertFailedTo("Add","User");
+                    }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public static void updateUser(User user){
+        Alerts alerts = new Alerts();
         String query = "UPDATE users SET username=?, password=?, userManag=?, clientManag=?, realEstateManag=?, transactionManag=?, chargeManag=?  where id = ?";
-
         try (Connection connection = Database.connect()) {
             assert connection != null;
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -77,17 +87,9 @@ public class UserManagement {
                 int numRowsAffected = statement.executeUpdate();
 
                 if (numRowsAffected > 0) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Result Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("User updated successfully.");
-                    alert.showAndWait();
+                    alerts.showAlertSuccessfuly("Updated","User");
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Failed to update client.");
-                    alert.showAndWait();
+                    alerts.showAlertFailedTo("Update","User");
                 }
             }
         } catch (SQLException e) {
@@ -95,45 +97,35 @@ public class UserManagement {
         }
     }
 
-    //Te9der tbedel les parametre chof wsh ysa3dk chemsou
-    //rigl
     public static void deleteUser(User user, int id) throws SQLException {
+        Alerts alerts = new Alerts();
+        if(user.getRole().getUserManager()) {
+            if(user.getId() == id){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Delete User Failed");
+                alert.showAndWait();
+            }else{
+                String query = "delete from users where id = ?";
+                try (Connection connection = Database.connect()) {
+                    assert connection != null;
+                    try (PreparedStatement statement = connection.prepareStatement(query)) {
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm deleting User");
-            alert.setHeaderText("Notice:");
-        if(user.getId()==id) {alert.setContentText("you are trying to delete the user account that is now logged, u will be logged out after deleting it.\nConfirm account deleting");}
-         else{alert.setContentText("Confirm User deleting.");}
-        Optional<ButtonType> result =alert.showAndWait();
-         if(result.get() == ButtonType.OK){
-            String query = "delete from users where id = ?";
-            try (Connection connection = Database.connect()) {
-                assert connection != null;
-                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                        statement.setString(1, String.valueOf(id));
+                        int numRowsAffected = statement.executeUpdate();
 
-                    statement.setString(1, String.valueOf(id));
-                    int numRowsAffected = statement.executeUpdate();
-
-                    if (numRowsAffected > 0) {
-                        alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("User deleted successfully.");
-                        alert.showAndWait();
-                    } else {
-                        Alert alert1= new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete User.");
-                        alert.showAndWait();
+                        if (numRowsAffected > 0) {
+                            alerts.showAlertSuccessfuly("Deleted","User");
+                        } else {
+                            alerts.showAlertFailedTo("Delete","User");
+                        }
                     }
                 }
+                catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-         }
+        }
     }
-
 
 }

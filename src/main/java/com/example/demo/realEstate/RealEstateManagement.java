@@ -1,6 +1,7 @@
 package com.example.demo.realEstate;
 
 import com.example.demo.Database;
+import com.example.demo.alerts.Alerts;
 import com.example.demo.user.User;
 import javafx.scene.control.Alert;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 public class RealEstateManagement {
 
     public static void createRealEstate(RealEstate realEstate,User user) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getRealEstateManager()) {
             LocalDate currentDate = LocalDate.now();
             String query = "insert into RealEstate (Title,Description,Price,Area,Address,Type,Date_Creation,id_Owner) VALUES (?,?,?,?,?,?,?,?)";
@@ -30,17 +32,9 @@ public class RealEstateManagement {
                     int rowsAffected = preparedStatement.executeUpdate();
 
                      if (rowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("real_estate added successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","RealEstate");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to add real_estate.");
-                        alert.showAndWait();
+                         alerts.showAlertFailedTo("Add","RealEstate");
                     }
 
                 }
@@ -52,15 +46,12 @@ public class RealEstateManagement {
                 alert.showAndWait();
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permission");
-            alert.setHeaderText("Permission denied");
-            alert.setContentText("You do not have permission to add Real Estate.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("RealEstate","Add");
         }
     }
 
     public static void updateRealEstate(RealEstate realEstate,User user) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getRealEstateManager()) {
             LocalDate currentDate = LocalDate.now();
             String query = "UPDATE RealEstate SET Title=?,Description=?,Price=?,Area=?,Address=?,Type=?, id_Owner=? WHERE Id=? ";
@@ -81,17 +72,9 @@ public class RealEstateManagement {
                     int rowsAffected = preparedStatement.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("real_estate Updated successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","RealEstate");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to Update real_estate.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Update","RealEstate");
                     }
 
                 }
@@ -103,15 +86,12 @@ public class RealEstateManagement {
                 alert.showAndWait();
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permission");
-            alert.setHeaderText("Permission denied");
-            alert.setContentText("You do not have permission to Update Real Estate.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("RealEstate","Update");
         }
     }
 
     public static void deleteRealEstate(int id,User user) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getRealEstateManager()) {
             String query = "delete from RealEstate where id = ?";
 
@@ -123,17 +103,9 @@ public class RealEstateManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("real estate deleted successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","RealEstate");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete real estate.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Delete","RealEstate");
                     }
                 }
             }catch (SQLIntegrityConstraintViolationException e){
@@ -148,11 +120,7 @@ public class RealEstateManagement {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to delete a real estate.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("RealEstate","Delete");
         }
     }
 }

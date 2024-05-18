@@ -1,6 +1,7 @@
 package com.example.demo.transaction;
 
 import com.example.demo.Database;
+import com.example.demo.alerts.Alerts;
 import com.example.demo.user.User;
 import javafx.scene.control.Alert;
 
@@ -11,8 +12,9 @@ public class TransactionManagement {
 
 
     public static void addTransaction(User user, Transaction transaction) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getTransactionManager()) {
-            LocalDate currentDate = LocalDate.now();
+
             String query = "insert into Transaction (Type,DateTransaction,Prix,Frais,MethodePaiement,Statut,Note,Id_Client,Id_Propriete) values(?,?,?,?,?,?,?,?,?)";
 
             try (Connection connection = Database.connect()) {
@@ -20,7 +22,7 @@ public class TransactionManagement {
                 try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
                     preparedStatement.setString(1, transaction.getType());
-                    preparedStatement.setDate(2, Date.valueOf(currentDate));
+                    preparedStatement.setDate(2, Date.valueOf(transaction.getDate()));
                     preparedStatement.setDouble(3, transaction.getPrix());
                     preparedStatement.setDouble(4, transaction.getFrais());
                     preparedStatement.setString(5, transaction.getMethodePaiement());
@@ -32,41 +34,24 @@ public class TransactionManagement {
 
                     int rowsAffected = preparedStatement.executeUpdate();
                     if (rowsAffected > 0) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Result Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("transaction added successfully.");
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Failed to add transaction.");
-                    alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","Transaction");
+                    } else {
+                        alerts.showAlertFailedTo("Add","Transaction");
+                    }
                 }
-        }
-            } catch (SQLIntegrityConstraintViolationException e){
-
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Message");
-        alert.setHeaderText(null);
-        alert.setContentText("cannot delete this real estate because it's in an existing transaction  .");
-        alert.showAndWait();
-        } catch (SQLException e) {
-                throw new RuntimeException(e);
+            }catch (SQLException e) {
+                    throw new RuntimeException(e);
             }
-        }
-        else{
-            //Alert
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permission");
-            alert.setHeaderText("Permission denied");
-            alert.setContentText("You do not have permission to add transaction.");
-            alert.showAndWait();
+
+        }else{
+            alerts.showAlertPermissionError("Add","Transaction");
         }
     }
 
+    public static void updateTransaction() {}
+
     public static void deleteTransaction(User user, int id) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getTransactionManager()) {
             String query = "delete from Transaction where id = ?";
 
@@ -78,17 +63,9 @@ public class TransactionManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Transaction delete successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Delete","Transaction");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete Transaction.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Delete","Transaction");
                     }
                 }
             }
@@ -96,12 +73,7 @@ public class TransactionManagement {
                 throw new RuntimeException(e);
             }
         }else{
-            //Alert
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permission");
-            alert.setHeaderText("Permission denied");
-            alert.setContentText("You do not have permission to delete transaction.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Delete","Transaction");
         }
     }
 

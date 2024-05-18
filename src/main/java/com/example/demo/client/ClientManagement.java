@@ -1,6 +1,7 @@
 package com.example.demo.client;
 
 import com.example.demo.Database;
+import com.example.demo.alerts.Alerts;
 import com.example.demo.user.User;
 import javafx.scene.control.Alert;
 
@@ -12,6 +13,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class ClientManagement {
 
     public static void createClient(Client client, User user) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getClientManager()) {
             String query = "INSERT INTO Client (Nom, Prenom, Email, Password, Phone) VALUES (?, ?, ?, ?, ?)";
 
@@ -28,32 +30,21 @@ public class ClientManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Client added successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","Client");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to add client.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Add","Client");
                     }
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to add a client.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Client","Add");
         }
     }
 
     public static void updateClient(User user,Client client) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getClientManager()) {
             String query = "UPDATE Client SET Nom=? , Prenom=? , Email=? , Phone=?  where id = ?";
 
@@ -68,32 +59,21 @@ public class ClientManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Client updated successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Updated","Client");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to update client.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Update","Client");
                     }
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to update a client.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Client","Update");
         }
     }
 
     public static void deleteClient(int id,User user){
+        Alerts alerts = new Alerts();
         if(user.getRole().getClientManager()) {
             String query = "delete from Client where id = ?";
 
@@ -105,17 +85,9 @@ public class ClientManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Client delete successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Deleted","Client");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete client.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Delete","Client");
                     }
                 }
             }catch (SQLIntegrityConstraintViolationException e){
@@ -130,11 +102,7 @@ public class ClientManagement {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to delete a client.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Client","Delete");
         }
     }
 

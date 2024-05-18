@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.alerts.Alerts;
 import com.example.demo.appointment.Appointment;
+import com.example.demo.appointment.AppointmentManagement;
 import com.example.demo.charge.Charge;
 import com.example.demo.charge.ChargeManagement;
 import com.example.demo.client.Client;
@@ -39,6 +41,7 @@ public class BoardController implements Initializable {
     private Stage stage;
     private Scene scene;
 
+    Alerts alerts = new Alerts();
 
     @FXML
     private AnchorPane home_form;
@@ -407,21 +410,19 @@ public class BoardController implements Initializable {
     }
 
     public void client_addBtn_Clicked() throws SQLException {
-        String nom = client_firstname.getText();
-        String prenom = client_lastname.getText();
-        String email = client_email.getText();
-        String phone = client_phone.getText();
-
-
-        if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-            alert.showAndWait();
+        if (client_firstname.getText().isEmpty() || client_lastname.getText().isEmpty() ||
+                client_email.getText().isEmpty() || client_phone.getText().isEmpty())
+        {
+            alerts.showAlertTextFieldEmptyError();
         } else {
+            String nom = client_firstname.getText();
+            String prenom = client_lastname.getText();
+            String email = client_email.getText();
+            String phone = client_phone.getText();
+
             Client client = new Client(nom,prenom,email,phone);
             ClientManagement.createClient(client,user);
+
             show_clients();
             //Clear Item
             client_clearBtn_Clicked();
@@ -429,22 +430,15 @@ public class BoardController implements Initializable {
     }
 
     public void client_updateBtn_Clicked() throws SQLException{
-        if (client_id.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty.Please make sure to select the client that u want to delete and to fill all the text fields..");
-            alert.showAndWait();
+        if (client_id.getText().isEmpty() || client_firstname.getText().isEmpty() || client_lastname.getText().isEmpty() ||
+            client_email.getText().isEmpty() || client_phone.getText().isEmpty() ){
+            alerts.showAlertTextFieldEmptyError();
         } else{
-            int id = Integer.parseInt(client_id.getText());
-            String nom=client_firstname.getText();
-            String prenom=client_lastname.getText() ;
-            String email=client_email.getText();
-            String phone=client_phone.getText();
-            Client client = new Client(id,nom,prenom,email,phone);
+            Client client = new Client(Integer.parseInt(client_id.getText()),client_firstname.getText(),client_lastname.getText(),
+                    client_email.getText(),client_phone.getText());
             ClientManagement.updateClient(user,client);
+            //Refresh
             show_clients();
-            //Clear Item
             client_clearBtn_Clicked();
         }
 
@@ -452,14 +446,9 @@ public class BoardController implements Initializable {
 
     public void client_deleteBtn_Clicked() throws SQLException{
         if (client_id.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please make sure to select the client that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertSelectionEmptyError("Client");
         } else{
-            int id = Integer.parseInt(client_id.getText());
-            ClientManagement.deleteClient(id, user);
+            ClientManagement.deleteClient(Integer.parseInt(client_id.getText()), user);
             show_clients();
             //Clear item
             client_clearBtn_Clicked();
@@ -637,11 +626,7 @@ public class BoardController implements Initializable {
                 realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().isEmpty()
                 || realEstate_ownerId.getText().isEmpty() || realEstate_type.getValue().isEmpty()){
 
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-            alert.showAndWait();
+            alerts.showAlertTextFieldEmptyError();
 
         }else{
             String title = realEstate_title.getText();
@@ -660,14 +645,9 @@ public class BoardController implements Initializable {
 
     public void realEstate_deleteBtn_Clicked() throws SQLException {
         if (realEstate_Id.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please make sure to select the real estate that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertSelectionEmptyError("RealEstate");
         }else{
-            int id = Integer.parseInt(realEstate_Id.getText());
-            RealEstateManagement.deleteRealEstate(id,user);
+            RealEstateManagement.deleteRealEstate(Integer.parseInt(realEstate_Id.getText()),user);
             show_realestates();
             realEstate_clearBtn_Clicked();
         }
@@ -678,12 +658,7 @@ public class BoardController implements Initializable {
                 realEstate_address.getText().isEmpty() || realEstate_area.getText().isEmpty() || realEstate_ownerFullname.getText().isEmpty()
                 || realEstate_ownerId.getText().isEmpty() || realEstate_type.getValue().isEmpty()){
 
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty.Please make sure to select the real estate that u want to update and to fill all the text fields.");
-            alert.showAndWait();
-
+            alerts.showAlertTextFieldEmptyError();
         }else{
             int id = Integer.parseInt(realEstate_Id.getText());
             String title = realEstate_title.getText();
@@ -724,6 +699,8 @@ public class BoardController implements Initializable {
     @FXML
     private TableColumn<Transaction, String> transaction_col_type;
     @FXML
+    private TableColumn<Transaction, LocalDate> transaction_col_date;
+    @FXML
     private TableColumn<Transaction, Double> transaction_col_prix;
     @FXML
     private TableColumn<Transaction, Double> transaction_col_frais;
@@ -746,6 +723,7 @@ public class BoardController implements Initializable {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("Id");
                     String type = resultSet.getString("Type");
+                    LocalDate date = resultSet.getDate("DateTransaction").toLocalDate();
                     double prix = resultSet.getDouble("Prix");
                     double frais = resultSet.getDouble("Frais");
                     String methodePaiement = resultSet.getString("MethodePaiement");
@@ -754,13 +732,14 @@ public class BoardController implements Initializable {
                     int id_Client = resultSet.getInt("Id_Client");
                     int id_Propriete = resultSet.getInt("Id_Propriete");
 
-                    Transaction transaction = new Transaction(id,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
+                    Transaction transaction = new Transaction(id,date,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
                     transactionList.add(transaction);
                 }
 
                 // Set cell value factories for table columns
                 transaction_col_id.setCellValueFactory(new PropertyValueFactory<>("Id"));
                 transaction_col_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+                transaction_col_date.setCellValueFactory(new PropertyValueFactory<>("Date"));
                 transaction_col_prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
                 transaction_col_frais.setCellValueFactory(new PropertyValueFactory<>("Frais"));
                 transaction_col_paiement.setCellValueFactory(new PropertyValueFactory<>("MethodePaiement"));
@@ -858,7 +837,7 @@ public class BoardController implements Initializable {
                     Double area = resultSet.getDouble("Area");
                     String address = resultSet.getString("Address");
                     String type = resultSet.getString("Type");
-                    //date
+                    //
                     int id_Owner = resultSet.getInt("Id_Owner");
 
                     RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address, id_Owner);
@@ -888,7 +867,7 @@ public class BoardController implements Initializable {
         if(index != -1){
             transaction_idLabel.setText(String.valueOf(transaction_col_id.getCellData(index)));
             transaction_TypeBtn.setValue(transaction_col_type.getCellData(index));
-            transaction_priceLabel.setText(String.valueOf(transaction_col_prix.getCellData(index)));
+            //transaction_priceLabel.setText(String.valueOf(transaction_col_prix.getCellData(index)));
             transaction_fraisInput.setText(String.valueOf(transaction_col_frais.getCellData(index)));
             transaction_NoteInput.setText(String.valueOf(transaction_col_note.getCellData(index)));
             transaction_PaiementBtn.setValue(String.valueOf(transaction_col_paiement.getCellData(index)));
@@ -900,6 +879,7 @@ public class BoardController implements Initializable {
         int index = transaction_realEstateTable.getSelectionModel().getSelectedIndex();
         if(index != -1){
             transaction_realEstateIdLabel.setText(String.valueOf(transaction_col_realEstateId.getCellData(index)));
+            transaction_priceLabel.setText(String.valueOf(transaction_col_realEstatePrice.getCellData(index)));
         }
     }
 
@@ -919,15 +899,12 @@ public class BoardController implements Initializable {
         if ( transaction_PaiementBtn.getValue()==null || transaction_TypeBtn.getValue().isEmpty() || transaction_priceLabel.getText().isEmpty()|| transaction_fraisInput.getText().isEmpty()
                 || transaction_NoteInput.getText().isEmpty()|| transaction_StatutBtn.getValue().isEmpty()|| transaction_realEstateIdLabel.getText().isEmpty()
                 || transaction_ClientIdLabel.getText().isEmpty()|| transaction_ClientLastnameLabel.getText().isEmpty() || transaction_ClientPhoneLabel.getText().isEmpty()|| index == -1){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-            alert.showAndWait();
+            alerts.showAlertTextFieldEmptyError();
 
         }else{
              int id=transaction_col_id.getCellData(index);
              String type=transaction_TypeBtn.getValue();
+             LocalDate dateNow = LocalDate.now();
              double prix= Double.parseDouble(transaction_priceLabel.getText());
              double frais= Double.parseDouble(transaction_fraisInput.getText());
              String methodePaiement=transaction_PaiementBtn.getValue();
@@ -935,7 +912,7 @@ public class BoardController implements Initializable {
              String note=transaction_NoteInput.getText();
              int id_Client= Integer.parseInt(transaction_ClientIdLabel.getText());
              int id_Propriete= Integer.parseInt(transaction_realEstateIdLabel.getText());
-            Transaction transaction = new Transaction(id,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
+            Transaction transaction = new Transaction(id,dateNow,type,prix,frais,methodePaiement,statut,note,id_Client,id_Propriete);
             TransactionManagement.addTransaction(user,transaction);
             show_transaction();
             //Clear Item
@@ -943,16 +920,15 @@ public class BoardController implements Initializable {
         }
     }
 
+    public void transaction_updateBtn_Clicked() throws SQLException {
+
+    }
+
     public void transaction_deleteBtn_Clicked() throws SQLException {
         if (transaction_idLabel.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the Transaction that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertSelectionEmptyError("Transaction");
         }else{
-            int id = Integer.parseInt(transaction_idLabel.getText());
-            TransactionManagement.deleteTransaction(user,id);
+            TransactionManagement.deleteTransaction(user,Integer.parseInt(transaction_idLabel.getText()));
             show_charges();
             transaction_clearBtn_Clicked();
         }
@@ -1046,7 +1022,7 @@ public class BoardController implements Initializable {
         }
     }
 
-    public void getcharge_Item(){
+    public void getCharge_Item(){
         int index = charge_table.getSelectionModel().getSelectedIndex();
         if(index != -1){
             charge_id.setText(String.valueOf(charge_col_id.getCellData(index)));
@@ -1058,20 +1034,13 @@ public class BoardController implements Initializable {
 
     public void charge_addBtn_clicked() throws SQLException {
 
-       if (charge_title.getText().isEmpty() || charge_description.getText().isEmpty() || charge_total.getText().isEmpty()) {
-           Alert alert = new Alert(Alert.AlertType.ERROR);
-           alert.setTitle("Error Message");
-           alert.setHeaderText(null);
-           alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-           alert.showAndWait();
+       if (charge_title.getText().isEmpty() || charge_total.getText().isEmpty()) {
+           alerts.showAlertTextFieldEmptyError();
        } else {
-           String Title = charge_title.getText();
-           String description = charge_description.getText();
-           double total = Double.parseDouble(charge_total.getText());
-           Charge charge=new Charge(Title,description,total);
+           Charge charge=new Charge(charge_title.getText(),charge_description.getText(),Double.parseDouble(charge_total.getText()));
            ChargeManagement.createCharge(charge,user);
+           //Refresh page
            show_charges();
-           //clear item
            charge_clearBtn_Clicked();
        }
     }
@@ -1085,16 +1054,11 @@ public class BoardController implements Initializable {
 
     public void charge_deleteBtn_clicked() throws SQLException{
         if (charge_id.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the charge that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertSelectionEmptyError("Charge");
         }else{
-            String id = charge_id.getText();
-            ChargeManagement.deleteClient(id, user);
+            ChargeManagement.deleteClient(charge_id.getText(), user);
+            //Refresh
             show_charges();
-            //clear item
             charge_clearBtn_Clicked();
         }
     }
@@ -1213,42 +1177,34 @@ public class BoardController implements Initializable {
         }
     }
 
-
     public void user_addBtn_clicked() throws SQLException {
-     if (user_username.getText().isEmpty() || user_password.getText().isEmpty() || (!user_clientManag.isSelected() && !user_realEstateManag.isSelected() && !user_transactionManag.isSelected() && !user_chargeManag.isSelected() && !user_userManag.isSelected()))
+        if (user_username.getText().isEmpty() || user_password.getText().isEmpty() || (!user_clientManag.isSelected() && !user_realEstateManag.isSelected() && !user_transactionManag.isSelected() && !user_chargeManag.isSelected() && !user_userManag.isSelected()))
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to fill all the text fields.");
-            alert.showAndWait();
+            alerts.showAlertTextFieldEmptyError();
         }else{
-         String u_username = user_username.getText();
-         String u_password = user_password.getText();
-         boolean user_clientManagement =false;
-         boolean user_realEstateManagement =false;
-         boolean user_transactionManagement =false;
-         boolean user_chargeManagement =false;
-         boolean user_userManagement =false;
-         if (user_clientManag.isSelected()) user_clientManagement = true;
-         if (user_realEstateManag.isSelected()) user_realEstateManagement = true;
-         if (user_transactionManag.isSelected()) user_transactionManagement = true;
-         if (user_chargeManag.isSelected()) user_chargeManagement = true;
-         if (user_userManag.isSelected()) user_userManagement = true;
-         Role role=new Role(user_userManagement,user_realEstateManagement,user_clientManagement,user_transactionManagement,user_chargeManagement);
-          User user1=new User(u_username,u_password,role);
-         UserManagement.createUser(user1);
-         show_user();
-     }
+             String u_username = user_username.getText();
+             String u_password = user_password.getText();
+             boolean user_clientManagement =false;
+             boolean user_realEstateManagement =false;
+             boolean user_transactionManagement =false;
+             boolean user_chargeManagement =false;
+             boolean user_userManagement =false;
+             if (user_clientManag.isSelected()) user_clientManagement = true;
+             if (user_realEstateManag.isSelected()) user_realEstateManagement = true;
+             if (user_transactionManag.isSelected()) user_transactionManagement = true;
+             if (user_chargeManag.isSelected()) user_chargeManagement = true;
+             if (user_userManag.isSelected()) user_userManagement = true;
+             Role role=new Role(user_userManagement,user_realEstateManagement,user_clientManagement,user_transactionManagement,user_chargeManagement);
+             User userToAdd=new User(u_username,u_password,role);
+             //Refresh
+             UserManagement.createUser(user,userToAdd);
+             show_user();
+        }
     }
 
     public void user_updateBtn_clicked() throws SQLException {
         if(user_userIdLabel.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertTextFieldEmptyError();
         } else{
             int id = Integer.parseInt(user_userIdLabel.getText());
             String u_username = user_username.getText();
@@ -1264,24 +1220,18 @@ public class BoardController implements Initializable {
             if (user_chargeManag.isSelected()) user_chargeManagement = true;
             if (user_userManag.isSelected()) user_userManagement = true;
             Role role=new Role(user_userManagement,user_realEstateManagement,user_clientManagement,user_transactionManagement,user_chargeManagement);
-            User user1=new User(id,u_username,u_password,role);
-            UserManagement.updateUser(user1);
+            User userToUpdate=new User(id,u_username,u_password,role);
+            UserManagement.updateUser(userToUpdate);
             show_user();
         }
     }
 
     public void user_deleteBtn_clicked() throws SQLException {
         if(user_userIdLabel.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Some text fields are empty. Please make sure to select the client that u want to delete first.");
-            alert.showAndWait();
+            alerts.showAlertSelectionEmptyError("User");
         } else{
             int id = Integer.parseInt(user_userIdLabel.getText());
             UserManagement.deleteUser(user,id);
-            if(user.getId()==id){logout_btn.fire();}
-            else{show_user();}
         }
     }
 
@@ -1427,7 +1377,7 @@ public class BoardController implements Initializable {
         }
     }
 
-    LocalDate date = LocalDate.now();
+    LocalDate date;
 
     @FXML
     public void getDate(ActionEvent event){
@@ -1435,20 +1385,60 @@ public class BoardController implements Initializable {
     }
 
     public void appointment_addBtn_clicked() throws SQLException {
-        if(appointment_id.getText().isEmpty() || appointment_clientFullname.getText().isEmpty() ||
-                appointment_clientPhone.getText().isEmpty() || appointment_realEstateId.getText().isEmpty() ||
-                appointment_date.getValue() != null)
+        if(appointment_date.getValue() == null || appointment_clientFullname.getText().isEmpty() ||
+                appointment_clientPhone.getText().isEmpty() || appointment_realEstateId.getText().isEmpty())
         {
-            System.out.println(date.toString());
+            alerts.showAlertTextFieldEmptyError();
         }else{
-            System.out.println(date.toString());
+            LocalDate dateNow = LocalDate.now();
+            int comparaison = dateNow.compareTo(appointment_date.getValue());
+            if(comparaison > 0){
+                //dateNow After date --> Error
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to add Appointment.\nPlease check the Date Selected");
+                alert.showAndWait();
+            }else{
+                if(comparaison == 0){
+                    //dateNow == date  --> Warning
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Do you confirm the day Selected.");
+                    alert.showAndWait();
+
+                }
+                //insert into db
+                String description = appointment_description.getText();
+                LocalDate localDate = date;
+                String clientFullname = appointment_clientFullname.getText();
+                String clientPhone = appointment_clientPhone.getText();
+                int realEstateId = Integer.parseInt(appointment_realEstateId.getText());
+                int userId = user.getId();
+
+                Appointment appointment = new Appointment(localDate, description, clientFullname, clientPhone, realEstateId, userId);
+                AppointmentManagement.addAppointment(user,appointment);
+
+                appointment_clearBtn_clicked();
+                show_appointment();
+            }
         }
 
     }
 
     public void appointment_updateBtn_clicked() throws SQLException {}
 
-    public void appointment_deleteBtn_clicked() throws SQLException {}
+    public void appointment_deleteBtn_clicked() throws SQLException {
+        if(appointment_id.getText().isEmpty()){
+            alerts.showAlertSelectionEmptyError("Appointment");
+        }else{
+            AppointmentManagement.deleteAppointment(user,Integer.parseInt(appointment_id.getText()));
+
+            appointment_clearBtn_clicked();
+            show_appointment();
+        }
+    }
 
     public void appointment_clearBtn_clicked(){
         appointment_id.setText("");

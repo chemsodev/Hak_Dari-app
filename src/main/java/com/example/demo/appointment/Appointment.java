@@ -27,8 +27,8 @@ public class Appointment {
         this.IdUser = new SimpleIntegerProperty(IdUser);
     }
 
-    public Appointment(int id, String description, String clientFullname, String clientPhone, int IdRealEstate, int IdUser){
-        this.Id = new SimpleIntegerProperty(id);
+    public Appointment(LocalDate date, String description, String clientFullname, String clientPhone, int IdRealEstate, int IdUser){
+        this.date = new SimpleObjectProperty<>(date);
         this.description = new SimpleStringProperty(description);
         this.clientFullname = new SimpleStringProperty(clientFullname);
         this.clientPhone = new SimpleStringProperty(clientPhone);

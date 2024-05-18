@@ -1,6 +1,7 @@
 package com.example.demo.charge;
 
 import com.example.demo.Database;
+import com.example.demo.alerts.Alerts;
 import com.example.demo.user.User;
 import javafx.scene.control.Alert;
 
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 public class ChargeManagement {
 
     public static void createCharge(Charge charge, User user) {
+        Alerts alerts = new Alerts();
         if(user.getRole().getChargeManager()) {
             String query = "INSERT INTO charge (Title, Description, Total) VALUES (?,?,?)";
 
@@ -32,26 +34,19 @@ public class ChargeManagement {
                         alert.setContentText("Charge added successfully.");
                         alert.showAndWait();
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to add Charge.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Added","Charge");
                     }
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to add a Charge.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Add","Charge");
         }
     }
 
     public static void deleteClient(String id,User user){
+        Alerts alerts = new Alerts();
         if(user.getRole().getChargeManager()) {
             String query = "delete from charge where charge_id = ?";
 
@@ -63,17 +58,9 @@ public class ChargeManagement {
                     int numRowsAffected = statement.executeUpdate();
 
                     if (numRowsAffected > 0) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Result Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Charge deleted successfully.");
-                        alert.showAndWait();
+                        alerts.showAlertSuccessfuly("Deleted","Charge");
                     } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to delete Charge.");
-                        alert.showAndWait();
+                        alerts.showAlertFailedTo("Delete","Charge");
                     }
                 }
             }
@@ -81,11 +68,7 @@ public class ChargeManagement {
                 throw new RuntimeException(e);
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Permision Error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have permission to delete a Charge.");
-            alert.showAndWait();
+            alerts.showAlertPermissionError("Delete","Charge");
         }
     }
 
