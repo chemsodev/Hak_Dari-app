@@ -35,7 +35,7 @@
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+                              <Line endX="69.0" layoutX="121.0" layoutY="179.0" startX="-100.0" stroke="WHITE" />
                               <Button fx:id="home_btn" layoutX="16.0" layoutY="207.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Home">
 
                               </Button>
@@ -61,6 +61,11 @@
                               <Button fx:id="charge_btn" layoutX="16.0" layoutY="350.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Charge" />
                               <Button fx:id="user_btn" layoutX="16.0" layoutY="386.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="User" />
                               <Button fx:id="appointment_btn" layoutX="17.0" layoutY="422.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Appointment" />
+                              <Label fx:id="home_dateLbael" layoutX="22.0" layoutY="665.0" prefHeight="21.0" prefWidth="145.0" textAlignment="CENTER" textFill="#f8f8f8">
+                                 <font>
+                                    <Font name="Tahoma" size="17.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -69,7 +74,7 @@
                <center>
                   <AnchorPane prefHeight="702.0" prefWidth="989.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="home_form" layoutY="-5.0" prefHeight="700.0" prefWidth="989.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+                        <AnchorPane fx:id="home_form" layoutY="-5.0" prefHeight="700.0" prefWidth="989.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
                            <children>
                               <AnchorPane layoutX="69.0" layoutY="105.0" prefHeight="521.0" prefWidth="863.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
@@ -206,7 +211,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="16.0" prefHeight="669.0" prefWidth="969.0" stylesheets="@dashboardDesign.css">
                                  <children>
@@ -216,7 +221,7 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="55.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="949.0">
+                                          <TableView fx:id="realestate_table" layoutX="10.0" layoutY="57.0" onMouseClicked="#getRealEstate_Item" prefHeight="294.0" prefWidth="949.0">
                                              <columns>
                                                 <TableColumn fx:id="col_realestateID" prefWidth="49.0" text="ID" />
                                                 <TableColumn fx:id="col_title" prefWidth="107.0" text="Title" />
@@ -228,7 +233,37 @@
                                                 <TableColumn fx:id="col_ownerID" prefWidth="89.5999755859375" text="OwnerId" />
                                              </columns>
                                           </TableView>
-                                          <TextField fx:id="realEstate_search" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0" promptText="Seach" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <TextField fx:id="realEstate_titleSearch" layoutX="14.0" layoutY="22.0" prefHeight="30.0" prefWidth="201.0" promptText="Title" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <TextField fx:id="realEstate_minPriceSearch" layoutX="225.0" layoutY="22.0" prefHeight="30.0" prefWidth="120.0" promptText="Min Price" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <Button layoutX="884.0" layoutY="15.0" mnemonicParsing="false" onAction="#realEstate_search" prefHeight="29.0" prefWidth="75.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Search" />
+                                          <Label layoutX="19.0" layoutY="3.0" text="Title :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="realEstate_maxPriceSearch" layoutX="356.0" layoutY="22.0" prefHeight="30.0" prefWidth="120.0" promptText="Max Price" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <Label layoutX="225.0" layoutY="3.0" text="Prix Entre :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="356.0" layoutY="3.0" text="à :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="488.0" layoutY="3.0" text="Type :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ChoiceBox fx:id="realEstate_typeSearch" layoutX="488.0" layoutY="24.0" prefHeight="27.0" prefWidth="100.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                          <TextField fx:id="realEstate_addressSearch" layoutX="602.0" layoutY="23.0" prefHeight="30.0" prefWidth="212.0" promptText="Address" styleClass="search" stylesheets="@dashboardDesign.css" />
+                                          <Label layoutX="603.0" layoutY="3.0" text="Address :">
+                                             <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                     <Label layoutX="30.0" layoutY="410.0" text="Title :">

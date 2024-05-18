@@ -58,6 +58,8 @@ public class BoardController implements Initializable {
     @FXML
     private AnchorPane appointment_form;
 
+    @FXML
+    private Label home_dateLbael;
     //Side Bar
     @FXML
     private Label usernamelabel;
@@ -101,6 +103,8 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+
+            home_dateLbael.setText(LocalDate.now().toString());
 
             home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -244,6 +248,7 @@ public class BoardController implements Initializable {
 
     public void displayInfo(User user) {
         usernamelabel.setText("Welcome " + user.getUsername());
+        home_dateLbael.setText(LocalDate.now().toString());
         this.user = user;
     }
 
@@ -466,6 +471,24 @@ public class BoardController implements Initializable {
  //-------------------------------------------------------------------------------------------------------------
  //                                               RealEstate Form
  //-------------------------------------------------------------------------------------------------------------
+     @FXML
+     private  TextField realEstate_titleSearch;
+    @FXML
+    private  TextField realEstate_minPriceSearch;
+    @FXML
+    private  TextField realEstate_maxPriceSearch;
+    @FXML
+    private  TextField realEstate_addressSearch;
+    @FXML
+    private  ChoiceBox<String> realEstate_typeSearch;
+    private String[] realEstates_types = {"Vente","Location"};
+
+    //Omb3d On vas Voir
+    public void init(URL url, ResourceBundle resourceBundle) {
+        realEstate_type.getItems().addAll(realEstates_types);
+    }
+
+
     @FXML
     private TableView<RealEstate> realestate_table;
     @FXML
@@ -565,6 +588,8 @@ public class BoardController implements Initializable {
     }
 
 
+
+
     @FXML
     private Label realEstate_Id;
     @FXML
@@ -582,7 +607,7 @@ public class BoardController implements Initializable {
     @FXML
     private Label realEstate_ownerId;
 
-    @FXML
+
     public void getRealEstate_Item() {
         int index = realestate_table.getSelectionModel().getSelectedIndex();
         if (index != -1) {
@@ -612,13 +637,242 @@ public class BoardController implements Initializable {
             }
         }
     }
-    @FXML
+
     public void getRealEstate_ClientItem(){
         int index = realEstate_clientTableView.getSelectionModel().getSelectedIndex();
         if(index != -1){
             realEstate_ownerFullname.setText(realEstate_col_ClientLastname.getCellData(index).toString());
             realEstate_ownerId.setText(realEstate_col_ClientId.getCellData(index).toString());
         }
+    }
+
+    public void realEstate_search() throws SQLException {
+        int querytype;
+
+        String titleSearch =realEstate_titleSearch.getText();
+        String typeSearch = realEstate_typeSearch.getValue();
+        Double minPriceSearch = 0.0;
+        Double maxPriceSearch = 0.0;
+        String addressSearch = realEstate_addressSearch.getText();
+        if(titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+        typeSearch.isEmpty() && addressSearch.isEmpty()){
+            show_realestates();
+            System.err.println("Error in Condition");
+        }
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            //Search By Title
+            String query;
+            if(titleSearch.isBlank() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isEmpty() && addressSearch.isEmpty()){
+                query = "SELECT * FROM RealEstate WHERE Title LIKE ?";
+                querytype = 0;
+
+                System.err.println("QueryType " + querytype);
+
+            //Search By Price
+            }else if(titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                    /*typeSearch.isEmpty() &&*/ addressSearch.isEmpty()){
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch){
+                    query = "SELECT * FROM RealEstate WHERE Price BETWEEN ? And ?";
+                    querytype=1;
+                }else{
+                    return;
+                }
+
+            //Search By Type
+            }else if(titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isBlank() && addressSearch.isEmpty()){
+                query = "SELECT * FROM RealEstate WHERE Type Like ?";
+                querytype=2;
+
+
+            //Search By Address
+            }else if (titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isBlank() && addressSearch.isBlank()){
+                query = "SELECT * FROM RealEstate WHERE Address Like ?";
+                querytype=3;
+
+
+            //Search By Title And Price
+            } else if (titleSearch.isBlank() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                     typeSearch.isEmpty() && addressSearch.isEmpty() ) {
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch){
+                    query = "SELECT * FROM RealEstate WHERE Title LIKE ? AND Price BETWEEN ? And ?";
+                    querytype=4;
+                }else{
+                    return;
+                }
+
+            //Search By Title And Type
+            }else if(titleSearch.isBlank() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isBlank() && addressSearch.isEmpty()){
+                query = "SELECT * FROM RealEstate WHERE Title LIKE ? AND Type LIKE ?";
+                querytype=5;
+
+
+            //Search By Title And Address
+            } else if (titleSearch.isBlank() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isEmpty() && addressSearch.isBlank()) {
+                query = "SELECT * FROM RealEstate WHERE Title LIKE ? AND  Address LIKE ?";
+                querytype=6;
+
+
+            //Search By Price And Type
+            }else if (titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                    typeSearch.isBlank() && addressSearch.isEmpty()){
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch){
+                    query = "SELECT * FROM RealEstate WHERE Price BETWEEN ? AND ? AND Type LIKE ?";
+                    querytype=7;
+                }else{
+                    return;
+                }
+
+
+            //Search BY Price And Address
+            }else if(titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                    typeSearch.isEmpty() && addressSearch.isBlank()){
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch){
+                    query = "SELECT * FROM RealEstate WHERE Price BETWEEN ? AND ? AND Address LIKE ?";
+                    querytype=8;
+                }else{
+                    return;
+                }
+
+            //Search By Type & Address
+            } else if (titleSearch.isEmpty() && realEstate_minPriceSearch.getText().isEmpty() && realEstate_maxPriceSearch.getText().isEmpty() &&
+                    typeSearch.isBlank() && addressSearch.isBlank()) {
+                query = "SELECT * FROM RealEstate WHERE Type LIKE ? AND Address LIKE ?";
+                querytype=9;
+
+
+            //Search By Title & Price & Type & Address
+            }else if(titleSearch.isBlank() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                    typeSearch.isBlank() && addressSearch.isBlank()){
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch) {
+                    query = "SELECT * FROM RealEstate WHERE Title LIKE ? AND Price BETWEEN ? AND ? AND Type LIKE ? AND Address LIKE ?";
+                    querytype = 10;
+                }else{
+                    return;
+                }
+
+
+            //Search By Title & Price & Type & Address
+            }else if(titleSearch.isBlank() && realEstate_minPriceSearch.getText().isBlank() && realEstate_maxPriceSearch.getText().isBlank() &&
+                    typeSearch.isEmpty() && addressSearch.isBlank()){
+                minPriceSearch = Double.parseDouble(realEstate_minPriceSearch.getText());
+                maxPriceSearch = Double.parseDouble(realEstate_maxPriceSearch.getText());
+                if(minPriceSearch > 0 && maxPriceSearch > 0 && maxPriceSearch >= minPriceSearch) {
+                    query = "SELECT * FROM RealEstate WHERE Title LIKE ? AND Price BETWEEN ? AND ? AND Address LIKE ?";
+                    querytype = 11;
+                }else{
+                    return;
+                }
+
+            }else{
+                System.err.println("Return ");
+                return;
+            }
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                switch (querytype) {
+                    case 0:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        break;
+                    case 1:
+                        preparedStatement.setDouble(1, minPriceSearch);
+                        preparedStatement.setDouble(2, maxPriceSearch);
+                        break;
+                    case 2:
+                        preparedStatement.setString(1, typeSearch);
+                        break;
+                    case 3:
+                        preparedStatement.setString(1, addressSearch + "%");
+                        break;
+                    case 4:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        preparedStatement.setDouble(2, minPriceSearch);
+                        preparedStatement.setDouble(3, maxPriceSearch);
+                        break;
+                    case 5:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        preparedStatement.setString(2, typeSearch );
+                        break;
+                    case 6:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        preparedStatement.setString(2, addressSearch + "%" );
+                        break;
+                    case 7:
+                        preparedStatement.setDouble(1, minPriceSearch);
+                        preparedStatement.setDouble(2, maxPriceSearch);
+                        preparedStatement.setString(3, typeSearch);
+                        break;
+                    case 8:
+                        preparedStatement.setDouble(1, minPriceSearch);
+                        preparedStatement.setDouble(2, maxPriceSearch);
+                        preparedStatement.setString(3, addressSearch + "%");
+                        break;
+                    case 9:
+                        preparedStatement.setString(1, typeSearch);
+                        preparedStatement.setString(2, addressSearch + "%" );
+                        break;
+                    case 10:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        preparedStatement.setDouble(2, minPriceSearch);
+                        preparedStatement.setDouble(3, maxPriceSearch);
+                        preparedStatement.setString(4, typeSearch);
+                        preparedStatement.setString(5, addressSearch + "%" );
+                        break;
+                    case 11:
+                        preparedStatement.setString(1, titleSearch + "%");
+                        preparedStatement.setDouble(2, minPriceSearch);
+                        preparedStatement.setDouble(3, maxPriceSearch);
+                        preparedStatement.setString(4, addressSearch + "%" );
+                        break;
+                }
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    ObservableList<RealEstate> realEstateList = FXCollections.observableArrayList();
+
+                    while (resultSet.next()) {
+                        int realestate_iD = resultSet.getInt("Id");
+                        String title = resultSet.getString("Title");
+                        String description = resultSet.getString("Description");
+                        Double price = resultSet.getDouble("Price");
+                        Double area = resultSet.getDouble("Area");
+                        String address = resultSet.getString("Address");
+                        String type = resultSet.getString("Type");
+                        int ownerId = resultSet.getInt("id_Owner");
+
+                        RealEstate realEstate = new RealEstate(realestate_iD, title, type, description, price, area, address, ownerId);
+                        realEstateList.add(realEstate);
+                    }
+
+                    // Set cell value factories for table columns
+                    col_realestateID.setCellValueFactory(new PropertyValueFactory<>("id"));
+                    col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+                    col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+                    col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+                    col_area.setCellValueFactory(new PropertyValueFactory<>("area"));
+                    col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
+                    col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+                    col_ownerID.setCellValueFactory(new PropertyValueFactory<>("ownerId"));
+
+                    realestate_table.setItems(realEstateList);
+                }
+            }
+
+        }
+
     }
 
     public void realEstate_addBtn_Clicked() throws SQLException {
