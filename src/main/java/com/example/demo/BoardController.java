@@ -7,6 +7,7 @@ import com.example.demo.charge.Charge;
 import com.example.demo.charge.ChargeManagement;
 import com.example.demo.client.Client;
 import com.example.demo.client.ClientManagement;
+import com.example.demo.client.HistoriqueClientManagment;
 import com.example.demo.realEstate.RealEstate;
 import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
@@ -428,6 +429,8 @@ public class BoardController implements Initializable {
             Client client = new Client(nom,prenom,email,phone);
             ClientManagement.createClient(client,user);
 
+            HistoriqueClientManagment.addAddHistorique(user,"Client Added Successfully by " + user.getUsername(),client);
+
             show_clients();
             //Clear Item
             client_clearBtn_Clicked();
@@ -442,6 +445,8 @@ public class BoardController implements Initializable {
             Client client = new Client(Integer.parseInt(client_id.getText()),client_firstname.getText(),client_lastname.getText(),
                     client_email.getText(),client_phone.getText());
             ClientManagement.updateClient(user,client);
+            //Sauvegarder Historique
+            HistoriqueClientManagment.addUpdateHistorique(user,"Client Updated Successfully by " + user.getUsername(),client);
             //Refresh
             show_clients();
             client_clearBtn_Clicked();
@@ -453,7 +458,9 @@ public class BoardController implements Initializable {
         if (client_id.getText().isEmpty()) {
             alerts.showAlertSelectionEmptyError("Client");
         } else{
+            String clientName = client_firstname.getText() + " " + client_lastname.getText();
             ClientManagement.deleteClient(Integer.parseInt(client_id.getText()), user);
+            HistoriqueClientManagment.addDeleteHistorique(user,"Client :"+clientName+" Deleted Successfully by " + user.getUsername());
             show_clients();
             //Clear item
             client_clearBtn_Clicked();
@@ -892,6 +899,7 @@ public class BoardController implements Initializable {
             int OwnerId = Integer.parseInt(realEstate_ownerId.getText());
             RealEstate realEstate = new RealEstate( title, type, description,price, area,address,OwnerId);
             RealEstateManagement.createRealEstate(realEstate,user);
+            HistoriqueClientManagment.addAddRealEstateHistorique(user,"RealEstate Added Successfully By " + user.getUsername(),OwnerId);
             show_realestates();
             realEstate_clearBtn_Clicked();
         }
@@ -902,6 +910,7 @@ public class BoardController implements Initializable {
             alerts.showAlertSelectionEmptyError("RealEstate");
         }else{
             RealEstateManagement.deleteRealEstate(Integer.parseInt(realEstate_Id.getText()),user);
+            HistoriqueClientManagment.addDeleteHistorique(user,"RealEstate Deleted Successfully By " + user.getUsername());
             show_realestates();
             realEstate_clearBtn_Clicked();
         }
@@ -924,6 +933,7 @@ public class BoardController implements Initializable {
             int OwnerId = Integer.parseInt(realEstate_ownerId.getText());
             RealEstate realEstate = new RealEstate( id,title, type, description,price, area,address,OwnerId);
             RealEstateManagement.updateRealEstate(realEstate,user);
+            HistoriqueClientManagment.addAddRealEstateHistorique(user,"RealEstate Updated Successfully By " + user.getUsername(),OwnerId);
             show_realestates();
             //Clear Item
             realEstate_clearBtn_Clicked();

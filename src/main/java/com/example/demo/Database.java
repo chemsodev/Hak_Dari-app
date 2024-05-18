@@ -14,7 +14,7 @@ public class Database {
         try {
 
             System.out.println("Connecting to database...");
-            return DriverManager.   getConnection("jdbc:mysql://mysql-11303ae7-poodb.a.aivencloud.com:11410/dbusers", "avnadmin", "AVNS_D8RBBMrd7j0urYAXFcB");
+            return DriverManager.   getConnection("jdbc:mysql://mysql-11303ae7-poodb.a.aivencloud.com:11410/dbusers", "avnadmin", "AVNS_-LL5D4csLkQUkSqnlh7");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Could not connect to database");
