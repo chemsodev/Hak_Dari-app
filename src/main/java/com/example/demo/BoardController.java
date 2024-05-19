@@ -7,7 +7,8 @@ import com.example.demo.charge.Charge;
 import com.example.demo.charge.ChargeManagement;
 import com.example.demo.client.Client;
 import com.example.demo.client.ClientManagement;
-import com.example.demo.client.HistoriqueClientManagment;
+import com.example.demo.historique.HistoriqueClientManagment;
+import com.example.demo.historique.HistoriqueClient;
 import com.example.demo.realEstate.RealEstate;
 import com.example.demo.realEstate.RealEstateManagement;
 import com.example.demo.transaction.Transaction;
@@ -34,7 +35,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class BoardController implements Initializable {
@@ -58,6 +59,8 @@ public class BoardController implements Initializable {
     private AnchorPane userManag_form;
     @FXML
     private AnchorPane appointment_form;
+    @FXML
+    private AnchorPane historique_form;
 
     @FXML
     private Label home_dateLbael;
@@ -78,6 +81,8 @@ public class BoardController implements Initializable {
     private Button user_btn;
     @FXML
     private Button appointment_btn;
+    @FXML
+    private Button historique_btn;
     @FXML
     private Button logout_btn;
 
@@ -104,6 +109,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+            historique_form.setVisible(false);
 
             home_dateLbael.setText(LocalDate.now().toString());
 
@@ -114,7 +120,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-
+            historique_btn.setStyle("-fx-background-color:transparent");
         } else if (event.getSource() == client_btn) {
             show_clients();
             home_form.setVisible(false);
@@ -124,6 +130,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+            historique_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
@@ -132,7 +139,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-
+            historique_btn.setStyle("-fx-background-color:transparent");
         } else if (event.getSource() == realEstate_btn) {
             show_realestates();
             show_realEstate_clients();
@@ -143,6 +150,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+            historique_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -151,7 +159,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-
+            historique_btn.setStyle("-fx-background-color:transparent");
         } else if (event.getSource() == transaction_btn) {
             //Affichage des table
             displayTransactionForm();
@@ -164,6 +172,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+            historique_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -172,7 +181,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-
+            historique_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == charge_btn) {
             show_charges();
@@ -183,6 +192,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(true);
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
+            historique_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
@@ -191,7 +201,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-
+            historique_btn.setStyle("-fx-background-color:transparent");
 
         } else if (event.getSource() == user_btn) {
             if(user.getRole().getUserManager()) {
@@ -203,6 +213,7 @@ public class BoardController implements Initializable {
                 charge_form.setVisible(false);
                 userManag_form.setVisible(true);
                 appointment_form.setVisible(false);
+                historique_form.setVisible(false);
 
                 show_user();
 
@@ -213,6 +224,7 @@ public class BoardController implements Initializable {
                 charge_btn.setStyle("-fx-background-color:transparent");
                 user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
                 appointment_btn.setStyle("-fx-background-color:transparent");
+                historique_btn.setStyle("-fx-background-color:transparent");
 
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -229,6 +241,7 @@ public class BoardController implements Initializable {
             charge_form.setVisible(false);
             userManag_form.setVisible(false);
             appointment_form.setVisible(true);
+            historique_form.setVisible(false);
 
             show_appointment();
             show_appointmentRealEstate();
@@ -240,7 +253,27 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            historique_btn.setStyle("-fx-background-color:transparent");
+        }else if (event.getSource() == historique_btn){
+            home_form.setVisible(false);
+            clientManag_form.setVisible(false);
+            realEstate_form.setVisible(false);
+            transaction_form.setVisible(false);
+            charge_form.setVisible(false);
+            userManag_form.setVisible(false);
+            appointment_form.setVisible(false);
+            historique_form.setVisible(true);
 
+            show_historique();
+
+            home_btn.setStyle("-fx-background-color:transparent");
+            client_btn.setStyle("-fx-background-color:transparent");
+            realEstate_btn.setStyle("-fx-background-color:transparent");
+            transaction_btn.setStyle("-fx-background-color:transparent");
+            charge_btn.setStyle("-fx-background-color:transparent");
+            user_btn.setStyle("-fx-background-color:transparent");
+            appointment_btn.setStyle("-fx-background-color:transparent");
+            historique_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
         }
 
     }
@@ -1718,6 +1751,57 @@ public class BoardController implements Initializable {
         appointment_realEstateDescriptionLabel.setText("");
     }
 
+
+//  -------------------------------------------------------------------------------------------------------
+//                                           User Form
+//  -------------------------------------------------------------------------------------------------------
+    @FXML
+    private TableView<HistoriqueClient> historique_tableView;
+    @FXML
+    private TableColumn<HistoriqueClient, Integer> historique_col_id;
+    @FXML
+    private TableColumn<HistoriqueClient, String> historique_col_description;
+    @FXML
+    private TableColumn<HistoriqueClient, LocalDateTime> historique_col_dateTime;
+    @FXML
+    private TableColumn<HistoriqueClient, Integer> historique_col_userId;
+    @FXML
+    private TableColumn<HistoriqueClient, Integer> historique_col_clientId;
+
+    public void show_historique()throws SQLException{
+        String query = "SELECT * FROM HistoriqueClient";
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                ObservableList<HistoriqueClient>  historiqueClientList = FXCollections.observableArrayList();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String description = resultSet.getString("Description");
+                    Timestamp timestamp = resultSet.getTimestamp("created_at");  // Ensure this matches your column name
+                    LocalDateTime dateTime = timestamp.toLocalDateTime();
+                    int userId = resultSet.getInt("userid");
+                    int clientId = resultSet.getInt("ClientId");
+
+
+                    HistoriqueClient historiqueClient = new HistoriqueClient(id,description,dateTime,userId,clientId);
+                    historiqueClientList.add(historiqueClient);
+                }
+
+                // Set cell value factories for table columns
+                historique_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                historique_col_description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+                historique_col_dateTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+                historique_col_userId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+                historique_col_clientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+
+                historique_tableView.setItems(historiqueClientList);
+
+            }
+        }
+    }
 
 
 }

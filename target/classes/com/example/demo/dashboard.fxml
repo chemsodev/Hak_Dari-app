@@ -45,14 +45,14 @@
                               <Button fx:id="realEstate_btn" layoutX="16.0" layoutY="278.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Real Estate">
 
                               </Button>
-                              <Button fx:id="logout_btn" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logout" stylesheets="@dashboardDesign.css">
+                              <Button fx:id="logout_btn" layoutX="9.0" layoutY="549.0" mnemonicParsing="false" onAction="#logout" stylesheets="@dashboardDesign.css">
 
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </Button>
-                              <Label layoutX="62.0" layoutY="515.0" text="Logout" textFill="WHITE">
+                              <Label layoutX="62.0" layoutY="555.0" text="Logout" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -66,6 +66,7 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="historique_btn" layoutX="19.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Historique" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -211,7 +212,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="16.0" prefHeight="669.0" prefWidth="969.0" stylesheets="@dashboardDesign.css">
                                  <children>
@@ -720,6 +721,27 @@
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="historique_form" layoutX="-3.0" layoutY="29.0" prefHeight="555.0" prefWidth="889.0">
+                           <children>
+                              <AnchorPane layoutX="99.0" layoutY="1.0" prefHeight="606.0" prefWidth="691.0" stylesheets="@dashboardDesign.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <TableView fx:id="historique_tableView" layoutX="9.0" layoutY="13.0" onMouseClicked="#getUser_item" prefHeight="587.0" prefWidth="671.0">
+                                       <columns>
+                                          <TableColumn fx:id="historique_col_id" prefWidth="38.0" text="ID" />
+                                          <TableColumn fx:id="historique_col_description" prefWidth="345.0" text="Description" />
+                                          <TableColumn fx:id="historique_col_dateTime" prefWidth="140.0" text="Date" />
+                                          <TableColumn fx:id="historique_col_userId" prefWidth="70.0" text="Id User" />
+                                          <TableColumn fx:id="historique_col_clientId" prefWidth="77.0" text="Id Client" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>

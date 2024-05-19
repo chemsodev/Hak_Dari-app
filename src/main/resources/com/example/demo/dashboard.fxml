@@ -45,14 +45,14 @@
                               <Button fx:id="realEstate_btn" layoutX="16.0" layoutY="278.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Real Estate">
 
                               </Button>
-                              <Button fx:id="logout_btn" layoutX="9.0" layoutY="509.0" mnemonicParsing="false" onAction="#logout" stylesheets="@dashboardDesign.css">
+                              <Button fx:id="logout_btn" layoutX="9.0" layoutY="549.0" mnemonicParsing="false" onAction="#logout" stylesheets="@dashboardDesign.css">
 
                                  <styleClass>
                                     <String fx:value="logout" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                               </Button>
-                              <Label layoutX="62.0" layoutY="515.0" text="Logout" textFill="WHITE">
+                              <Label layoutX="62.0" layoutY="555.0" text="Logout" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -66,6 +66,7 @@
                                     <Font name="Tahoma" size="17.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="historique_btn" layoutX="19.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@dashboardDesign.css" text="Historique" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -211,7 +212,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="realEstate_form" layoutX="35.0" layoutY="78.0" prefHeight="555.0" prefWidth="889.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="16.0" prefHeight="669.0" prefWidth="969.0" stylesheets="@dashboardDesign.css">
                                  <children>
@@ -362,7 +363,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="23.0" prefHeight="645.0" prefWidth="979.0" visible="false">
+                        <AnchorPane fx:id="transaction_form" layoutX="5.0" layoutY="23.0" prefHeight="645.0" prefWidth="979.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="18.0" prefHeight="610.0" prefWidth="258.0" stylesheets="@dashboardDesign.css">
                                  <styleClass>
@@ -370,84 +371,85 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="19.0" layoutY="127.0" text="Type :">
+                                    <Label layoutX="19.0" layoutY="105.0" text="Type :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="transaction_ClientIdLabel" layoutX="99.0" layoutY="412.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Id" />
-                                    <Label fx:id="transaction_ClientLastnameLabel" layoutX="98.0" layoutY="447.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Lastname" />
-                                    <Button fx:id="transaction_updateBtn1" layoutX="143.0" layoutY="559.0" mnemonicParsing="false" onAction="#transaction_addBtn_Clicked" prefHeight="38.0" prefWidth="99.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Add" />
-                                    <Button fx:id="transaction_clearBtn1" layoutX="15.0" layoutY="559.0" mnemonicParsing="false" onAction="#transaction_clearBtn_Clicked" prefHeight="38.0" prefWidth="99.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
+                                    <Label fx:id="transaction_ClientIdLabel" layoutX="99.0" layoutY="375.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Id" />
+                                    <Label fx:id="transaction_ClientLastnameLabel" layoutX="98.0" layoutY="410.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Lastname" />
+                                    <Button fx:id="transaction_updateBtn1" layoutX="175.0" layoutY="559.0" mnemonicParsing="false" onAction="#transaction_addBtn_Clicked" prefHeight="38.0" prefWidth="60.0" styleClass="update-btn" stylesheets="@dashboardDesign.css" text="Add" />
+                                    <Button fx:id="transaction_clearBtn1" layoutX="19.0" layoutY="559.0" mnemonicParsing="false" onAction="#transaction_clearBtn_Clicked" prefHeight="38.0" prefWidth="60.0" styleClass="clear-btn" stylesheets="@dashboardDesign.css" text="Clear" />
                                     <Text layoutX="85.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Text>
-                                    <Label layoutX="19.0" layoutY="165.0" text="Prix :">
+                                    <Label layoutX="19.0" layoutY="143.0" text="Prix :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="19.0" layoutY="203.0" text="Frais :">
+                                    <Label layoutX="19.0" layoutY="181.0" text="Frais :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="transaction_fraisInput" layoutX="100.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label layoutX="19.0" layoutY="241.0" text="Paiement :">
+                                    <TextField fx:id="transaction_fraisInput" layoutX="100.0" layoutY="178.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label layoutX="19.0" layoutY="219.0" text="Paiement :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="19.0" layoutY="279.0" text="Statut :">
+                                    <Label layoutX="19.0" layoutY="257.0" text="Statut :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="19.0" layoutY="317.0" text="Note :">
+                                    <Label layoutX="19.0" layoutY="295.0" text="Note :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="transaction_NoteInput" layoutX="100.0" layoutY="314.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Label fx:id="transaction_priceLabel" layoutX="100.0" layoutY="163.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Price" />
-                                    <Label fx:id="transaction_ClientPhoneLabel" layoutX="98.0" layoutY="481.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Phone Number" />
-                                    <Label layoutX="21.0" layoutY="414.0" text="Client Id :">
+                                    <TextField fx:id="transaction_NoteInput" layoutX="100.0" layoutY="292.0" prefHeight="25.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Label fx:id="transaction_priceLabel" layoutX="100.0" layoutY="141.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Price" />
+                                    <Label fx:id="transaction_ClientPhoneLabel" layoutX="98.0" layoutY="444.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="Client Phone Number" />
+                                    <Label layoutX="21.0" layoutY="377.0" text="Client Id :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="19.0" layoutY="449.0" text="Lastname :">
+                                    <Label layoutX="19.0" layoutY="412.0" text="Lastname :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="20.0" layoutY="481.0" text="Phone :">
+                                    <Label layoutX="20.0" layoutY="444.0" text="Phone :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="19.0" layoutY="351.0" text="R.E Id :">
+                                    <Label layoutX="19.0" layoutY="329.0" text="R.E Id :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="transaction_realEstateIdLabel" layoutX="100.0" layoutY="349.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="R.E Id" />
-                                    <ChoiceBox fx:id="transaction_TypeBtn" layoutX="100.0" layoutY="124.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <ChoiceBox fx:id="transaction_PaiementBtn" layoutX="100.0" layoutY="238.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <ChoiceBox fx:id="transaction_StatutBtn" layoutX="99.0" layoutY="276.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
-                                    <Button fx:id="transaction_deleteBtn" layoutX="79.0" layoutY="514.0" mnemonicParsing="false" onAction="#transaction_deleteBtn_Clicked" prefHeight="38.0" prefWidth="99.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
-                                    <Label layoutX="19.0" layoutY="89.0" text="Id :">
+                                    <Label fx:id="transaction_realEstateIdLabel" layoutX="100.0" layoutY="327.0" prefHeight="25.0" prefWidth="150.0" styleClass="label-info" stylesheets="@dashboardDesign.css" text="R.E Id" />
+                                    <ChoiceBox fx:id="transaction_TypeBtn" layoutX="100.0" layoutY="102.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <ChoiceBox fx:id="transaction_PaiementBtn" layoutX="100.0" layoutY="216.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <ChoiceBox fx:id="transaction_StatutBtn" layoutX="99.0" layoutY="254.0" prefWidth="150.0" styleClass="textfield" stylesheets="@dashboardDesign.css" />
+                                    <Button fx:id="transaction_deleteBtn" layoutX="98.0" layoutY="559.0" mnemonicParsing="false" onAction="#transaction_deleteBtn_Clicked" prefHeight="38.0" prefWidth="62.0" styleClass="delete-btn" stylesheets="@dashboardDesign.css" text="Delete" />
+                                    <Label layoutX="19.0" layoutY="67.0" text="Id :">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="transaction_idLabel" layoutX="100.0" layoutY="89.0" prefHeight="20.0" prefWidth="150.0">
+                                    <Label fx:id="transaction_idLabel" layoutX="100.0" layoutY="67.0" prefHeight="20.0" prefWidth="150.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
+                                    <Button fx:id="generateContratBtn" layoutX="19.0" layoutY="511.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="223.0" styleClass="gen-btn" stylesheets="@dashboardDesign.css" text="Generate Contrat" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="280.0" layoutY="18.0" prefHeight="610.0" prefWidth="693.0" stylesheets="@dashboardDesign.css">
@@ -720,6 +722,27 @@
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="historique_form" layoutX="-3.0" layoutY="29.0" prefHeight="555.0" prefWidth="889.0" visible="false">
+                           <children>
+                              <AnchorPane layoutX="99.0" layoutY="1.0" prefHeight="606.0" prefWidth="691.0" stylesheets="@dashboardDesign.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <TableView fx:id="historique_tableView" layoutX="9.0" layoutY="13.0" onMouseClicked="#getUser_item" prefHeight="587.0" prefWidth="671.0">
+                                       <columns>
+                                          <TableColumn fx:id="historique_col_id" prefWidth="38.0" text="ID" />
+                                          <TableColumn fx:id="historique_col_description" prefWidth="345.0" text="Description" />
+                                          <TableColumn fx:id="historique_col_dateTime" prefWidth="140.0" text="Date" />
+                                          <TableColumn fx:id="historique_col_userId" prefWidth="70.0" text="Id User" />
+                                          <TableColumn fx:id="historique_col_clientId" prefWidth="77.0" text="Id Client" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
