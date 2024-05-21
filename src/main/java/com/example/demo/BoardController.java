@@ -29,16 +29,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.ChoiceBox;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class BoardController implements Initializable {
+
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -1799,6 +1805,91 @@ public class BoardController implements Initializable {
 
                 historique_tableView.setItems(historiqueClientList);
 
+            }
+        }
+    }
+    @FXML
+    private Button generateContratBtn;
+
+    public void handleGenerateContract() {
+        PDFGenerator generator = new PDFGenerator();
+        Map<String, String> data = new HashMap<>();
+
+        // Fetch data from the database and populate the data map
+        String query = "SELECT Nom, Prenom, Phone FROM Client WHERE Id = ?";
+        String firstNamec = null;
+        String lastNamec = null;
+        String Phonec = null;
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, transaction_ClientIdLabel.getText());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        firstNamec = resultSet.getString("Prenom");
+                        lastNamec = resultSet.getString("Nom");
+                        Phonec = resultSet.getString("Phone");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String query1 = "SELECT Nom, Prenom, Phone FROM Client WHERE Id = (SELECT id_Owner FROM RealEstate WHERE RealEstate.Id = ?)";
+        String firstNames = null;
+        String lastNames = null;
+        String Phones = null;
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (PreparedStatement statement = connection.prepareStatement(query1)) {
+                statement.setString(1, transaction_realEstateIdLabel.getText());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        firstNames = resultSet.getString("Prenom");
+                        lastNames = resultSet.getString("Nom");
+                        Phones = resultSet.getString("Phone");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        String query2 = "SELECT Address FROM RealEstate WHERE Id = ?";
+        String Address = null;
+        try (Connection connection = Database.connect()) {
+            assert connection != null;
+            try (PreparedStatement statement = connection.prepareStatement(query2)) {
+                statement.setString(1, transaction_realEstateIdLabel.getText());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        Address = resultSet.getString("Address");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        data.put("buyerName", firstNamec + " " + lastNamec);
+        data.put("buyerPhone", Phonec);
+        data.put("sellerName", firstNames + " " + lastNames);
+        data.put("sellerPhone", Phones);
+        data.put("propertyAddress", Address);
+        data.put("salePrice", transaction_priceLabel.getText());
+        data.put("propertyAddress1", Address);
+        data.put("salePrice1", transaction_priceLabel.getText());
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Contract");
+        Stage stage = (Stage) generateContratBtn.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {
+            try {
+                generator.createRealEstateContract("/com/example/demo/template.pdf", file.getAbsolutePath(), data);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

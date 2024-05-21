@@ -140,6 +140,18 @@ and open the template in the editor.
     -fx-background-color:#3357a4;
 }
 
+.gen-btn{
+    -fx-background-color:#0096c7;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.gen-btn:hover{
+    -fx-background-color:#0096c7;
+}
+
 .update-btn{
     -fx-background-color:#327252;
     -fx-background-radius:8px;

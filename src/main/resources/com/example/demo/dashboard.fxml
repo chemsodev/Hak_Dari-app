@@ -449,7 +449,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="generateContratBtn" layoutX="19.0" layoutY="511.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="223.0" styleClass="gen-btn" stylesheets="@dashboardDesign.css" text="Generate Contrat" />
+                                    <Button fx:id="generateContratBtn" layoutX="19.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleGenerateContract" prefHeight="38.0" prefWidth="223.0" styleClass="gen-btn" stylesheets="@dashboardDesign.css" text="Generate Contrat" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="280.0" layoutY="18.0" prefHeight="610.0" prefWidth="693.0" stylesheets="@dashboardDesign.css">
