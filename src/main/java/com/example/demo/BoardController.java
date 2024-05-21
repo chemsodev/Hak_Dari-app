@@ -119,7 +119,7 @@ public class BoardController implements Initializable {
 
             home_dateLbael.setText(LocalDate.now().toString());
 
-            home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             client_btn.setStyle("-fx-background-color:transparent");
             realEstate_btn.setStyle("-fx-background-color:transparent");
             transaction_btn.setStyle("-fx-background-color:transparent");
@@ -139,7 +139,7 @@ public class BoardController implements Initializable {
             historique_form.setVisible(false);
 
             home_btn.setStyle("-fx-background-color:transparent");
-            client_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            client_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             realEstate_btn.setStyle("-fx-background-color:transparent");
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
@@ -160,7 +160,7 @@ public class BoardController implements Initializable {
 
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
-            realEstate_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            realEstate_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
@@ -183,7 +183,7 @@ public class BoardController implements Initializable {
             home_btn.setStyle("-fx-background-color:transparent");
             client_btn.setStyle("-fx-background-color:transparent");
             realEstate_btn.setStyle("-fx-background-color:transparent");
-            transaction_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            transaction_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
@@ -204,7 +204,7 @@ public class BoardController implements Initializable {
             client_btn.setStyle("-fx-background-color:transparent");
             realEstate_btn.setStyle("-fx-background-color:transparent");
             transaction_btn.setStyle("-fx-background-color:transparent");
-            charge_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            charge_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
             historique_btn.setStyle("-fx-background-color:transparent");
@@ -228,7 +228,7 @@ public class BoardController implements Initializable {
                 realEstate_btn.setStyle("-fx-background-color:transparent");
                 transaction_btn.setStyle("-fx-background-color:transparent");
                 charge_btn.setStyle("-fx-background-color:transparent");
-                user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+                user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
                 appointment_btn.setStyle("-fx-background-color:transparent");
                 historique_btn.setStyle("-fx-background-color:transparent");
 
@@ -258,7 +258,7 @@ public class BoardController implements Initializable {
             transaction_btn.setStyle("-fx-background-color:transparent");
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
-            appointment_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            appointment_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             historique_btn.setStyle("-fx-background-color:transparent");
         }else if (event.getSource() == historique_btn){
             home_form.setVisible(false);
@@ -279,7 +279,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-            historique_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #3a4368, #28966c);");
+            historique_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, ##8f1508, #EB5D48);");
         }
 
     }
