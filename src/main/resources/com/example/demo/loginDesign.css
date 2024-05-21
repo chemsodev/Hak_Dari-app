@@ -1,5 +1,5 @@
 .left-form{
-    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-color:linear-gradient(to bottom right, #801408, #EB5D48);
     -fx-border-color:#000;
     -fx-border-width:.4px 0px .4px .4px;
 }
@@ -30,12 +30,12 @@
 }
 .textfield:focused{
     -fx-background-color:#fff;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-color:linear-gradient(to bottom right, #85291f, #EB5D48);
     -fx-border-width:.8px;
 }
 
 .login-btn{
-    -fx-background-color:linear-gradient(to bottom, #278f96,#2d645f);
+    -fx-background-color:linear-gradient(to bottom, #85291f,#EB5D48);
     -fx-background-radius:5px;
     -fx-text-fill:#fff;
     -fx-font-size:14px;
@@ -43,5 +43,5 @@
     -fx-cursor:hand;
 }
 .login-btn:hover{
-    -fx-background-color:linear-gradient(to bottom, #21a7ae,#368981);
+    -fx-background-color:linear-gradient(to bottom, #f1584a, #f3402d);
 }

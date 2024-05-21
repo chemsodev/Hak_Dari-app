@@ -39,7 +39,7 @@ and open the template in the editor.
 }
 
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
 }
 
 .nav-btn{
@@ -52,12 +52,12 @@ and open the template in the editor.
 }
 
 .logout{
-    -fx-background-color:#219a6a;
+    -fx-background-color:#EB5D48;
     -fx-background-radius:10px;
     -fx-cursor:hand;
 }
 .logout:hover{
-    -fx-background-color:#18a383;
+    -fx-background-color: #d54a36;
 }
 
 .shadow{
@@ -76,7 +76,7 @@ and open the template in the editor.
 
 .table-view{
     -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
     -fx-border-radius:8px;
     -fx-padding:0px;
 }
@@ -84,7 +84,7 @@ and open the template in the editor.
     -fx-alignment:CENTER;
 }
 .table-view .column-header-background{
-    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
     -fx-background-insets: 0 0 0 0;
     -f-background-radius:8px 8px 0px 0px;
 }
@@ -99,7 +99,7 @@ and open the template in the editor.
 
 .textfield{
     -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
     -fx-border-width:.8px;
     -fx-font-family:"Tahoma";
     -fx-border-radius:4px;
@@ -111,7 +111,7 @@ and open the template in the editor.
 
 .search{
     -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
     -fx-border-radius:5px;
     -fx-font-size:13px;
     -fx-font-family:"Arial";
@@ -153,7 +153,7 @@ and open the template in the editor.
 }
 
 .update-btn{
-    -fx-background-color:#327252;
+    -fx-background-color:#8f1508;
     -fx-background-radius:8px;
     -fx-text-fill:#fff;
     -fx-font-size:14px;
@@ -161,7 +161,7 @@ and open the template in the editor.
     -fx-cursor:hand;
 }
 .update-btn:hover{
-    -fx-background-color:#309a65;
+    -fx-background-color:#8f1508;
 }
 
 .delete-btn{
@@ -190,7 +190,7 @@ and open the template in the editor.
 
 .label-info{
     -fx-background-color:transparent;
-    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-color:linear-gradient(to bottom right, #8f1508, #EB5D48);
     -fx-border-radius:4px;
     -fx-padding:0px 0px 0px 8px;
 }
