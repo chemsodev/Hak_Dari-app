@@ -1,4 +1,12 @@
 Hola amigos
+
+## Contributor License Agreement
+To contribute to this project, you must first sign our Contributor License Agreement (CLA). This ensures that 
+we have the legal rights to use your contributions. Please visit the [CLA Assistant](https://cla-assistant.io/chemsodev/Hak_Dari-app) 
+to sign the agreement before making any contributions.
+
+[![CLA assistant](https://cla-assistant.io/readme/badge/chemsodev/Hak_Dari-app)](https://cla-assistant.io/chemsodev/Hak_Dari-app)
+
 ## License
 This project is licensed under the Custom Contributor License. Only approved contributors are granted permission 
 to use, copy, modify, merge, publish, distribute, and sublicense this software. For more information, see the 
