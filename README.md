@@ -1,4 +1,4 @@
-Hola amigos
+<img src="src/main/resources/com/example/demo/red_logo.png" alt="Logo" style="width:180px;height:120px;"> <span style="font-size: 2.5em;">****Real Estate Agency Management Application****</span>
 
 ## License
 This project is licensed under the Proprietary License. See the [LICENSE](LICENSE.md) file for details.
