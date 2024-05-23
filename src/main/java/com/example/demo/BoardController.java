@@ -99,7 +99,8 @@ public class BoardController implements Initializable {
     private Label home_totalRealEstate_label;
     @FXML
     private Label home_totalTransaction_label;
-
+    @FXML
+    private Label home_totalClient_label;
 
     private Connection connect;
     private Statement statement;
@@ -116,9 +117,7 @@ public class BoardController implements Initializable {
             userManag_form.setVisible(false);
             appointment_form.setVisible(false);
             historique_form.setVisible(false);
-
             home_dateLbael.setText(LocalDate.now().toString());
-
             home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
             client_btn.setStyle("-fx-background-color:transparent");
             realEstate_btn.setStyle("-fx-background-color:transparent");
@@ -279,7 +278,7 @@ public class BoardController implements Initializable {
             charge_btn.setStyle("-fx-background-color:transparent");
             user_btn.setStyle("-fx-background-color:transparent");
             appointment_btn.setStyle("-fx-background-color:transparent");
-            historique_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, ##8f1508, #EB5D48);");
+            historique_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #8f1508, #EB5D48);");
         }
 
     }
@@ -323,7 +322,28 @@ public class BoardController implements Initializable {
         }
 
     }
+    public void home_totalClient() {
 
+        String sql = "SELECT COUNT(id) FROM Client";
+
+        connect = Database.connect();
+        int countData = 0;
+        try {
+
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()) {
+                countData = result.getInt("COUNT(id)");
+            }
+
+            home_totalClient_label.setText(String.valueOf(countData));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     public void home_totalRealEstate(){
 
         String sql = "SELECT COUNT(id) FROM RealEstate";
@@ -373,6 +393,7 @@ public class BoardController implements Initializable {
     public void initialze(){
         home_totalRealEstate();
         home_totalUser();
+        home_totalClient();
         home_totalTransaction();
     }
 
@@ -473,6 +494,7 @@ public class BoardController implements Initializable {
             show_clients();
             //Clear Item
             client_clearBtn_Clicked();
+            home_totalClient();
         }
     }
 
@@ -503,6 +525,7 @@ public class BoardController implements Initializable {
             show_clients();
             //Clear item
             client_clearBtn_Clicked();
+            home_totalClient();
         }
     }
 
@@ -941,6 +964,7 @@ public class BoardController implements Initializable {
             HistoriqueClientManagment.addAddRealEstateHistorique(user,"RealEstate Added Successfully By " + user.getUsername(),OwnerId);
             show_realestates();
             realEstate_clearBtn_Clicked();
+            home_totalRealEstate();
         }
     }
 
@@ -952,6 +976,7 @@ public class BoardController implements Initializable {
             HistoriqueClientManagment.addDeleteHistorique(user,"RealEstate Deleted Successfully By " + user.getUsername());
             show_realestates();
             realEstate_clearBtn_Clicked();
+            home_totalRealEstate();
         }
     }
 
@@ -1220,20 +1245,19 @@ public class BoardController implements Initializable {
             show_transaction();
             //Clear Item
             transaction_clearBtn_Clicked();
+            home_totalTransaction();
         }
     }
 
-    public void transaction_updateBtn_Clicked() throws SQLException {
-
-    }
 
     public void transaction_deleteBtn_Clicked() throws SQLException {
         if (transaction_idLabel.getText().isEmpty()) {
             alerts.showAlertSelectionEmptyError("Transaction");
         }else{
             TransactionManagement.deleteTransaction(user,Integer.parseInt(transaction_idLabel.getText()));
-            show_charges();
+            show_transaction();
             transaction_clearBtn_Clicked();
+            home_totalTransaction();
         }
     }
 
@@ -1502,6 +1526,7 @@ public class BoardController implements Initializable {
              //Refresh
              UserManagement.createUser(user,userToAdd);
              show_user();
+             home_totalUser();
         }
     }
 
@@ -1535,6 +1560,8 @@ public class BoardController implements Initializable {
         } else{
             int id = Integer.parseInt(user_userIdLabel.getText());
             UserManagement.deleteUser(user,id);
+            show_user();
+            home_totalUser();
         }
     }
 
