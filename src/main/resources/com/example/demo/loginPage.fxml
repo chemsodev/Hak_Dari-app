@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -14,16 +16,21 @@
             <children>
                 <AnchorPane prefHeight="700.0" prefWidth="600.0" styleClass="left-form" stylesheets="@loginDesign.css">
                     <children>
-                        <Label layoutX="130.0" layoutY="320.0" text="RealEstate Management System" textFill="WHITE">
+                        <Label layoutX="119.0" layoutY="421.0" text="RealEstate Management System" textFill="WHITE">
                             <font>
                                 <Font name="Tahoma" size="24.0" />
                             </font>
                         </Label>
+                  <ImageView fitHeight="212.0" fitWidth="315.0" layoutX="143.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@white_logo.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
                 <AnchorPane layoutX="600.0" prefHeight="700.0" prefWidth="600.0" styleClass="right-form" stylesheets="@loginDesign.css">
                     <children>
-                        <Label layoutX="233.0" layoutY="226.0" text="Welcome back !" textFill="#368981">
+                        <Label layoutX="233.0" layoutY="226.0" text="Welcome back !" textFill="#eb5d48">
                             <font>
                                 <Font name="Tahoma Bold" size="17.0" />
                             </font>
